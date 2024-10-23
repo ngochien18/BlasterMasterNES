@@ -99,9 +99,6 @@
     <ClCompile Include="Goomba.cpp">
       <Filter>Framework\Objects\Goomba</Filter>
     </ClCompile>
-    <ClCompile Include="Mario.cpp">
-      <Filter>Framework\Objects\Mario</Filter>
-    </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Framework\Objects\Portal</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Jason.cpp">
+      <Filter>Framework\Objects\Mario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +164,6 @@
     <ClInclude Include="Goomba.h">
       <Filter>Framework\Objects\Goomba</Filter>
     </ClInclude>
-    <ClInclude Include="Mario.h">
-      <Filter>Framework\Objects\Mario</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Framework\Objects\Portal</Filter>
     </ClInclude>
@@ -193,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="AssetIDs.h">
       <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Jason.h">
+      <Filter>Framework\Objects\Mario</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

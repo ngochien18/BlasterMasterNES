@@ -3,7 +3,7 @@
 #include "GameObject.h"
 
 // 
-// The most popular type of object in Mario! 
+// The most popular type of object in Jason! 
 // 
 class CPlatform : public CGameObject
 {

@@ -33,7 +33,7 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 #include "Animation.h"
 #include "Animations.h"
 
-#include "Mario.h"
+#include "Jason.h"
 #include "Brick.h"
 #include "Goomba.h"
 #include "Coin.h"
@@ -45,7 +45,7 @@ HOW TO INSTALL Microsoft.DXSDK.D3DX
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
 #define MAIN_WINDOW_TITLE L"04 - Collision"
-#define WINDOW_ICON_PATH L"mario.ico"
+#define WINDOW_ICON_PATH L"jason.ico"
 
 #define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255, 0.0f)
 
@@ -202,7 +202,7 @@ int WINAPI WinMain(
 
 
 	//IMPORTANT: this is the only place where a hardcoded file name is allowed ! 
-	game->Load(L"mario-sample.txt");
+	game->Load(L"jason-sample.txt");
 
 	SetWindowPos(hWnd, 0, 0, 0, SCREEN_WIDTH * 2, SCREEN_HEIGHT * 2, SWP_NOMOVE | SWP_NOOWNERZORDER | SWP_NOZORDER);
 
