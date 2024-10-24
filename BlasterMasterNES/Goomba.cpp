@@ -5,7 +5,7 @@ CGoomba::CGoomba(float x, float y) :CGameObject(x, y)
 	this->ax = 0;
 	this->ay = GOOMBA_GRAVITY;
 	die_start = -1;
-	SetState(GOOMBA_STATE_WALKING);
+	SetState(GOOMBA_STATE_WALKING_LEFT);
 }
 
 void CGoomba::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -57,7 +57,12 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isDeleted = true;
 		return;
 	}
-
+	if (vx > 0) {
+		state = GOOMBA_STATE_WALKING_RIGHT;
+	}
+	else if (vx < 0) {
+		state = GOOMBA_STATE_WALKING_LEFT;
+	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -65,11 +70,15 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CGoomba::Render()
 {
-	int aniId = ID_ANI_GOOMBA_WALKING;
+	int aniId = -1;
 	if (state == GOOMBA_STATE_DIE)
 	{
 		aniId = ID_ANI_GOOMBA_DIE;
 	}
+	else if (state == GOOMBA_STATE_WALKING_LEFT)
+		aniId = ID_ANI_GOOMBA_WALKING_LEFT;
+	else if (state == GOOMBA_STATE_WALKING_RIGHT)
+		aniId = ID_ANI_GOOMBA_WALKING_RIGHT;
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
@@ -87,8 +96,11 @@ void CGoomba::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
-	case GOOMBA_STATE_WALKING:
+	case GOOMBA_STATE_WALKING_LEFT:
 		vx = -GOOMBA_WALKING_SPEED;
+		break;
+	case GOOMBA_STATE_WALKING_RIGHT:
+		vx = GOOMBA_WALKING_SPEED;
 		break;
 	}
 }
