@@ -114,7 +114,7 @@ class CJason : public CGameObject
 	BOOLEAN isOnPlatform;
 	int coin;
 
-	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithBlackfoot(LPCOLLISIONEVENT e);
 	void OnCollisionWithCoin(LPCOLLISIONEVENT e);
 	void OnCollisionWithPortal(LPCOLLISIONEVENT e);
 

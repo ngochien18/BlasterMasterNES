@@ -40,9 +40,6 @@
     <Filter Include="Framework\Objects\Coin">
       <UniqueIdentifier>{519bfff7-ea74-4036-8d85-cd84f435e387}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Framework\Objects\Goomba">
-      <UniqueIdentifier>{8ea368c6-b9d0-425b-82a3-48f19511272e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Framework\Objects\Mario">
       <UniqueIdentifier>{10f0a3a6-9d3d-488d-841d-159c276cb4b0}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,9 @@
     </Filter>
     <Filter Include="Framework\KeyEventHandler">
       <UniqueIdentifier>{c060fd94-3010-4ece-8f2c-b4b1efe97c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\Objects\Blackfoot">
+      <UniqueIdentifier>{8ea368c6-b9d0-425b-82a3-48f19511272e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,9 +96,6 @@
     <ClCompile Include="Coin.cpp">
       <Filter>Framework\Objects\Coin</Filter>
     </ClCompile>
-    <ClCompile Include="Goomba.cpp">
-      <Filter>Framework\Objects\Goomba</Filter>
-    </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Framework\Objects\Portal</Filter>
     </ClCompile>
@@ -122,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Jason.cpp">
       <Filter>Framework\Objects\Mario</Filter>
+    </ClCompile>
+    <ClCompile Include="Blackfoot.cpp">
+      <Filter>Framework\Objects\Blackfoot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +161,6 @@
     <ClInclude Include="Coin.h">
       <Filter>Framework\Objects\Coin</Filter>
     </ClInclude>
-    <ClInclude Include="Goomba.h">
-      <Filter>Framework\Objects\Goomba</Filter>
-    </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Framework\Objects\Portal</Filter>
     </ClInclude>
@@ -193,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Jason.h">
       <Filter>Framework\Objects\Mario</Filter>
+    </ClInclude>
+    <ClInclude Include="Blackfoot.h">
+      <Filter>Framework\Objects\Blackfoot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

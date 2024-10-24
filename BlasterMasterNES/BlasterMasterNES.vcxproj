@@ -148,7 +148,7 @@
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Goomba.cpp" />
+    <ClCompile Include="Blackfoot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Jason.cpp" />
     <ClCompile Include="Platform.cpp" />
@@ -171,7 +171,7 @@
     <ClInclude Include="debug.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Goomba.h" />
+    <ClInclude Include="Blackfoot.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Jason.h" />
     <ClInclude Include="Platform.h" />

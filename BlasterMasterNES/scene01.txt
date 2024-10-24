@@ -3,7 +3,7 @@
 jason.txt
 brick.txt
 coin.txt
-goomba.txt
+blackfoot.txt
 cloud.txt
 #
 [OBJECTS]

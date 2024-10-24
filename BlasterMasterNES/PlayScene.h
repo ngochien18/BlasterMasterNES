@@ -5,7 +5,7 @@
 #include "GameObject.h"
 #include "Brick.h"
 #include "Jason.h"
-#include "Goomba.h"
+#include "Blackfoot.h"
 //#include "Koopas.h"
 
 

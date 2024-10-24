@@ -4,7 +4,7 @@
 #include "Jason.h"
 #include "Game.h"
 
-#include "Goomba.h"
+#include "Blackfoot.h"
 #include "Coin.h"
 #include "Portal.h"
 
@@ -47,32 +47,32 @@ void CJason::OnCollisionWith(LPCOLLISIONEVENT e)
 			vx = 0;
 		}
 
-	if (dynamic_cast<CGoomba*>(e->obj))
-		OnCollisionWithGoomba(e);
+	if (dynamic_cast<CBlackfoot*>(e->obj))
+		OnCollisionWithBlackfoot(e);
 	else if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
 }
 
-void CJason::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
+void CJason::OnCollisionWithBlackfoot(LPCOLLISIONEVENT e)
 {
-	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+	CBlackfoot* blackfoot = dynamic_cast<CBlackfoot*>(e->obj);
 
-	// jump on top >> kill Goomba and deflect a bit 
+	// jump on top >> kill Blackfoot and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		if (blackfoot->GetState() != BLACKFOOT_STATE_DIE)
 		{
-			goomba->SetState(GOOMBA_STATE_DIE);
+			blackfoot->SetState(BLACKFOOT_STATE_DIE);
 			vy = -JASON_JUMP_DEFLECT_SPEED;
 		}
 	}
-	else // hit by Goomba
+	else // hit by Blackfoot
 	{
 		if (untouchable == 0)
 		{
-			if (goomba->GetState() != GOOMBA_STATE_DIE)
+			if (blackfoot->GetState() != BLACKFOOT_STATE_DIE)
 			{
 				if (level > JASON_LEVEL_SMALL)
 				{
