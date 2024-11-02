@@ -1,0 +1,13 @@
+# list of object assets to load in this scene
+[ASSETS]
+jason.txt
+Enermy.txt
+#
+[OBJECTS]
+# type	x	y	extra_settings per object type
+# type: 0 = Jason	1=Enermy
+# See OBJECT_TYPE constants in AssetIDs.h
+
+# jason
+0	60	70	10
+1	100	100	10

@@ -1,0 +1,15 @@
+[SETTINGS]
+start	1
+
+#id	type	file
+# type: 0: Intro 1: play scene 
+[SCENES]
+0	Intro.txt
+1	scene01.txt
+
+# id	file 
+[TEXTURES]
+0	textures\Player.png
+10	textures\Enermy.png
+-100	textures\bbox.png
+
