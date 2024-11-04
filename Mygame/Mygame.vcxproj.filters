@@ -49,6 +49,9 @@
     <Filter Include="EffectItem">
       <UniqueIdentifier>{adc88743-7bd7-4065-86ee-5d94aaf6e94c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Blackfoot">
+      <UniqueIdentifier>{f34fd88a-a9af-4084-a60d-10020fc7788e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -71,9 +74,6 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Enermy.cpp">
-      <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="utils.cpp">
       <Filter>Utils</Filter>
@@ -98,6 +98,9 @@
     </ClCompile>
     <ClCompile Include="EffectItem.cpp">
       <Filter>EffectItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Blackfoot.cpp">
+      <Filter>Enemy\Blackfoot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -124,9 +127,6 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Enermy.h">
-      <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="utils.h">
       <Filter>Utils</Filter>
@@ -157,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="AssetID.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Blackfoot.h">
+      <Filter>Enemy\Blackfoot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

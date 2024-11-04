@@ -1,16 +1,16 @@
 #pragma once
 #include "GameObject.h"
-#define ENERMY_STATE_DIE 300
-#define ENERMY_DIE_TIMEOUT 500
-#define ENERMY_BBOX_WIDTH 16
-#define ENERMY_BBOX_HEIGHT 14
-#define ENERMY_BBOX_HEIGHT_DIE 7
-#define ENERMY_STATE_WALKING 100
-#define	ID_ANI_ENERMY_WALKING_LEFT 1100
-#define ID_ANI_ENERMY_WALKING_RIGHT 1200
-#define ID_ANI_ENERMY_DIE 1300
-#define ENERMY_WALKING_SPEED 0.1f
-class Enermy: public Gameobject
+#define BLACKFOOT_STATE_DIE 300
+#define BLACKFOOT_DIE_TIMEOUT 500
+#define BLACKFOOT_BBOX_WIDTH 16
+#define BLACKFOOT_BBOX_HEIGHT 14
+#define BLACKFOOT_BBOX_HEIGHT_DIE 7
+#define BLACKFOOT_STATE_WALKING 100
+#define	ID_ANI_BLACKFOOT_WALKING_LEFT 1100
+#define ID_ANI_BLACKFOOT_WALKING_RIGHT 1200
+#define ID_ANI_BLACKFOOT_DIE 1300
+#define BLACKFOOT_WALKING_SPEED 0.1f
+class Blackfoot: public Gameobject
 {
 protected:
 	float ax;
@@ -29,9 +29,9 @@ protected:
 	//virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 
 public:
-	Enermy(float x, float y) : Gameobject(x, y)
+	Blackfoot(float x, float y) : Gameobject(x, y)
 	{
-		state = ENERMY_STATE_WALKING;
+		state = BLACKFOOT_STATE_WALKING;
 		maxVx = 0.0f;
 		maxVy = 0.0f;
 		ax = 0.0f;

@@ -1,8 +1,8 @@
-#include "Enermy.h"
+#include "Blackfoot.h"
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
-void Enermy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
 	vy += ay * dt;
@@ -12,7 +12,7 @@ void Enermy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vy) > abs(maxVy))	vy = maxVy*ny;
 	x += vx;
 	y += vy;
-	if ((state == ENERMY_STATE_DIE) && (GetTickCount64() - die_start > ENERMY_DIE_TIMEOUT))
+	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
 		isdeleted = true;
 		return;
@@ -20,56 +20,56 @@ void Enermy::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	Gameobject::Update(dt, coObjects);
 }
-void Enermy::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == ENERMY_STATE_DIE)
+	if (state == BLACKFOOT_STATE_DIE)
 	{
-		left = x - ENERMY_BBOX_WIDTH / 2;
-		top = y - ENERMY_BBOX_HEIGHT_DIE / 2;
-		right = left + ENERMY_BBOX_WIDTH;
-		bottom = top + ENERMY_BBOX_HEIGHT_DIE;
+		left = x - BLACKFOOT_BBOX_WIDTH / 2;
+		top = y - BLACKFOOT_BBOX_HEIGHT_DIE / 2;
+		right = left + BLACKFOOT_BBOX_WIDTH;
+		bottom = top + BLACKFOOT_BBOX_HEIGHT_DIE;
 	}
 	else
 	{
-		left = x - ENERMY_BBOX_WIDTH / 2;
-		top = y - ENERMY_BBOX_HEIGHT / 2;
-		right = left + ENERMY_BBOX_WIDTH;
-		bottom = top + ENERMY_BBOX_HEIGHT;
+		left = x - BLACKFOOT_BBOX_WIDTH / 2;
+		top = y - BLACKFOOT_BBOX_HEIGHT / 2;
+		right = left + BLACKFOOT_BBOX_WIDTH;
+		bottom = top + BLACKFOOT_BBOX_HEIGHT;
 	}
 }
-void Enermy::render()
+void Blackfoot::render()
 {
 	int aniID = 0;
-	if (state == ENERMY_STATE_DIE)
+	if (state == BLACKFOOT_STATE_DIE)
 	{
-		aniID = ID_ANI_ENERMY_DIE;
+		aniID = ID_ANI_BLACKFOOT_DIE;
 	}
 	else if (ax >= 0)
 	{
-		aniID = ID_ANI_ENERMY_WALKING_RIGHT;
+		aniID = ID_ANI_BLACKFOOT_WALKING_RIGHT;
 	}
 	else
 	{
-		aniID = ID_ANI_ENERMY_WALKING_LEFT;
+		aniID = ID_ANI_BLACKFOOT_WALKING_LEFT;
 	}
 	
 
 	Animations::GetInstance()->Get(aniID)->Render(x, y);
 	RenderBoundingBox();
 }
-void Enermy::SetState(int state)
+void Blackfoot::SetState(int state)
 {
 	Gameobject::SetState(state);
 	switch (state)
 	{
-	case ENERMY_STATE_DIE:
+	case BLACKFOOT_STATE_DIE:
 		die_start = GetTickCount64();
-		y += (ENERMY_BBOX_HEIGHT - ENERMY_BBOX_HEIGHT_DIE) / 2;
+		y += (BLACKFOOT_BBOX_HEIGHT - BLACKFOOT_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
 		ay = 0;
 		break;
-	case ENERMY_STATE_WALKING:
+	case BLACKFOOT_STATE_WALKING:
 		//vy = 0;
 		//ax = 0.001f;
 		if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
@@ -101,8 +101,8 @@ void Enermy::SetState(int state)
 			vy = 0;
 			ay = 0;
 		}
-		maxVx = ENERMY_WALKING_SPEED;
-		maxVy = ENERMY_WALKING_SPEED;
+		maxVx = BLACKFOOT_WALKING_SPEED;
+		maxVy = BLACKFOOT_WALKING_SPEED;
 		break;
 	}
 }

@@ -7,7 +7,7 @@
 #include "AssetID.h"
 #include "GameObject.h"
 #include "Playablechracter.h"
-#include "Enermy.h"
+#include "Blackfoot.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -101,7 +101,7 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
-	case OBJECT_TYPE_ENERMY: obj = new Enermy(x, y); break;
+	case OBJECT_TYPE_BLACKFOOT: obj = new Blackfoot(x, y); break;
 	//case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
 	//case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
