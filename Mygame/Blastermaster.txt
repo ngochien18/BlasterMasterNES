@@ -4,8 +4,8 @@ start	1
 #id	type	file
 # type: 0: Intro 1: play scene 
 [SCENES]
-0	Intro.txt
-1	scene01.txt
+0	scene\Intro.txt
+1	scene\scene01.txt
 
 # id	file 
 [TEXTURES]
