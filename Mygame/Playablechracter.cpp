@@ -145,9 +145,9 @@ void Playablechracter::OnkeyUP(int keycode)
 void Playablechracter::Keystate(BYTE* key)
 {
 	LPGAME game = game->GetInstance();
-	if (game->IsKeyDown(DIK_LSHIFT)||game->IsKeyDown(DIK_RSHIFT))
+	if (game->IsKeyDown(DIK_S))
 	{
-		if (game->IsKeyDown(DIK_S))
+		if (game->IsKeyDown(DIK_LSHIFT))
 		{
 			DebugOut(L"DASHING");
 			SetState(JASON_STATE_DASHING);
