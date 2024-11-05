@@ -1,14 +1,17 @@
 #pragma once
 #include "GameObject.h"
-#define SUNAMI_STATE_DIE 1300
-#define SUNAMI_DIE_TIMEOUT 1500
+#define SUNAMI_STATE_DIE 300
+#define SUNAMI_DIE_TIMEOUT 500
 #define SUNAMI_BBOX_WIDTH 16
 #define SUNAMI_BBOX_HEIGHT 14
 #define SUNAMI_BBOX_HEIGHT_DIE 7
-#define SUNAMI_STATE_WALKING 1100
+#define SUNAMI_STATE_WALKING_X 100
+#define SUNAMI_STATE_WALKING_Y 200
 #define	ID_ANI_SUNAMI_WALKING_LEFT 2100
 #define ID_ANI_SUNAMI_WALKING_RIGHT 2200
-#define ID_ANI_SUNAMI_DIE 2300
+#define	ID_ANI_SUNAMI_WALKING_UP 2300
+#define	ID_ANI_SUNAMI_WALKING_DOWN 2400
+#define ID_ANI_SUNAMI_DIE 2500
 #define SUNAMI_WALKING_SPEED 0.1f
 class Sunami : public Gameobject
 {
@@ -26,11 +29,11 @@ protected:
 public:
 	Sunami(float x, float y) : Gameobject(x, y)
 	{
-		state = SUNAMI_STATE_WALKING;
-		maxVx = 0.9f;
-		maxVy = 0.0f;
-		ax = 0.01f;
-		ay = 0.0f;
+		state = SUNAMI_STATE_WALKING_Y;
+		maxVx = 0.0f;
+		maxVy = 0.9f;
+		ax = 0.0f;
+		ay = 0.01f;
 	}
 	virtual void SetState(int state);
 };

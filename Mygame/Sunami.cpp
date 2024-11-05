@@ -44,13 +44,21 @@ void Sunami::render()
 	{
 		aniID = ID_ANI_SUNAMI_DIE;
 	}
-	else if (vx >= 0)
+	else if (ax >= 0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_RIGHT;
 	}
-	else
+	else if ( ax<0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_LEFT;
+	}
+	if (ay >= 0)
+	{
+		aniID = ID_ANI_SUNAMI_WALKING_DOWN;
+	}
+	else if (ay < 0)
+	{
+		aniID = ID_ANI_SUNAMI_WALKING_UP;
 	}
 
 
@@ -69,10 +77,16 @@ void Sunami::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
-	case SUNAMI_STATE_WALKING:
+	case SUNAMI_STATE_WALKING_X:
 
-		if (ax > 0 && x > 250) { ax = -0.001f; nx = -1; }
-		if (ax < 0 && x < 50) { ax = 0.001f; nx = 1; }
+		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
+		if (ax < 0 && x < 50) { ax = -ax; nx = 1; }
+		break;
+	case SUNAMI_STATE_WALKING_Y:
+
+		if (ay > 0 && y > 180) { ay = -ay; ny = -1; }
+		if (ay < 0 && y < 50) { ay = -ay; ny = 1; }
+		break;
 		
 	}
 }
