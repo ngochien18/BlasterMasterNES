@@ -29,7 +29,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -139,6 +139,7 @@
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
+    <ClCompile Include="Sunami.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Sunami.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="GameObject.h" />

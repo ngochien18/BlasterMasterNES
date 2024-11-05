@@ -44,7 +44,7 @@ void Blackfoot::render()
 	{
 		aniID = ID_ANI_BLACKFOOT_DIE;
 	}
-	else if (ax >= 0)
+	else if (vx >= 0)
 	{
 		aniID = ID_ANI_BLACKFOOT_WALKING_RIGHT;
 	}
@@ -70,9 +70,19 @@ void Blackfoot::SetState(int state)
 		ay = 0;
 		break;
 	case BLACKFOOT_STATE_WALKING:
-		//vy = 0;
-		//ax = 0.001f;
-		if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
+
+		if (ax > 0 && x > 250) { ax = -0.001f; nx = -1; }
+		if (ax < 0 && x < 50) { ax = 0.001f; nx = 1; }
+		/*if (x < 50 || x > 200)
+		{
+			ax = -0.001f; nx = -1;
+		}
+		else
+		{
+			ax = 0.001f; nx = 1;
+		}
+		break;*/
+		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
 		{
 			ax = 0.001f; nx = 1;
 		}
@@ -103,6 +113,6 @@ void Blackfoot::SetState(int state)
 		}
 		maxVx = BLACKFOOT_WALKING_SPEED;
 		maxVy = BLACKFOOT_WALKING_SPEED;
-		break;
+		break;*/
 	}
 }

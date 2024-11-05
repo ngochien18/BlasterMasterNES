@@ -52,6 +52,15 @@
     <Filter Include="Enemy\Blackfoot">
       <UniqueIdentifier>{f34fd88a-a9af-4084-a60d-10020fc7788e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Sunami">
+      <UniqueIdentifier>{6f9e77dc-5765-4050-92ea-ad7c4488333b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Eyelet">
+      <UniqueIdentifier>{c70e581e-d8fe-4ce0-ba07-c646cf9a6373}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Bellbomber">
+      <UniqueIdentifier>{dff34d7d-924f-431d-b3c8-43bacb90268b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -101,6 +110,9 @@
     </ClCompile>
     <ClCompile Include="Blackfoot.cpp">
       <Filter>Enemy\Blackfoot</Filter>
+    </ClCompile>
+    <ClCompile Include="Sunami.cpp">
+      <Filter>Enemy\Sunami</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Blackfoot.h">
       <Filter>Enemy\Blackfoot</Filter>
+    </ClInclude>
+    <ClInclude Include="Sunami.h">
+      <Filter>Enemy\Sunami</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

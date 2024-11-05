@@ -32,9 +32,9 @@ public:
 	Blackfoot(float x, float y) : Gameobject(x, y)
 	{
 		state = BLACKFOOT_STATE_WALKING;
-		maxVx = 0.0f;
+		maxVx = 0.9f;
 		maxVy = 0.0f;
-		ax = 0.0f;
+		ax = 0.01f;
 		ay = 0.0f;
 	}
 	virtual void SetState(int state);
