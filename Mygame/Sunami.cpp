@@ -67,6 +67,9 @@ void Sunami::render()
 }
 void Sunami::SetState(int state)
 {
+	float cx = 0;
+	float cy=0;
+	Game::GetInstance()->GetCamPos(cx, cy);
 	Gameobject::SetState(state);
 	switch (state)
 	{
@@ -79,13 +82,13 @@ void Sunami::SetState(int state)
 		break;
 	case SUNAMI_STATE_WALKING_X:
 
-		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
-		if (ax < 0 && x < 50) { ax = -ax; nx = 1; }
+		if (ax > 0 && x-cx > Game::GetInstance()->GetBackBufferWidth()-10) { ax = -ax; nx = -1; }
+		if (ax < 0 && x-cx < 10) { ax = -ax; nx = 1; }
 		break;
 	case SUNAMI_STATE_WALKING_Y:
 
-		if (ay > 0 && y > 180) { ay = -ay; ny = -1; }
-		if (ay < 0 && y < 50) { ay = -ay; ny = 1; }
+		if (ay > 0 && y-cy> Game::GetInstance()->GetBackBufferHeight()-10) { ay = -ay; ny = -1; }
+		if (ay < 0 && y-cy < 10) { ay = -ay; ny = 1; }
 		break;
 		
 	}

@@ -59,6 +59,9 @@ void Blackfoot::render()
 }
 void Blackfoot::SetState(int state)
 {
+	// class game co ham get campos cho a lay ra campos va gan vao bien nha a
+	//vi du ve camera a co the lay unity ra a nhe
+	//con sunami em da sua thanh lam theo camera roi a co the lay tham khao anh nhe
 	Gameobject::SetState(state);
 	switch (state)
 	{
@@ -72,7 +75,8 @@ void Blackfoot::SetState(int state)
 	case BLACKFOOT_STATE_WALKING:
 
 		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
-		if (ax < 0 && x < 50) { ax = -ax; nx = 1; }
+		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }
+		//doan nay sua thanh lay campos gan vao bien cx cy la xong nha a 
 		/*if (x < 50 || x > 200)
 		{
 			ax = -0.001f; nx = -1;
@@ -82,7 +86,7 @@ void Blackfoot::SetState(int state)
 			ax = 0.001f; nx = 1;
 		}
 		break;*/
-		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
+		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0) 
 		{
 			ax = 0.001f; nx = 1;
 		}
