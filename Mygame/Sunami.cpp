@@ -17,9 +17,7 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-	if (x > 150) {
-		state == SUNAMI_STATE_WALKING_Y;
-	}
+
 	Gameobject::Update(dt, coObjects);
 }
 void Sunami::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -70,9 +68,6 @@ void Sunami::render()
 }
 void Sunami::SetState(int state)
 {
-	float cx = 0;
-	float cy=0;
-	Game::GetInstance()->GetCamPos(cx, cy);
 	Gameobject::SetState(state);
 	switch (state)
 	{
@@ -84,13 +79,13 @@ void Sunami::SetState(int state)
 		ay = 0;
 		break;
 	case SUNAMI_STATE_WALKING_X:
-		if (ax > 0 && x-cx > Game::GetInstance()->GetBackBufferWidth()-10) { ax = -ax; nx = -1; }
-		if (ax < 0 && x-cx < 10) { ax = -ax; nx = 1; }
+		if (ax > 0 && x> Game::GetInstance()->GetBackBufferWidth()-SUNAMI_BBOX_WIDTH) { ax = -ax; nx = -1; }
+		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }
 		break;
 	case SUNAMI_STATE_WALKING_Y:
 
-		if (ay > 0 && y-cy> Game::GetInstance()->GetBackBufferHeight()-10) { ay = -ay; ny = -1; }
-		if (ay < 0 && y-cy < 10) { ay = -ay; ny = 1; }
+		if (ay > 0 && y> Game::GetInstance()->GetBackBufferHeight()-10) { ay = -ay; ny = -1; }
+		if (ay < 0 && y< 10) { ay = -ay; ny = 1; }
 		break;
 		
 	}
