@@ -66,9 +66,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
@@ -113,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="Sunami.cpp">
       <Filter>Enemy\Sunami</Filter>
+    </ClCompile>
+    <ClCompile Include="Eyelet.cpp">
+      <Filter>Enemy\Eyelet</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bellbomber.cpp">
+      <Filter>Enemy\Bellbomber</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="Sunami.h">
       <Filter>Enemy\Sunami</Filter>
+    </ClInclude>
+    <ClInclude Include="Eyelet.h">
+      <Filter>Enemy\Eyelet</Filter>
+    </ClInclude>
+    <ClInclude Include="Bellbomber.h">
+      <Filter>Enemy\Bellbomber</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

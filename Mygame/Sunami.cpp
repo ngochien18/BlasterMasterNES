@@ -17,7 +17,9 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-
+	if (x > 150) {
+		state == SUNAMI_STATE_WALKING_Y;
+	}
 	Gameobject::Update(dt, coObjects);
 }
 void Sunami::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -44,19 +46,20 @@ void Sunami::render()
 	{
 		aniID = ID_ANI_SUNAMI_DIE;
 	}
-	else if (ax >= 0)
+	else if (ax > 0 && ay==0 )
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_RIGHT;
+
 	}
-	else if ( ax<0)
+	else if ( ax<0 && ay==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_LEFT;
 	}
-	if (ay >= 0)
+	else if (ay > 0 && ax==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_DOWN;
 	}
-	else if (ay < 0)
+	else if (ay < 0 && ax==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_UP;
 	}
@@ -78,9 +81,12 @@ void Sunami::SetState(int state)
 		ay = 0;
 		break;
 	case SUNAMI_STATE_WALKING_X:
-
-		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
-		if (ax < 0 && x < 50) { ax = -ax; nx = 1; }
+		if (ax > 0 && x == 150) {
+			ax = 0; vx = 0; nx = 0; ay = 0.1f; ny = 1;
+		}
+		
+		/*if (ax > 0 && x > 250) { ax = -ax; nx = -1; }*/
+		/*if (ax < 0 && x < 50) { ax = -ax; nx = 1; }*/
 		break;
 	case SUNAMI_STATE_WALKING_Y:
 

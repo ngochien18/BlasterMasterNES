@@ -29,11 +29,11 @@ protected:
 public:
 	Sunami(float x, float y) : Gameobject(x, y)
 	{
-		state = SUNAMI_STATE_WALKING_Y;
-		maxVx = 0.0f;
+		state = SUNAMI_STATE_WALKING_X;
+		maxVx = 0.9f;
 		maxVy = 0.9f;
-		ax = 0.0f;
-		ay = 0.01f;
+		ax = 0.1f;
+		ay = 0.0f;
 	}
 	virtual void SetState(int state);
 };
