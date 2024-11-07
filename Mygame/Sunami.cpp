@@ -44,7 +44,7 @@ void Sunami::render()
 	{
 		aniID = ID_ANI_SUNAMI_DIE;
 	}
-	else if (ax >= 0)
+	else if (ax > 0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_RIGHT;
 	}
@@ -52,7 +52,7 @@ void Sunami::render()
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_LEFT;
 	}
-	if (ay >= 0)
+	if (ay > 0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_DOWN;
 	}
@@ -67,9 +67,9 @@ void Sunami::render()
 }
 void Sunami::SetState(int state)
 {
-	float cx = 0;
-	float cy = 0;
-	Game::GetInstance()->GetCamPos(cx, cy);
+	//float cx = 0;
+	//float cy = 0;
+	//Game::GetInstance()->GetCamPos(cx, cy);
 	Gameobject::SetState(state);
 	switch (state)
 	{
@@ -82,13 +82,57 @@ void Sunami::SetState(int state)
 		break;
 	case SUNAMI_STATE_WALKING_X:
 
-		if (ax > 0 && x - cx > Game::GetInstance()->GetBackBufferWidth() - 10) { ax = -ax; nx = -1; }
-		if (ax < 0 && x - cx < 10) { ax = -ax; nx = 1; }
+		/*if (ax > 0 && x>150) { ax = -ax; nx = -1; }
+		if (ax < 0 && x <10) { ax = -ax; nx = 1; }*/
+		ay = 0; vy = 0; ny = 0;
+		if (y <= 10)
+		{
+			y = 10;
+			ax = 1; nx = 1;
+		}
+		else if (y >= 150)
+		{
+			y = 150;
+			ax = -1; nx = -1;
+		}
+		else
+		{
+			ax = 1; nx = 1;
+		}
+		if (ax > 0 && x >= 250) { this->state = SUNAMI_STATE_WALKING_Y; }
+		if (ax < 0 && x <= 10) {
+
+			this->state = SUNAMI_STATE_WALKING_Y;
+		}
 		break;
 	case SUNAMI_STATE_WALKING_Y:
 
-		if (ay > 0 && y > 180) { ay = -ay; ny = -1; }
-		if (ay < 0 && y < 10) { ay = -ay; ny = 1; }
+		/*if (ay > 0 && y > 180) { ay = -ay; ny = -1; }
+		if (ay < 0 && y < 10) { ay = -ay; ny = 1; }*/
+		ax = 0;  nx = 0; vx = 0;
+		if (x <= 15)
+		{
+			x = 15;
+			ay = -1; ny = -1;
+		}
+		else if (x >= 250)
+		{
+			x = 250;
+			ay = 1; ny = 1;
+		}
+		else
+		{
+			ay = -1; ny = -1;
+		}
+		if (ay > 0 && y >= 150) {
+
+			this->state = SUNAMI_STATE_WALKING_X;
+		}
+		if (ay < 0 && y <= 10) {
+
+			this->state = SUNAMI_STATE_WALKING_X;
+		}
+
 		break;
 
 	}
