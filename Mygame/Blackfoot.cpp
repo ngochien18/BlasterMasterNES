@@ -73,7 +73,10 @@ void Blackfoot::SetState(int state)
 		ay = 0;
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
-		ay = 0; vy = 0; ny = 0;
+
+		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
+		if (ax < 0 && x < 20) { ax = -ax; nx = 1; }
+		/*ay = 0; vy = 0; ny = 0;
 		if (y <= 10)
 		{
 			y = 10;
@@ -93,7 +96,7 @@ void Blackfoot::SetState(int state)
 
 			this->state = BLACKFOOT_WALKING_DU;
 		}
-		DebugOut(L"WALKX");
+		DebugOut(L"WALKX");*/
 		break;
 	case BLACKFOOT_WALKING_DU:
 		ax = 0;  nx = 0; vx = 0;
@@ -121,7 +124,7 @@ void Blackfoot::SetState(int state)
 		}
 
 		break;
-		//doan nay sua thanh lay campos gan vao bien cx cy la xong nha a 
+	
 		/*if (x < 50 || x > 200)
 		{
 			ax = -0.001f; nx = -1;
