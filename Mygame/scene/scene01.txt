@@ -4,14 +4,16 @@ object\jason.txt
 object\Blackfoot.txt
 object\Sunami.txt
 object\Eyelet.txt
+object\Bellbomber.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet
+# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # jason
-0	60	70	10
-1	100	100	10
-2	100	150	10
-3	100	180	10
+0	60	50	10
+1	100	80	10
+2	100	130	10
+3	100	150	10
+4	100	170	10

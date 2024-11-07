@@ -10,6 +10,7 @@
 #include "Blackfoot.h"
 #include "Sunami.h"
 #include "Eyelet.h"
+#include "Bellbomber.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -106,6 +107,7 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BLACKFOOT: obj = new Blackfoot(x, y); break;
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
 	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	//case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
 	//case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
