@@ -85,9 +85,9 @@ void Sunami::SetState(int state)
 		/*if (ax > 0 && x>150) { ax = -ax; nx = -1; }
 		if (ax < 0 && x <10) { ax = -ax; nx = 1; }*/
 		ay = 0; vy = 0; ny = 0;
-		if (y <= 10)
+		if (y <= 100)
 		{
-			y = 10;
+			y = 100;
 			ax = 1; nx = 1;
 		}
 		else if (y >= 150)
@@ -99,8 +99,8 @@ void Sunami::SetState(int state)
 		{
 			ax = 1; nx = 1;
 		}
-		if (ax > 0 && x >= 250) { this->state = SUNAMI_STATE_WALKING_Y; }
-		if (ax < 0 && x <= 10) {
+		if (ax > 0 && x >= 120) { this->state = SUNAMI_STATE_WALKING_Y; }
+		if (ax < 0 && x <= 30) {
 
 			this->state = SUNAMI_STATE_WALKING_Y;
 		}
@@ -110,14 +110,14 @@ void Sunami::SetState(int state)
 		/*if (ay > 0 && y > 180) { ay = -ay; ny = -1; }
 		if (ay < 0 && y < 10) { ay = -ay; ny = 1; }*/
 		ax = 0;  nx = 0; vx = 0;
-		if (x <= 15)
+		if (x <= 30)
 		{
-			x = 15;
+			x = 30;
 			ay = -1; ny = -1;
 		}
-		else if (x >= 250)
+		else if (x >= 120)
 		{
-			x = 250;
+			x = 120;
 			ay = 1; ny = 1;
 		}
 		else
@@ -128,7 +128,7 @@ void Sunami::SetState(int state)
 
 			this->state = SUNAMI_STATE_WALKING_X;
 		}
-		if (ay < 0 && y <= 10) {
+		if (ay < 0 && y <= 100) {
 
 			this->state = SUNAMI_STATE_WALKING_X;
 		}

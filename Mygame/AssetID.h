@@ -6,6 +6,7 @@
 #define OBJECT_TYPE_BLACKFOOT	1
 #define OBJECT_TYPE_SUNAMI	2
 #define OBJECT_TYPE_EYELET	3
+#define OBJECT_TYPE_BELLBOMBER	4
 
 #pragma region JASON 
 // big

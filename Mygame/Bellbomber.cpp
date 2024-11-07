@@ -46,11 +46,17 @@ void Bellbomber::render()
 	}
 	else if (vx >= 0)
 	{
-		aniID = ID_ANI_BELLBOMBER_WALKING_RIGHT;
+		aniID = ID_ANI_BELLBOMBER_FLYING_RIGHT;
+		if (x >= 220) {
+			aniID= ID_ANI_BELLBOMBER_DROPPING_BOMB_RIGHT;
+		}
 	}
 	else
 	{
-		aniID = ID_ANI_BELLBOMBER_WALKING_LEFT;
+		aniID = ID_ANI_BELLBOMBER_FLYING_LEFT;
+		if (x <= 80) {
+			aniID = ID_ANI_BELLBOMBER_DROPPING_BOMB_LEFT;
+		}
 	}
 
 
@@ -69,10 +75,14 @@ void Bellbomber::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
-	case BELLBOMBER_STATE_WALKING:
-
+	case BELLBOMBER_STATE_FLYING:
+		/*if (x == 150) {
+			this->SetState==
+		}*/
 		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
 		if (ax < 0 && x < 50) { ax = -ax; nx = 1; }
-		
+		break;
+	//case BELLBOMBER_STATE_FLYING:
+		//break;
 	}
 }

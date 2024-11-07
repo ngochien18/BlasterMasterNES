@@ -70,13 +70,13 @@ void Eyelet::SetState(int state)
 		ay = 0;
 		break;
 	case EYELET_STATE_FLYING:
-		if (y <= 130)
+		if (y <= lowerbar)
 		{
-			ay = ay; ny = 1;
+			ny = 1;
 		}
-		else if (y >= 170)
+		else if (y >= upperbar)
 		{
-			ay = -ay; ny = -1;
+			ny = -1;
 		}
 		if (ax > 0 && x > Game::GetInstance()->GetBackBufferWidth()-10) { 
 			ax = -ax; nx = -1;

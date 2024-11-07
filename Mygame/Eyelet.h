@@ -16,6 +16,7 @@ protected:
 	float ax;
 	float ay;
 	float maxVx, maxVy;
+	float upperbar, lowerbar;
 	ULONGLONG die_start;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
@@ -31,6 +32,8 @@ public:
 		maxVy = 0.9f;
 		ax = 0.1f;
 		ay = 0.9f;
+		upperbar = 140;
+		lowerbar = 120;
 	}
 	virtual void SetState(int state);
 };
