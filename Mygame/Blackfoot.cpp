@@ -8,8 +8,8 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (abs(vx) > abs(maxVx)) vx = maxVx*nx;
-	if (abs(vy) > abs(maxVy))	vy = maxVy*ny;
+	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 	x += vx;
 	y += vy;
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
@@ -17,7 +17,7 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-
+	DebugOut(L"%f,%f,%f,%f\n", x, y, ax, ay);
 	Gameobject::Update(dt, coObjects);
 }
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -52,7 +52,7 @@ void Blackfoot::render()
 	{
 		aniID = ID_ANI_BLACKFOOT_WALKING_LEFT;
 	}
-	
+
 
 	Animations::GetInstance()->Get(aniID)->Render(x, y);
 	RenderBoundingBox();
@@ -72,10 +72,55 @@ void Blackfoot::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
-	case BLACKFOOT_STATE_WALKING:
+	case BLACKFOOT_STATE_WALKING_RL:
+		ay = 0; vy = 0; ny = 0;
+		if (y <= 10)
+		{
+			y = 10;
+			ax = 1; nx = 1;
+		}
+		else if (y >= 150)
+		{
+			y = 150;
+			ax = -1; nx = -1;
+		}
+		else
+		{
+			ax = 1; nx = 1;
+		}
+		if (ax > 0 && x >= 250) { this->state = BLACKFOOT_WALKING_DU; }
+		if (ax < 0 && x <= 10) {
 
-		if (ax > 0 && x > 250) { ax = -ax; nx = -1; }
-		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }
+			this->state = BLACKFOOT_WALKING_DU;
+		}
+		DebugOut(L"WALKX");
+		break;
+	case BLACKFOOT_WALKING_DU:
+		ax = 0;  nx = 0; vx = 0;
+		if (x <= 15)
+		{
+			x = 15;
+			ay = -1; ny = -1;
+		}
+		else if (x >= 250)
+		{
+			x = 250;
+			ay = 1; ny = 1;
+		}
+		else
+		{
+			ay = -1; ny = -1;
+		}
+		if (ay > 0 && y >= 150) {
+
+			this->state = BLACKFOOT_STATE_WALKING_RL;
+		}
+		if (ay < 0 && y <= 10) {
+
+			this->state = BLACKFOOT_STATE_WALKING_RL;
+		}
+
+		break;
 		//doan nay sua thanh lay campos gan vao bien cx cy la xong nha a 
 		/*if (x < 50 || x > 200)
 		{
@@ -86,7 +131,7 @@ void Blackfoot::SetState(int state)
 			ax = 0.001f; nx = 1;
 		}
 		break;*/
-		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0) 
+		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
 		{
 			ax = 0.001f; nx = 1;
 		}
@@ -100,7 +145,7 @@ void Blackfoot::SetState(int state)
 			vx = 0;
 			ax = 0;
 		}
-		
+
 		if (this->y - ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Gety() > 0)
 		{
 			ay = -0.001f; ny = -1;
