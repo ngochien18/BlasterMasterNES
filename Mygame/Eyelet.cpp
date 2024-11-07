@@ -44,12 +44,12 @@ void Eyelet::render()
 	{
 		aniID = ID_ANI_EYELET_DIE;
 	}
-	else if (ax > 0 && ay == 0)
+	else if (ax >= 0 )
 	{
 		aniID = ID_ANI_EYELET_FLYING_RIGHT;
 
 	}
-	else if (ax < 0 && ay == 0)
+	else if (ax < 0 )
 	{
 		aniID = ID_ANI_EYELET_FLYING_LEFT;
 	}
@@ -70,7 +70,17 @@ void Eyelet::SetState(int state)
 		ay = 0;
 		break;
 	case EYELET_STATE_FLYING:
-		if (ax > 0 && x > Game::GetInstance()->GetBackBufferWidth() - 10) { ax = -ax; nx = -1; }
+		if (y <= 130)
+		{
+			ay = ay; ny = 1;
+		}
+		else if (y >= 170)
+		{
+			ay = -ay; ny = -1;
+		}
+		if (ax > 0 && x > Game::GetInstance()->GetBackBufferWidth()-10) { 
+			ax = -ax; nx = -1;
+		}
 		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }
 		break;
 

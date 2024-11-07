@@ -30,7 +30,7 @@ public:
 		maxVx = 0.9f;
 		maxVy = 0.9f;
 		ax = 0.1f;
-		ay = 0.0f;
+		ay = 0.9f;
 	}
 	virtual void SetState(int state);
 };
