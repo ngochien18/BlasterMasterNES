@@ -5,12 +5,14 @@
 #define BLACKFOOT_BBOX_WIDTH 16
 #define BLACKFOOT_BBOX_HEIGHT 14
 #define BLACKFOOT_BBOX_HEIGHT_DIE 7
-#define BLACKFOOT_STATE_WALKING 100
+#define BLACKFOOT_STATE_WALKING_RL 100
+#define BLACKFOOT_WALKING_DU 200
 #define	ID_ANI_BLACKFOOT_WALKING_LEFT 1100
 #define ID_ANI_BLACKFOOT_WALKING_RIGHT 1200
 #define ID_ANI_BLACKFOOT_DIE 1300
 #define BLACKFOOT_WALKING_SPEED 0.1f
-class Blackfoot: public Gameobject
+
+class Blackfoot : public Gameobject
 {
 protected:
 	float ax;
@@ -31,9 +33,9 @@ protected:
 public:
 	Blackfoot(float x, float y) : Gameobject(x, y)
 	{
-		state = BLACKFOOT_STATE_WALKING;
+		state = BLACKFOOT_STATE_WALKING_RL;
 		maxVx = 0.9f;
-		maxVy = 0.0f;
+		maxVy = 0.9f;
 		ax = 0.01f;
 		ay = 0.0f;
 	}

@@ -17,6 +17,10 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
+	//if (x == 150)
+	//{
+	//	state == SUNAMI_STATE_WALKING_Y;
+	//}
 
 	Gameobject::Update(dt, coObjects);
 }
@@ -44,19 +48,23 @@ void Sunami::render()
 	{
 		aniID = ID_ANI_SUNAMI_DIE;
 	}
-	else if (ax >= 0)
+	else if (ax == 0 && ay ==0) {
+		aniID = ID_ANI_SUNAMI_IDLE;
+	}
+	else if (ax > 0 && ay==0 )
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_RIGHT;
+
 	}
-	else if ( ax<0)
+	else if ( ax<0 && ay==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_LEFT;
 	}
-	if (ay >= 0)
+	else if (ay > 0 && ax==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_DOWN;
 	}
-	else if (ay < 0)
+	else if (ay < 0 && ax==0)
 	{
 		aniID = ID_ANI_SUNAMI_WALKING_UP;
 	}
@@ -67,9 +75,6 @@ void Sunami::render()
 }
 void Sunami::SetState(int state)
 {
-	float cx = 0;
-	float cy=0;
-	Game::GetInstance()->GetCamPos(cx, cy);
 	Gameobject::SetState(state);
 	switch (state)
 	{
@@ -80,15 +85,24 @@ void Sunami::SetState(int state)
 		vy = 0;
 		ay = 0;
 		break;
+	case SUNAMI_STATE_IDLE:
+		ax = 0.0f;
+		ay = 0.0f;
+		vx = 0;
+		vy = 0;
+		break;
 	case SUNAMI_STATE_WALKING_X:
-
-		if (ax > 0 && x-cx > Game::GetInstance()->GetBackBufferWidth()-10) { ax = -ax; nx = -1; }
-		if (ax < 0 && x-cx < 10) { ax = -ax; nx = 1; }
+		/*if (ax > 0 && x> Game::GetInstance()->GetBackBufferWidth()-SUNAMI_BBOX_WIDTH) { ax = -ax; nx = -1; }
+		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }*/
+		if (ax > 0 && x == 150) {
+			vx = 0; ax = 0; nx = 0;
+			/*state = SUNAMI_STATE_WALKING_Y;*/
+		}
 		break;
 	case SUNAMI_STATE_WALKING_Y:
 
-		if (ay > 0 && y-cy> Game::GetInstance()->GetBackBufferHeight()-10) { ay = -ay; ny = -1; }
-		if (ay < 0 && y-cy < 10) { ay = -ay; ny = 1; }
+		if (ay > 0 && y> Game::GetInstance()->GetBackBufferHeight()-10) { ay = -ay; ny = -1; }
+		if (ay < 0 && y< 10) { ay = -ay; ny = 1; }
 		break;
 		
 	}
