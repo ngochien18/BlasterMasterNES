@@ -126,12 +126,12 @@ void Playablechracter::GetBoundingBox(float& left, float& top, float& right, flo
 }
 void Playablechracter::OnkeyUP(int keycode)
 {
-	Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
+	//Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
 	switch (keycode)
 	{
-		if (jason->GetState() == JASON_STATE_DIE) return;
+		if (GetState() == JASON_STATE_DIE) return;
 		else {
-			if (jason->GetState() == JASON_STATE_IDLE) {
+			if (GetState() == JASON_STATE_IDLE) {
 	case DIK_W:
 		SetState(JASON_STATE_WALK_UP);
 		break;
