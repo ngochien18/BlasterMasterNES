@@ -77,6 +77,7 @@ public:
 	}
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	void SetState(int state);
+	int GetState() { return this->state; }
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 	void SetLevel(int l);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

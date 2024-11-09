@@ -1,0 +1,17 @@
+# ==== SOPHIA =========
+# wheel part
+spr-sophia-wheel-0	3	21	8	8	0	
+spr-sophia-wheel-1	12	21	8	8	0
+spr-sophia-wheel-2	21	21	8	8	0
+spr-sophia-wheel-3	30	21	8	8	0
+# middle part
+spr-sophia-middle	3	12	8	8	0
+# gun part
+spr-sophia-gun-00	12	3	8	8	0
+spr-sophia-gun-45	21	3	8	8	0
+spr-sophia-gun-90	30	3	8	8	0
+# cabin part
+spr-sophia-cabin	39	3	16	8	0
+spr-sophia-cabin-turn	56	3	16	8	0
+spr-sophia-cabin-45	73	3	16	16	0
+spr-sophia-cabin-open	125	3	16	16	0
