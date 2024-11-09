@@ -1,6 +1,7 @@
 #pragma once
 #include "Game.h"
 #include "Scene.h"
+#include "Playerdata.h"
 #include "Gameobject.h"
 #include "Textures.h"
 #include "unordered_map"

@@ -120,6 +120,15 @@
     <ClCompile Include="Bellbomber.cpp">
       <Filter>Enemy\Bellbomber</Filter>
     </ClCompile>
+    <ClCompile Include="Playerdata.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="JasonBigWalking.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -187,6 +196,18 @@
     </ClInclude>
     <ClInclude Include="Bellbomber.h">
       <Filter>Enemy\Bellbomber</Filter>
+    </ClInclude>
+    <ClInclude Include="Playerdata.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="JasonBigWalking.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

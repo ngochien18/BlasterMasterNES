@@ -11,6 +11,7 @@
 #include "Sunami.h"
 #include "Eyelet.h"
 #include "Bellbomber.h"
+#include "Player.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -99,8 +100,10 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] JASON object was created before!\n");
 			return;
 		}
-		obj = new Playablechracter(x, y);
-		player = (Playablechracter*)obj;
+		
+		obj = new Playerdata(x, y);
+		player = (Playerdata*)obj;
+		
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;

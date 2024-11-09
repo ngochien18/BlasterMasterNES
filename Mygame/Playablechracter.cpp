@@ -129,7 +129,7 @@ void Playablechracter::OnkeyUP(int keycode)
 	case DIK_W:
 		SetState(JASON_STATE_WALK_UP);
 		break;
-	case DIK_S:
+	case DIK_X:
 		SetState(JASON_STATE_WALK_DOWN);
 		break;
 	case DIK_D:
@@ -145,13 +145,13 @@ void Playablechracter::OnkeyUP(int keycode)
 void Playablechracter::Keystate(BYTE* key)
 {
 	LPGAME game = game->GetInstance();
-	if (game->IsKeyDown(DIK_S))
+	if (game->IsKeyDown(DIK_X))
 	{
 		if (game->IsKeyDown(DIK_LSHIFT))
 		{
-			DebugOut(L"DASHING");
+			
 			SetState(JASON_STATE_DASHING);
-			DebugOut(L"DASHING");
+			
 		}
 	}
 	else if (game->IsKeyDown(DIK_A))

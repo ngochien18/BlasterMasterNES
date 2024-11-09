@@ -40,7 +40,7 @@
 
 class Playablechracter : public Gameobject
 {	
-public:
+private:
 	float maxVx;
 	float maxVy;
 	float ax;				// acceleration on x 
