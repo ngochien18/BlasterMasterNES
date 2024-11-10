@@ -61,6 +61,15 @@
     <Filter Include="Enemy\Bellbomber">
       <UniqueIdentifier>{dff34d7d-924f-431d-b3c8-43bacb90268b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\PlayerState">
+      <UniqueIdentifier>{e992b8f7-202e-4015-9c0c-3c458c2d3ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\Playerdata">
+      <UniqueIdentifier>{1f19a2c4-5050-42e5-8333-184c24980e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map and camera">
+      <UniqueIdentifier>{f3c50114-5fb0-4ecb-8b18-5d20f59d9703}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -120,14 +129,11 @@
     <ClCompile Include="Bellbomber.cpp">
       <Filter>Enemy\Bellbomber</Filter>
     </ClCompile>
-    <ClCompile Include="Playerdata.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="JasonBigWalking.cpp">
-      <Filter>Player</Filter>
+      <Filter>Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="JasonBigIdle.cpp">
+      <Filter>Player\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,17 +203,23 @@
     <ClInclude Include="Bellbomber.h">
       <Filter>Enemy\Bellbomber</Filter>
     </ClInclude>
-    <ClInclude Include="Playerdata.h">
-      <Filter>Player</Filter>
+    <ClInclude Include="JasonBigWalking.h">
+      <Filter>Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
-      <Filter>Player</Filter>
+      <Filter>Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
+      <Filter>Player\Playerdata</Filter>
     </ClInclude>
-    <ClInclude Include="JasonBigWalking.h">
-      <Filter>Player</Filter>
+    <ClInclude Include="Playerdata.h">
+      <Filter>Player\Playerdata</Filter>
+    </ClInclude>
+    <ClInclude Include="JasonBigIdle.h">
+      <Filter>Player\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Map and camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

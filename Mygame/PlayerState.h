@@ -1,6 +1,8 @@
 #pragma once
-#include "Player.h"
+#include "Game.h"
+#include "PlayerState.h"
 #include "Playerdata.h"
+#include "Windows.h"
 enum class StateName
 {
 //Small

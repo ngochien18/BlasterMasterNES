@@ -10,6 +10,7 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if(abs(vy)>abs(maxVy))	vy=maxVy;
 	x += vx;
 	y += vy;
+	DebugOut(L"Real x,y: %f,%f\n", x, y);
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount64() - untouchable_start > JASON_DASH_TIME)
 	{
@@ -55,7 +56,7 @@ void Playablechracter::SetState(int state)
 
 	switch (state)
 	{
-	case JASON_STATE_WALK_DOWN:
+	case BIG_JASON_STATE_WALK_DOWN:
 		maxVy = JASON_WALKING_SPEED;
 		ay = JASON_ACCEL_WALK;
 		ax = 0;
@@ -63,7 +64,7 @@ void Playablechracter::SetState(int state)
 		ny = 1;
 		nx = 0;
 		break;
-	case JASON_STATE_WALK_UP:
+	case BIG_JASON_STATE_WALK_UP:
 		maxVy = -JASON_WALKING_SPEED;
 		ay = -JASON_ACCEL_WALK;
 		ax = 0;
@@ -71,7 +72,7 @@ void Playablechracter::SetState(int state)
 		ny = -1;
 		nx = 0;
 		break;
-	case JASON_STATE_WALK_RIGHT:
+	case BIG_JASON_STATE_WALK_RIGHT:
 		maxVx = JASON_WALKING_SPEED;
 		ax = JASON_ACCEL_WALK;
 		ay = 0;
@@ -79,7 +80,7 @@ void Playablechracter::SetState(int state)
 		nx = 1;
 		ny = 0;
 		break;
-	case JASON_STATE_WALK_LEFT:
+	case BIG_JASON_STATE_WALK_LEFT:
 		maxVx = -JASON_WALKING_SPEED;
 		ax = -JASON_ACCEL_WALK;
 		ay = 0;
@@ -87,7 +88,7 @@ void Playablechracter::SetState(int state)
 		nx = -1;
 		ny = 0;
 		break;
-	case JASON_STATE_IDLE:
+	case BIG_JASON_STATE_IDLE:
 		ax = 0.0f;
 		ay = 0.0f;
 		vx = 0;
@@ -103,8 +104,6 @@ void Playablechracter::SetState(int state)
 
 	
 	Gameobject::setstate(state);
-	
-	DebugOut(L"Set stated %d\n", this->state);
 }
 void Playablechracter::SetLevel(int l)
 {
@@ -122,52 +121,57 @@ void Playablechracter::GetBoundingBox(float& left, float& top, float& right, flo
 	right = left + JASON_BIG_BBOX_WIDTH;
 	bottom = top + JASON_BIG_BBOX_HEIGHT;
 }
-void Playablechracter::OnkeyUP(int keycode)
+void Playablechracter::OnkeyDown(int keycode)
 {
-	switch (keycode)
-	{
-	case DIK_W:
-		SetState(JASON_STATE_WALK_UP);
-		break;
-	case DIK_X:
-		SetState(JASON_STATE_WALK_DOWN);
-		break;
-	case DIK_D:
-		SetState(JASON_STATE_WALK_RIGHT);
-		break;
-	case DIK_A:
-		SetState(JASON_STATE_WALK_LEFT);
-		break;
-	default:
-		DebugOut(L"No key called\n");
-	}
 }
 void Playablechracter::Keystate(BYTE* key)
 {
 	LPGAME game = game->GetInstance();
-	if (game->IsKeyDown(DIK_X))
+	if (state == BIG_JASON_STATE_IDLE)
 	{
-		if (game->IsKeyDown(DIK_LSHIFT))
+		if (game->IsKeyDown(DIK_S))
 		{
-			
-			SetState(JASON_STATE_DASHING);
-			
+			SetState(BIG_JASON_STATE_WALK_DOWN);
+		}
+		else if (game->IsKeyDown(DIK_A))
+		{
+			SetState(BIG_JASON_STATE_WALK_LEFT);
+		}
+		else if (game->IsKeyDown(DIK_D))
+		{
+			SetState(BIG_JASON_STATE_WALK_RIGHT);
+		}
+		else if (game->IsKeyDown(DIK_W))
+		{
+			SetState(BIG_JASON_STATE_WALK_UP);
+		}
+		else
+		{
+			SetState(BIG_JASON_STATE_IDLE);
 		}
 	}
-	else if (game->IsKeyDown(DIK_A))
+	else if (state == BIG_JASON_STATE_WALK_UP || state == BIG_JASON_STATE_WALK_LEFT
+		|| state == BIG_JASON_STATE_WALK_DOWN || state == BIG_JASON_STATE_WALK_RIGHT)
 	{
-
-	}
-	else if (game->IsKeyDown(DIK_D))
-	{
-
-	}
-	else if (game->IsKeyDown(DIK_W))
-	{
-
-	}
-	else
-	{
-		SetState(JASON_STATE_IDLE);
+		if (game->IsKeyDown(DIK_S))
+		{
+			SetState(BIG_JASON_STATE_WALK_DOWN);
+		}
+		else if (game->IsKeyDown(DIK_A))
+		{
+			SetState(BIG_JASON_STATE_WALK_LEFT);
+		}
+		else if (game->IsKeyDown(DIK_D))
+		{
+			SetState(BIG_JASON_STATE_WALK_RIGHT);
+		}
+		else if (game->IsKeyDown(DIK_W))
+		{
+			SetState(BIG_JASON_STATE_WALK_UP);
+		}
+		else
+		{
+			SetState(BIG_JASON_STATE_IDLE);
+		}
 	}
 }

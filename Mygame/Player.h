@@ -2,7 +2,6 @@
 #include "Game.h"
 class Playerdata;
 class PlayerState;
-class JasonBigWalking;
 #define JASON_ACCEL_WALK	0.0005f
 #define JASON_WALKING_SPEED		0.1f
 enum ControlKey

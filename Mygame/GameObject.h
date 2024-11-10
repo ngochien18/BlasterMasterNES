@@ -19,9 +19,9 @@ protected:
 	float vx, vy;
 	int nx,ny;
 	int state;
-	bool isdeleted;
+	bool isdeleted;	
 public:
-	Player* states;
+	Player* states;//for player
 	virtual void render()=0;
 	virtual void setstate(int state) { this->state = state;	 }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }

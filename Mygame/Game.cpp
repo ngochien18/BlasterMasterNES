@@ -9,6 +9,7 @@
 #include "PlayScene.h"
 #include"D3DX10.h"
 #include <dinput.h>
+
 Game* Game::__instance = NULL;
 void Game::InitDX(HWND hWnd, HINSTANCE hInstance)
 {
@@ -147,7 +148,8 @@ void Game::InitDX(HWND hWnd, HINSTANCE hInstance)
 	pD3DDevice->CreateBlendState(&StateDesc, &this->pBlendStateAlpha);
 
 	DebugOut((wchar_t*)L"[INFO] InitDirectX has been successful\n");
-
+	DebugOut((wchar_t*)L"[INFO] Width,Height:%d,%d\n",BackBufferWidth,BackBufferHeight);
+	camera = new Camera(BackBufferWidth,BackBufferHeight);
 	return;
 }
 void Game::SetPointSamplerState()

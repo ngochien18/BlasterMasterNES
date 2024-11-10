@@ -36,19 +36,20 @@ void Sprite::Draw(float x, float y)
 {
 	Game* g = Game::GetInstance();
 	float cx, cy;
-	g->GetCamPos(cx, cy);
+	g->GetCamera()->GetCamPos(cx, cy);
 
 	cx = (FLOAT)floor(cx);
 	cy = (FLOAT)floor(cy);
 
 
-	D3DXMATRIX matTranslation, matRotation, matWorld;
+	D3DXMATRIX matTranslation, matWorld;
 
 	// Floor the position values to avoid subpixel rendering issues
 	x = (FLOAT)floor(x);
 	y = (FLOAT)floor(y);
-	
-	D3DXMatrixTranslation(&matTranslation, x - cx, g->GetBackBufferHeight() - y + cy, 0.1f);
+	//Game::GetInstance()->GetCamera()->Trans(x, y);
+	DebugOut(L"virtual x,y:%f,%f\n", x, y);
+	D3DXMatrixTranslation(&matTranslation, x-cx , g->GetBackBufferHeight() - y + cy, 0.1f);
 	this->sprite.matWorld = (this->matScaling * matTranslation);
 
 	g->GetSpriteHandler()->DrawSpritesImmediate(&sprite, 1, 0, 0);

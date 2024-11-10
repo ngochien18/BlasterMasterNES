@@ -30,14 +30,11 @@
 #define JASON_BIG_BBOX_HEIGHT 24
 #define ID_ANI_JASON_DIE 999
 #define JASON_STATE_DIE -100
-#define JASON_STATE_IDLE			0
-#define JASON_STATE_WALK_RIGHT	100
-#define JASON_STATE_WALK_LEFT	200
-#define JASON_STATE_WALK_UP			300
-#define JASON_STATE_WALK_DOWN		400
-#define JASON_STATE_DASHING			500
-#define JASON_DASH_TIME 200
-
+#define BIG_JASON_STATE_IDLE			0
+#define BIG_JASON_STATE_WALK_RIGHT	100
+#define BIG_JASON_STATE_WALK_LEFT	200
+#define BIG_JASON_STATE_WALK_UP			300
+#define BIG_JASON_STATE_WALK_DOWN		400
 class Playablechracter : public Gameobject
 {	
 private:
@@ -59,6 +56,7 @@ public:
 		ay = 0.0f;
 
 		level = JASON_LEVEL_BIG;
+		state = BIG_JASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
 	}
@@ -81,6 +79,8 @@ public:
 	void SetLevel(int l);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void OnkeyUP(int keycode);
+	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
+
 };
 
