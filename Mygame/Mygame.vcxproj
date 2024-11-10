@@ -141,6 +141,7 @@
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
+    <ClCompile Include="SmallJason.cpp" />
     <ClCompile Include="Sunami.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SmallJason.h" />
     <ClInclude Include="Sunami.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />

@@ -5,6 +5,7 @@ object\Blackfoot.txt
 object\Sunami.txt
 object\Eyelet.txt
 object\Bellbomber.txt
+object\SmallJason.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -13,7 +14,9 @@ object\Bellbomber.txt
 
 # jason
 0	60	50	10
+9	80	50	10
 1	100	80	10
 2	100	130	10
 3	100	150	10
 4	100	170	10
+

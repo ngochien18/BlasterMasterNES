@@ -2,16 +2,17 @@
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
+#include "math.h"
 void Eyelet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
-	vy += ay * dt;
+	
 	vx += ax * dt;
-
+	
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 	x += vx;
-	y += vy;
+	y = 150-50 * sin(x/360*3.14);
 	if ((state == EYELET_STATE_DIE) && (GetTickCount64() - die_start > EYELET_DIE_TIMEOUT))
 	{
 		isdeleted = true;
