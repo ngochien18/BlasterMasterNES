@@ -17,7 +17,6 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-	DebugOut(L"%f,%f,%f,%f\n", x, y, ax, ay);
 	Gameobject::Update(dt, coObjects);
 }
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)

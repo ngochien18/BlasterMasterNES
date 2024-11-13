@@ -6,6 +6,7 @@
 #include "Animation.h"
 #include "Animations.h"
 #include "Sprites.h"
+#include "Player.h"
 #define ID_TEX_BBOX -101		// special texture to draw object bounding box
 #define BBOX_ALPHA 0.25f		// Bounding box transparency
 
@@ -18,10 +19,11 @@ protected:
 	float vx, vy;
 	int nx,ny;
 	int state;
-	bool isdeleted;
+	bool isdeleted;	
 public:
+	Player* states;//for player
 	virtual void render()=0;
-	virtual void setstate(int state) { this->state = state;	DebugOut(L"set successful %d\n",this->state); }
+	virtual void setstate(int state) { this->state = state;	 }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	void GetPosition(float& x, float& y) { x = this->x; y = this->y; }

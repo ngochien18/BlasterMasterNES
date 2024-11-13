@@ -7,17 +7,16 @@
 #include "PlayScene.h"
 void SampleKeyEventHandler::OnKeyDown(int KeyCode)
 {
-	Playablechracter* jason = (Playablechracter *)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
-	if (jason == nullptr) {
+	Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
+	if (jason== nullptr) {
 		DebugOut(L"[ERROR] Player object not found!\n");
 		return;
 	}
-	DebugOut(L"KeyCode received: %d\n", KeyCode);
-	jason->OnkeyUP(KeyCode);
-}
-void SampleKeyEventHandler::KeyState(BYTE* states)
-{
 	
+	jason->OnkeyDown(KeyCode);
+}
+void SampleKeyEventHandler::KeyState(BYTE* state)
+{
 	Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
-	jason->Keystate(states);
+	jason->Keystate(state);
 }

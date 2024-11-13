@@ -11,7 +11,12 @@
 #include "Sunami.h"
 #include "Eyelet.h"
 #include "Bellbomber.h"
+<<<<<<< HEAD
 #include "SmallJason.h"
+=======
+#include "Player.h"
+#include "JasonBigIdle.h"
+>>>>>>> master
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -100,8 +105,12 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] JASON object was created before!\n");
 			return;
 		}
+		
 		obj = new Playablechracter(x, y);
 		player = (Playablechracter*)obj;
+		//if (player->states->mPlayerstate == nullptr)
+			//player->states->mPlayerstate = new JasonBigIdle(player->states);
+		
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
@@ -243,13 +252,11 @@ void PlayScene::Update(DWORD dt)
 	// Update camera to follow jason
 	float cx, cy;
 	player->GetPosition(cx, cy);
-
 	Game* game = Game::GetInstance();
 	cx -= game->GetBackBufferWidth()/2;
 	cy -= game->GetBackBufferHeight() / 2;
-	if (cx < 0) cx = 0;
-	if (cy < 0) cy = 0;
-	Game::GetInstance()->SetCamPos(cx, cy);
+	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
+	DebugOut(L"Camera pos: x,y: %f,%f", cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2
 	// -> xplayer luon = bufferwidth/2 -> luon render player tai vi tri co toa do la buffer width/2
 	// -> xo-cx=xo-xp+bufferwidth/2 xhqc=xo-xp

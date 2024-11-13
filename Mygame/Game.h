@@ -5,19 +5,19 @@
 #include <unordered_map>
 #include <string>
 #include "Debug.h"
-#define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
-
+#include "Camera.h"
 #include "Texture.h"
 #include "KeyEventHandler.h"
 #include "Scene.h"
-
+#define DIRECTINPUT_VERSION 0x0800
 #define MAX_FRAME_RATE 100
 #define KEYBOARD_BUFFER_SIZE 1024
 #define KEYBOARD_STATE_SIZE 256
 using namespace std;
+class Camera;
 class Game
-{ 
+{
 	static Game* __instance;
 	HWND hwnd;
 	int BackBufferWidth = 0;
@@ -33,8 +33,7 @@ class Game
 	BYTE  keyStates[KEYBOARD_STATE_SIZE];			// DirectInput keyboard state buffer 
 	DIDEVICEOBJECTDATA keyEvents[KEYBOARD_BUFFER_SIZE];		// Buffered keyboard data
 	LPKEYEVENTHANDLER keyHandler;
-	float cam_x = 0.0f;
-	float cam_y = 0.0f;
+	Camera* camera;
 	HINSTANCE hInstance;
 	unordered_map<int, LPSCENE> scenes;
 	int current_scene;
@@ -42,6 +41,7 @@ class Game
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_SCENES(string line);
 public:
+	
 	void InitDX(HWND hWnd, HINSTANCE hInstance);
 	void Draw(float x, float y, LPTEXTURE tex, RECT* rect = NULL, float alpha = 1.0f, int sprite_width = 0, int sprite_height = 0);
 	void Draw(float x, float y, LPTEXTURE tex, int l, int t, int r, int b, float alpha = 1.0f, int sprite_width = 0, int sprite_height = 0)
@@ -57,26 +57,26 @@ public:
 	void InitKeyboard();
 	int IsKeyDown(int KeyCode);
 	void ProcessKeyboard();
-	void SetKeyHandler(LPKEYEVENTHANDLER handler) { keyHandler = handler;
-	DebugOut(L"[INFO] Key handler set: %s\n", handler ? L"Valid" : L"NULL");
+	void SetKeyHandler(LPKEYEVENTHANDLER handler) {
+		keyHandler = handler;
+		DebugOut(L"[INFO] Key handler set: %s\n", handler ? L"Valid" : L"NULL");
 	}
-	ID3D10Device* GetDirect3DDevice() { return this->pD3DDevice; }
-	IDXGISwapChain* GetSwapChain() { return this->pSwapChain; }
-	ID3D10RenderTargetView* GetRenderTargetView() { return this->pRenderTargetView; }
+	ID3D10Device* GetDirect3DDevice() { return this->pD3DDevice; };
+	IDXGISwapChain* GetSwapChain() { return this->pSwapChain; };
+	ID3D10RenderTargetView* GetRenderTargetView() { return this->pRenderTargetView; };
 
-	ID3DX10Sprite* GetSpriteHandler() { return this->spriteObject; }
+	ID3DX10Sprite* GetSpriteHandler() { return this->spriteObject; };
 
 	ID3D10BlendState* GetAlphaBlending() { return pBlendStateAlpha; };
 	int GetBackBufferWidth() { return BackBufferWidth; }
 	int GetBackBufferHeight() { return BackBufferHeight; }
 
 	static Game* GetInstance();
-
+	Camera* GetCamera()
+	{
+		return camera;
+	};
 	void SetPointSamplerState();
-
-	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
-	void GetCamPos(float& x, float& y) { x = cam_x; y = cam_y; }
-
 	LPSCENE GetCurrentScene() { return scenes[current_scene]; }
 	void Load(LPCWSTR gameFile);
 	void SwitchScene();
