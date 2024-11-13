@@ -70,6 +70,9 @@
     <Filter Include="Map and camera">
       <UniqueIdentifier>{f3c50114-5fb0-4ecb-8b18-5d20f59d9703}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\SmallJason">
+      <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -134,6 +137,9 @@
     </ClCompile>
     <ClCompile Include="JasonBigIdle.cpp">
       <Filter>Player\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallJason.cpp">
+      <Filter>Player\SmallJason</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Map and camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallJason.h">
+      <Filter>Player\SmallJason</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
