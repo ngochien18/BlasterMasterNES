@@ -13,6 +13,7 @@
 #include "Bellbomber.h"
 #include "Player.h"
 #include "JasonBigIdle.h"
+#include  "SmallJason.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
