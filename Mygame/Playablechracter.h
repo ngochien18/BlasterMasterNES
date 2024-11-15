@@ -10,7 +10,7 @@
 #define JASON_LEVEL_BIG 2
 
 #define JASON_ACCEL_WALK	0.005f
-#define JASON_WALKING_SPEED		0.1f
+#define JASON_WALKING_SPEED		0.9f
 //aniid
 #pragma region ANIMATION_ID
 

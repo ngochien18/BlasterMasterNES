@@ -270,14 +270,14 @@ void PlayScene::Update(DWORD dt)
 	cx -= game->GetBackBufferWidth() /2 ;
 	cy -= game->GetBackBufferHeight() /2;
 	
-	/*if (cx < 0) cx = 0;
-	if (cy < 0) cy = 0;*/
+	//if (cx < 0) cx = 0;
+	//if (cy < 0) cy = 0;
 
-	//if (cx + 320 > 620)
-	//	cx = 620 - 320;
+	/*if (cx + 320 > 620)
+		cx = 620 - 320;
 
-	//if (cy + 240 > 480)
-	//	cy = 480 - 240;
+	if (cy + 240 > 480)
+		cy = 480 - 240;*/
 	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
 	DebugOut(L"Camera pos: x,y: %f,%f", cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2

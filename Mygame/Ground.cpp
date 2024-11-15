@@ -3,12 +3,12 @@
 #include "PlayScene.h"
 #include "Game.h"
 
-void Ground::Render()
+void Ground::render()
 {
 	Animations::GetInstance()->Get(ID_ANI_GROUND)->Render(x, y);
-	/*Animations* animations = Animations::GetInstance();
-	animations->Get(ID_ANI_GROUND)->Render(x, y);*/
-	RenderBoundingBox();
+	//Animations* animations = Animations::GetInstance();
+	//animations->Get(ID_ANI_GROUND)->render(x, y);
+	//RenderBoundingBox();
 }
 
 
