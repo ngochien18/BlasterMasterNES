@@ -11,5 +11,6 @@ start	1
 [TEXTURES]
 0	textures\Player.png
 10	textures\Enermy.png
--100	textures\bbox.png
+10	textures\tileset.png
+
 

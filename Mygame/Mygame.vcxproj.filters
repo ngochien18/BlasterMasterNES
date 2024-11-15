@@ -73,6 +73,9 @@
     <Filter Include="Player\SmallJason">
       <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Ground">
+      <UniqueIdentifier>{217f4363-71bc-406e-b0b5-7799e8332c78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="SmallJason.cpp">
       <Filter>Player\SmallJason</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Enemy\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="SmallJason.h">
       <Filter>Player\SmallJason</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Enemy\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

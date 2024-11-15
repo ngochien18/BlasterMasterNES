@@ -134,6 +134,9 @@ void SmallJason::OnkeyUP(int keycode)
 		}
 	}
 }
+void SmallJason::OnkeyDown(int keycode)
+{
+}
 void SmallJason::Keystate(BYTE* key)
 {
 	LPGAME game = game->GetInstance();

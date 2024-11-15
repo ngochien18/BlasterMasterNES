@@ -86,6 +86,7 @@ public:
 	void SetLevel(int l);
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void OnkeyUP(int keycode);
+	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
 };
 
