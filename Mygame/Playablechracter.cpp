@@ -10,7 +10,7 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if(abs(vy)>abs(maxVy))	vy=maxVy;
 	x += vx;
 	y += vy;
-	DebugOut(L"Real x,y: %f,%f\n", x, y);
+	DebugOut(L"Real x,y: %f,%f;vx,vy:%f,%f\n", x, y,vx,vy);
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount64() - untouchable_start > JASON_DASH_TIME)
 	{
@@ -57,16 +57,16 @@ void Playablechracter::SetState(int state)
 	switch (state)
 	{
 	case BIG_JASON_STATE_WALK_DOWN:
-		maxVy = JASON_WALKING_SPEED;
-		ay = JASON_ACCEL_WALK;
+		maxVy = -JASON_WALKING_SPEED;
+		ay = -JASON_ACCEL_WALK;
 		ax = 0;
 		vx = 0;
 		ny = 1;
 		nx = 0;
 		break;
 	case BIG_JASON_STATE_WALK_UP:
-		maxVy = -JASON_WALKING_SPEED;
-		ay = -JASON_ACCEL_WALK;
+		maxVy = JASON_WALKING_SPEED;
+		ay = JASON_ACCEL_WALK;
 		ax = 0;
 		vx = 0;
 		ny = -1;

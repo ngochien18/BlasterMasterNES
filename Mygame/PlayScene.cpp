@@ -249,7 +249,7 @@ void PlayScene::Update(DWORD dt)
 	player->GetPosition(cx, cy);
 	Game* game = Game::GetInstance();
 	cx -= game->GetBackBufferWidth()/2;
-	cy -= game->GetBackBufferHeight() / 2;
+	cy += game->GetBackBufferHeight() / 2;
 	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
 	DebugOut(L"Camera pos: x,y: %f,%f", cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2

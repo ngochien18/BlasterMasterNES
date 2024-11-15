@@ -10,13 +10,14 @@ class Camera
 public:
 	Camera(int x, int y)
 	{
-		x = BackBufferHeight;
-		y = BackBufferWidth;
+		 BackBufferHeight=y;
+		 BackBufferWidth=x;
 	}
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
-	void Trans(float& x, float& y)
+	void Trans(FLOAT& x, FLOAT& y)
 	{
-		y = y-BackBufferWidth;
+		y = BackBufferHeight-(-y+cam_y);
+		x = x-cam_x;
 	}
 	void GetCamPos(float& x, float& y)
 	{
