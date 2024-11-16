@@ -274,7 +274,6 @@ void PlayScene::Update(DWORD dt)
 	//if (cy < 0) cy = 0;
 
 	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
-	DebugOut(L"Camera pos: x,y: %f,%f", cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2
 	// -> xplayer luon = bufferwidth/2 -> luon render player tai vi tri co toa do la buffer width/2
 	// -> xo-cx=xo-xp+bufferwidth/2 xhqc=xo-xp

@@ -16,7 +16,7 @@ public:
 	void SetCamPos(float x, float y) { cam_x = x; cam_y = y; }
 	void Trans(FLOAT& x, FLOAT& y)
 	{
-		y = BackBufferHeight - (cam_y - y);
+		y = BackBufferHeight - cam_y + y;
 		x = x - cam_x;
 	}
 	void GetCamPos(float& x, float& y)

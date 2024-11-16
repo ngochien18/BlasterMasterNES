@@ -147,6 +147,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Enemy\Ground</Filter>
     </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Enemy\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
