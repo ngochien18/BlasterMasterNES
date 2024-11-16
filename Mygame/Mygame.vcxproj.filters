@@ -67,14 +67,14 @@
     <Filter Include="Player\Playerdata">
       <UniqueIdentifier>{1f19a2c4-5050-42e5-8333-184c24980e77}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map and camera">
-      <UniqueIdentifier>{f3c50114-5fb0-4ecb-8b18-5d20f59d9703}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Player\SmallJason">
       <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Enemy\Ground">
       <UniqueIdentifier>{217f4363-71bc-406e-b0b5-7799e8332c78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{f3c50114-5fb0-4ecb-8b18-5d20f59d9703}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +231,7 @@
       <Filter>Player\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Map and camera</Filter>
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="SmallJason.h">
       <Filter>Player\SmallJason</Filter>

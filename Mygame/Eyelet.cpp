@@ -11,7 +11,8 @@ void Eyelet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 	x += vx;
-	y += vy;
+	y = 100 - 50 * sin(x / 360 * 3.14);
+
 	if ((state == EYELET_STATE_DIE) && (GetTickCount64() - die_start > EYELET_DIE_TIMEOUT))
 	{
 		isdeleted = true;
@@ -70,14 +71,14 @@ void Eyelet::SetState(int state)
 		ay = 0;
 		break;
 	case EYELET_STATE_FLYING:
-		if (y <= lowerbar)
+		/*if (y <= lowerbar)
 		{
 			ny = 1;
 		}
 		else if (y >= upperbar)
 		{
 			ny = -1;
-		}
+		}*/
 		if (ax > 0 && x > Game::GetInstance()->GetBackBufferWidth()-10) { 
 			ax = -ax; nx = -1;
 		}
