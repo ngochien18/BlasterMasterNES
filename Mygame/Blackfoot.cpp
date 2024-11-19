@@ -73,8 +73,8 @@ void Blackfoot::SetState(int state)
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
 
-		if(ax >= 0 && x > 304) { ax = -ax; nx = -1; };
-		if (ax < 0 && x < 128) { ax = -ax; nx = 1; }
+		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
+		if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
 		/*ay = 0; vy = 0; ny = 0;
 		if (y <= 10)
 		{

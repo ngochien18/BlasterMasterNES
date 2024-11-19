@@ -14,8 +14,8 @@
 
 #define GAME_Icon_PATH L"Blaster_master_icon.ico"
 #define BACKGROUND_COLOR D3DXCOLOR(0.2f, 0.2f, 0.2f, 0.2f)
-#define WINDOW_WIDTH 620
-#define WINDOW_HEIGHT 480
+//#define WINDOW_WIDTH 620
+//#define WINDOW_HEIGHT 480
 
 #define MAX_FRAME_RATE 100
 #define SCREEN_WIDTH 320
