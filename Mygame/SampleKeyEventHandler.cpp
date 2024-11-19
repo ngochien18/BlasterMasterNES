@@ -5,6 +5,7 @@
 
 #include "Playablechracter.h"
 #include "PlayScene.h"
+#include "SmallJason.h"
 void SampleKeyEventHandler::OnKeyDown(int KeyCode)
 {
 	Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();

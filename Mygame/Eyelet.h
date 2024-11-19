@@ -31,9 +31,9 @@ public:
 		maxVx = 0.9f;
 		maxVy = 0.9f;
 		ax = 0.1f;
-		ay = 0.9f;
-		upperbar = 140;
-		lowerbar = 120;
+		ay = 0.1f;
+		//upperbar = 140;
+		//lowerbar = 120;
 	}
 	virtual void SetState(int state);
 };

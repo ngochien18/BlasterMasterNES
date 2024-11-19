@@ -61,7 +61,7 @@ void Playablechracter::SetState(int state)
 		ay = -JASON_ACCEL_WALK;
 		ax = 0;
 		vx = 0;
-		ny = 1;
+		ny = -1;
 		nx = 0;
 		break;
 	case BIG_JASON_STATE_WALK_UP:
@@ -69,7 +69,7 @@ void Playablechracter::SetState(int state)
 		ay = JASON_ACCEL_WALK;
 		ax = 0;
 		vx = 0;
-		ny = -1;
+		ny = 1;
 		nx = 0;
 		break;
 	case BIG_JASON_STATE_WALK_RIGHT:

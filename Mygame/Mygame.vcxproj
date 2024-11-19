@@ -138,11 +138,14 @@
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Bellbomber.cpp" />
     <ClCompile Include="Eyelet.cpp" />
+    <ClCompile Include="Global.cpp" />
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="JasonBigIdle.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="JasonBigWalking.cpp" />
+    <ClCompile Include="SmallJason.cpp" />
     <ClCompile Include="Sunami.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -165,6 +168,8 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Global.h" />
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="JasonBigIdle.h" />
     <ClInclude Include="JasonBigWalking.h" />
     <ClInclude Include="KeyEventHandler.h" />
@@ -174,6 +179,7 @@
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SmallJason.h" />
     <ClInclude Include="Sunami.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />

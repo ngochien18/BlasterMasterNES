@@ -13,6 +13,8 @@
 #include "Bellbomber.h"
 #include "Player.h"
 #include "JasonBigIdle.h"
+#include  "SmallJason.h"
+#include "Ground.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -33,7 +35,7 @@ void PlayScene::_ParseSection_SPRITES(string line)
 	vector<string> tokens = split(line);
 
 	if (tokens.size() < 6) return; // skip invalid lines
-		
+
 	int ID = atoi(tokens[0].c_str());
 	int l = atoi(tokens[1].c_str());
 	int t = atoi(tokens[2].c_str());
@@ -101,12 +103,27 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 			DebugOut(L"[ERROR] JASON object was created before!\n");
 			return;
 		}
-		
+
 		obj = new Playablechracter(x, y);
 		player = (Playablechracter*)obj;
 		//if (player->states->mPlayerstate == nullptr)
 			//player->states->mPlayerstate = new JasonBigIdle(player->states);
-		
+
+
+		DebugOut(L"[INFO] Player object has been created!\n");
+		break;
+	case OBJECT_TYPE_SMALLJASON:
+		if (player != NULL)
+		{
+			DebugOut(L"[ERROR] JASON object was created before!\n");
+			return;
+		}
+
+		obj = new SmallJason(x, y);
+		player = (SmallJason*)obj;
+		//if (player->states->mPlayerstate == nullptr)
+			//player->states->mPlayerstate = new JasonBigIdle(player->states);
+
 
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
@@ -114,36 +131,38 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
 	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
 	case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
-	//case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
-	//case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
+	case OBJECT_TYPE_GROUND: obj = new Ground(x, y); break;
+	//case OBJECT_TYPE_SMALLJASON : obj = new SmallJason(x, y); break;
+		//case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
+		//case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
-	//case OBJECT_TYPE_PLATFORM:
-	//{
+		//case OBJECT_TYPE_PLATFORM:
+		//{
 
-		/*float cell_width = (float)atof(tokens[3].c_str());
-		float cell_height = (float)atof(tokens[4].c_str());
-		int length = atoi(tokens[5].c_str());
-		int sprite_begin = atoi(tokens[6].c_str());
-		int sprite_middle = atoi(tokens[7].c_str());
-		int sprite_end = atoi(tokens[8].c_str());
+			/*float cell_width = (float)atof(tokens[3].c_str());
+			float cell_height = (float)atof(tokens[4].c_str());
+			int length = atoi(tokens[5].c_str());
+			int sprite_begin = atoi(tokens[6].c_str());
+			int sprite_middle = atoi(tokens[7].c_str());
+			int sprite_end = atoi(tokens[8].c_str());
 
-		obj = new CPlatform(
-			x, y,
-			cell_width, cell_height, length,
-			sprite_begin, sprite_middle, sprite_end
-		);
+			obj = new CPlatform(
+				x, y,
+				cell_width, cell_height, length,
+				sprite_begin, sprite_middle, sprite_end
+			);
 
-		break;*/
-	//}
+			break;*/
+			//}
 
-	//case OBJECT_TYPE_PORTAL:
-	//{
-	//	float r = (float)atof(tokens[3].c_str());
-	//	float b = (float)atof(tokens[4].c_str());
-	//	int scene_id = atoi(tokens[5].c_str());
-	//	obj = new CPortal(x, y, r, b, scene_id);
-	//}
-	//break;
+			//case OBJECT_TYPE_PORTAL:
+			//{
+			//	float r = (float)atof(tokens[3].c_str());
+			//	float b = (float)atof(tokens[4].c_str());
+			//	int scene_id = atoi(tokens[5].c_str());
+			//	obj = new CPortal(x, y, r, b, scene_id);
+			//}
+			//break;
 
 
 	default:
@@ -248,10 +267,15 @@ void PlayScene::Update(DWORD dt)
 	float cx, cy;
 	player->GetPosition(cx, cy);
 	Game* game = Game::GetInstance();
-	cx -= game->GetBackBufferWidth()/2;
-	cy += game->GetBackBufferHeight() / 2;
+
+	cx -=  game->GetBackBufferWidth()/2  ;
+	cy += game->GetBackBufferHeight() /2 ;
+	
+	//if(cx < 0) cx = 0;
+	//if (cy < 0) cy = 0;
+
+
 	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
-	DebugOut(L"Camera pos: x,y: %f,%f", cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2
 	// -> xplayer luon = bufferwidth/2 -> luon render player tai vi tri co toa do la buffer width/2
 	// -> xo-cx=xo-xp+bufferwidth/2 xhqc=xo-xp
