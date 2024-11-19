@@ -267,11 +267,13 @@ void PlayScene::Update(DWORD dt)
 	float cx, cy;
 	player->GetPosition(cx, cy);
 	Game* game = Game::GetInstance();
+
 	cx -=  game->GetBackBufferWidth()/2  ;
 	cy += game->GetBackBufferHeight() /2 ;
 	
 	//if(cx < 0) cx = 0;
 	//if (cy < 0) cy = 0;
+
 
 	Game::GetInstance()->GetCamera()->SetCamPos(cx, cy);
 	//if cx> bufferwidth()/2 -> cx=player->x-bufferwidth/2

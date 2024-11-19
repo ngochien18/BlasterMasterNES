@@ -15,7 +15,6 @@ class JasonBigIdle : public PlayerState
 public:
     JasonBigIdle(Player* data);  // Constructor
     ~JasonBigIdle();  // Destructor
-
     void HandleKeyBoard(int Keycode) override;  // Corrected method name
     StateName GetState() override;  // Corrected return value
 };
