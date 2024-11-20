@@ -5,6 +5,7 @@
 #include "Gameobject.h"
 #include "Textures.h"
 #include "unordered_map"
+#include "Quadtree.h"
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
@@ -19,13 +20,14 @@ class PlayScene : public Scene
 	LPGAMEOBJECT player;
 
 	vector<LPGAMEOBJECT> objects;
+	Quadtree* quadtree;
 	std::unordered_map<int, bool> keyboardstate;
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
 
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
-
+	void _ParseSection_QUADTREE(string line);
 	void LoadAssets(LPCWSTR assetFile);
 
 public:
