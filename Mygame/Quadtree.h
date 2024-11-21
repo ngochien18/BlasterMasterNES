@@ -76,16 +76,18 @@ public:
 					{
 						list.push_back(currentid);
 					}
+
 				}
-			}
-			for (int i = 0; i < 4; i++)
-			{
-				
-				if (currentnode->ChildNodeList[i] != NULL)
+				for (int i = 0; i < 4; i++)
 				{
-					node.push(currentnode->ChildNodeList[i]);
+
+					if (currentnode->ChildNodeList[i] != NULL)
+					{
+						node.push(currentnode->ChildNodeList[i]);
+					}
 				}
 			}
+			
 		}
 		return list;
 	}
