@@ -10,7 +10,6 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if(abs(vy)>abs(maxVy))	vy=maxVy;
 	x += vx;
 	y += vy;
-	DebugOut(L"Real x,y: %f,%f;vx,vy:%f,%f\n", x, y,vx,vy);
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount64() - untouchable_start > JASON_DASH_TIME)
 	{

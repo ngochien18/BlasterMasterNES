@@ -8,6 +8,9 @@ object\Bellbomber.txt
 object\SmallJason.txt
 object\Ground.txt
 #
+[BACKGROUND]
+-2	1	1	2047	2047	30
+#
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber

@@ -18,7 +18,7 @@
 class PlayScene : public Scene
 {
 	LPGAMEOBJECT player;
-
+	Sprite* background;
 	vector<LPGAMEOBJECT> objects;
 	Quadtree* quadtree;
 	std::unordered_map<int, bool> keyboardstate;
@@ -28,6 +28,7 @@ class PlayScene : public Scene
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_QUADTREE(string line);
+	void _ParseSectionBackGround(string line);
 	void LoadAssets(LPCWSTR assetFile);
 
 public:
@@ -44,5 +45,6 @@ public:
 	void PurgeDeletedObjects();
 
 	static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);
+
 };
 typedef PlayScene* LPPLAYSCENE;
