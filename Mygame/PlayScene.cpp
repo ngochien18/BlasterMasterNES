@@ -318,6 +318,7 @@ void PlayScene::Update(DWORD dt)
 }
 void PlayScene::Render()
 {
+	if(background!=NULL)
 		background->Draw(0, 0);
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->render();
