@@ -153,9 +153,6 @@
     <ClCompile Include="Global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Quadtree.cpp">
-      <Filter>Quadtree</Filter>
-    </ClCompile>
     <ClCompile Include="Quadtreenode.cpp">
       <Filter>Quadtree</Filter>
     </ClCompile>
