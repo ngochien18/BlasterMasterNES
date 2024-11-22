@@ -143,6 +143,8 @@
     <ClCompile Include="JasonBigIdle.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="Quadtree.cpp" />
+    <ClCompile Include="Quadtreenode.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="JasonBigWalking.cpp" />
     <ClCompile Include="SmallJason.cpp" />
@@ -177,6 +179,8 @@
     <ClInclude Include="Playerdata.h" />
     <ClInclude Include="PlayerState.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="Quadtree.h" />
+    <ClInclude Include="Quadtreenode.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SmallJason.h" />

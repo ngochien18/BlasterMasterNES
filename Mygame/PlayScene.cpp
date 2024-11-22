@@ -20,11 +20,13 @@ PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
 	player = NULL;
 	key_handler = new SampleKeyEventHandler(this);
+	quadtree = new Quadtree();
 }
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
 #define SCENE_SECTION_OBJECTS	2
-
+#define SCENE_SECTION_QUADTREE	3
+#define SCENE_SECTION_BACKGROUND 4
 #define ASSETS_SECTION_UNKNOWN -1
 #define ASSETS_SECTION_SPRITES 1
 #define ASSETS_SECTION_ANIMATIONS 2
@@ -176,6 +178,25 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 
 	objects.push_back(obj);
 }
+void PlayScene::_ParseSection_QUADTREE(string line)
+{
+	vector<string>tokens = split(line);
+	DebugOut(L"%d\n",tokens.size());
+	int id = atoi(tokens[0].c_str());
+	int PID = atoi(tokens[1].c_str());
+	int x = atoi(tokens[2].c_str());
+	int y = atoi(tokens[3].c_str());
+	int w = atoi(tokens[4].c_str());
+	int h = atoi(tokens[5].c_str());
+	vector<int>list;
+	for (int i = 6; i < tokens.size(); i++)
+	{
+		int OID = atoi(tokens[i].c_str());
+		list.push_back(OID);
+	}
+	Quadtreenode* node = new Quadtreenode(id, x, y, w, h, list, PID);
+	this->quadtree->ADD(node);
+}
 void PlayScene::LoadAssets(LPCWSTR assetFile)
 {
 	DebugOut(L"[INFO] Start loading assets from : %s \n", assetFile);
@@ -224,10 +245,16 @@ void PlayScene::Load()
 	while (f.getline(str, MAX_SCENE_LINE))
 	{
 		string line(str);
-
+		DebugOut(L"[INFO] Parsing line: %s\n", ToWSTR(line).c_str());
 		if (line[0] == '#') continue;	// skip comment lines	
 		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
 		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+		if (line == "[BACKGROUND]") {
+			DebugOut(L"[INFO] BACKGROUND section detected\n");
+			section = SCENE_SECTION_BACKGROUND;
+			continue;
+		}
+		if (line == "[QUADTREE]") { section = SCENE_SECTION_QUADTREE; continue; }
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -237,6 +264,11 @@ void PlayScene::Load()
 		{
 		case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
 		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+		case SCENE_SECTION_BACKGROUND:
+			_ParseSectionBackGround(line);
+			break;
+		case SCENE_SECTION_QUADTREE:_ParseSection_QUADTREE(line); break;
+		
 		}
 	}
 
@@ -254,10 +286,11 @@ void PlayScene::Update(DWORD dt)
 	{
 		coObjects.push_back(objects[i]);
 	}
-
-	for (size_t i = 0; i < objects.size(); i++)
+	vector<int> IDtorender=this->quadtree->traversal();
+	this->player->Update(dt, &coObjects);
+	for (size_t i = 0; i < IDtorender.size(); i++)
 	{
-		objects[i]->Update(dt, &coObjects);
+		objects[IDtorender[i]]->Update(dt, &coObjects);
 	}
 
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
@@ -285,6 +318,8 @@ void PlayScene::Update(DWORD dt)
 }
 void PlayScene::Render()
 {
+	if(background!=NULL)
+		background->Draw(0, 0);
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->render();
 }
@@ -309,7 +344,20 @@ void PlayScene::Unload()
 }
 
 bool PlayScene::IsGameObjectDeleted(const LPGAMEOBJECT& o) { return o == NULL; }
+void PlayScene::_ParseSectionBackGround(string line)
+{
+	vector<string> tokens = split(line);
+	int ID = atoi(tokens[0].c_str());
+	int l = atoi(tokens[1].c_str());
+	int t = atoi(tokens[2].c_str());
+	int r = atoi(tokens[3].c_str());
+	int b = atoi(tokens[4].c_str());
+	int texID = atoi(tokens[5].c_str());
+	DebugOut(L"enter back ground %d,%d,%d,%d,%d,%d \n", ID, l, t, r, b, texID);
 
+	LPTEXTURE tex = Textures::GetInstance()->Get(30);
+	background = new Sprite(ID, l, t, r, b, tex);
+}
 void PlayScene::PurgeDeletedObjects()
 {
 	vector<LPGAMEOBJECT>::iterator it;

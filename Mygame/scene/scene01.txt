@@ -8,6 +8,9 @@ object\Bellbomber.txt
 object\SmallJason.txt
 object\Ground.txt
 #
+[BACKGROUND]
+-2	1	1	2047	2047	30
+#
 [OBJECTS]
 # type	x	y	extra_settings per object type
 # type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber
@@ -23,4 +26,27 @@ object\Ground.txt
 100	160	120	20
 100	240	180	20
 100	290	42	20
+#BLACKFOOT
 1	90	70	10
+[QUADTREE]
+#ID	#PID	#X	#Y	#W	#H	#ObjID
+1	0	0	120	160	120	
+2	0	160	120	160	120
+3	0	160	0	160	120
+4	0	0	0	160	120
+5	1	0	180	80	60
+6	1	80	180	80	60
+7	1	80	120	80	60	3	4
+8	1	0	120	80	60	1	2	3
+9	2	160	180	80	60
+10	2	240	180	80	60	5
+11	2	240	120	60	60
+12	2	160	120	80	60	4
+13	3	160	60	80	60	4	7
+14	3	240	60	80	60
+15	3	240	0	80	60	6
+16	3	160	0	80	60
+17	4	0	60	80	60
+18	4	80	60	80	60	4	7
+19	4	80	0	80	60
+20	4	0	0	80	60

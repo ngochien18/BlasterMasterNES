@@ -1,6 +1,6 @@
 #pragma once
 #include "Game.h"
-class Game;
+
 class Camera
 {
 	float cam_x = 0.0f;
