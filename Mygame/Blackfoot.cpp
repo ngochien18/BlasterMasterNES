@@ -19,6 +19,7 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	}
 	Gameobject::Update(dt, coObjects);
+	//DebugOut(L"ve blackfoot");
 }
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {

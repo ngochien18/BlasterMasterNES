@@ -309,8 +309,8 @@ void PlayScene::Update(DWORD dt)
 	player->GetPosition(cx, cy);
 	Game* game = Game::GetInstance();
 
-	cx -=  game->GetBackBufferWidth()/2  ;
-	cy += game->GetBackBufferHeight() /2 ;
+	cx -=  game->GetBackBufferWidth()/2  ; //w 23 h 31
+	cy += game->GetBackBufferHeight() /2  ;
 	
 	//if(cx < 0) cx = 0;
 	//if (cy < 0) cy = 0;
