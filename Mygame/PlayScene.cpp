@@ -193,7 +193,9 @@ void PlayScene::_ParseSection_QUADTREE(string line)
 	{
 		int OID = atoi(tokens[i].c_str());
 		list.push_back(OID);
+		DebugOut(L"%d\n", list[list.size() - 1]);
 	}
+	
 	Quadtreenode* node = new Quadtreenode(id, x, y, w, h, list, PID);
 	this->quadtree->ADD(node);
 }
@@ -287,6 +289,12 @@ void PlayScene::Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 	vector<int> IDtorender=this->quadtree->traversal();
+	DebugOut(L"rendersize:%d\n", IDtorender.size());
+	if (IDtorender.size()!=0)
+	{
+		DebugOut(L"IDtorender:%d\n", IDtorender[0]);
+	}
+	
 	this->player->Update(dt, &coObjects);
 	for (size_t i = 0; i < IDtorender.size(); i++)
 	{

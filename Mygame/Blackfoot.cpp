@@ -12,6 +12,7 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 	x += vx;
 	y += vy;
+	DebugOut(L"Updated\n");
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
 		isdeleted = true;

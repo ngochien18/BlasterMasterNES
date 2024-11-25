@@ -28,7 +28,7 @@ bool Quadtreenode::nodeincamera(float c_x, float c_y, float c_w, float c_h)
 	}
 	if (x+width >= c_x && x+width <= c_x + c_w)// xay dung zone toa do cua cac zone la khac biet khong co 1 diem cung ton tai trong gioi han 2 zone
 	{
-		if ((y >= c_y && y <= c_y + c_h) || (y + height >= y && y + height <= c_y + c_h))
+		if ((y >= c_y && y <= c_y + c_h) || (y - height >= y && y - height <= c_y + c_h))
 		{
 			return true;
 		}

@@ -143,7 +143,6 @@
     <ClCompile Include="JasonBigIdle.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayScene.cpp" />
-    <ClCompile Include="Quadtree.cpp" />
     <ClCompile Include="Quadtreenode.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="JasonBigWalking.cpp" />
