@@ -133,7 +133,14 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
 	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
 	case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
-	case OBJECT_TYPE_GROUND: obj = new Ground(x, y); break;
+	case OBJECT_TYPE_GROUND: {
+		int w = atoi(tokens[4].c_str());
+		int h = atoi(tokens[5].c_str());
+		obj = new Ground(x, y, w, h);
+		//objects.push_back((Ground*)obj);
+		//DebugOut(L"them gach");
+		break;
+	}
 	//case OBJECT_TYPE_SMALLJASON : obj = new SmallJason(x, y); break;
 		//case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
 		//case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
