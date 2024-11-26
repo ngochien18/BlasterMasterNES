@@ -1,37 +1,27 @@
 #include "Quadtreenode.h"
-bool Quadtreenode::camerainnode(float c_x, float c_y, float c_w, float c_h)
+bool Quadtreenode::AABB(float c_x, float c_y, float c_w, float c_h)
 {
-	if (c_x >= x && c_x <= x + width)// xay dung zone toa do cua cac zone la khac biet khong co 1 diem cung ton tai trong gioi han 2 zone
+	float node_l = this->x;
+	float node_b = this->y;
+	float node_r = this->width+this->x;
+	float node_t = this->height+this->y;
+	float c_b = c_y;
+	float c_l = c_x;
+	float c_r = c_x + c_w;
+	float c_t = c_y + c_h;
+	bool AABBonX = false;
+	bool AABBonY = false;
+	if ((node_l > c_r || node_r < c_l)==false)
 	{
-		if ((c_y >= y && c_y <= y + height) || (c_y + c_h >= y && c_y + c_h <= y + height))
-		{
-			return true;
-		}
+		AABBonX = true;
 	}
-	if (c_x+c_w >= x && c_x+c_w <= x + width)// xay dung zone toa do cua cac zone la khac biet khong co 1 diem cung ton tai trong gioi han 2 zone
+	if ((node_b >= c_t || node_t <= c_b)==false)
 	{
-		if ((c_y >= y && c_y <= y + height) || (c_y + c_h >= y && c_y + c_h <= y + height))
-		{
-			return true;
-		}
+		AABBonY = true;
 	}
-	return false;
-}
-bool Quadtreenode::nodeincamera(float c_x, float c_y, float c_w, float c_h)
-{
-	if (x >= c_x && x <= c_x + c_w)// xay dung zone toa do cua cac zone la khac biet khong co 1 diem cung ton tai trong gioi han 2 zone
+	if (AABBonX==true && AABBonY==true)
 	{
-		if ((y >= c_y && y <= c_y + c_h) || (y + height >= y && y+height<= c_y + c_h))
-		{
-			return true;
-		}
-	}
-	if (x+width >= c_x && x+width <= c_x + c_w)// xay dung zone toa do cua cac zone la khac biet khong co 1 diem cung ton tai trong gioi han 2 zone
-	{
-		if ((y >= c_y && y <= c_y + c_h) || (y - height >= y && y - height <= c_y + c_h))
-		{
-			return true;
-		}
+		return true;
 	}
 	return false;
 }

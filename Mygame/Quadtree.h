@@ -11,6 +11,10 @@ public:
 	{
 		root = NULL;
 	}
+	/*void CreatQuadTree(Quadtreenode* nodetoadd)
+	{
+			if(nodetoadd)
+	}*/
 	void ADD(Quadtreenode* nodeneedtoadd)
 	{
 		if (root != NULL)
@@ -70,7 +74,7 @@ public:
 			
 			currentnode = node.front();
 			node.pop();
-			if (currentnode->camerainnode(cx, cy, w, h) == true || currentnode->nodeincamera(cx, cy, w, h) == true)
+			if (currentnode->AABB(cx, cy, w, h) == TRUE)
 			{
 				for (int i = 0; i < currentnode->objectID_list.size(); i++)
 				{

@@ -34,8 +34,8 @@ public:
 			ChildNodeList.push_back(node);
 		}
 	}
-	bool camerainnode(float x, float y, float c_x, float c_y);
-	bool nodeincamera(float x, float y, float c_x, float c_y);
+	void GetNodeSize(float& w, float& height);
+	bool AABB(float c_x, float c_y, float c_w, float c_h);
 };
 
 
