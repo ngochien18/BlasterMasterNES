@@ -44,8 +44,9 @@ public:
 	void PurgeDeletedObjects();
 	void Setplayerstate(LPGAMEOBJECT newstate)
 	{
-
+		player = NULL;
 		player = newstate;
+		objects[0] = player;
 		DebugOut(L"state set\n");
 	}
 	static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);

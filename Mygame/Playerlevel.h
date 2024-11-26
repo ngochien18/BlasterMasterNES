@@ -15,6 +15,9 @@ public:
 	{
 
 	}
+	virtual void OnkeyUP(int keycode)=0;
+	virtual void OnkeyDown(int keycode)=0;
+	virtual void Keystate(BYTE* key)=0;
 	virtual void render() = 0;
 	virtual void Delete() { isdeleted = true; }
 	virtual void SetState(int state) { this->state = state; }

@@ -54,7 +54,7 @@ public:
 		maxVy = 0.0f;
 		ax = 0.0f;
 		ay = 0.0f;
-
+		state = SMALLJASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
 	}

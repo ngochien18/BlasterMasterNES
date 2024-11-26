@@ -45,7 +45,6 @@ int Playablechracter::GetAniIdBig()
 		aniId = ID_ANI_JASON_WALKING_DOWN;
 	}
 	if (aniId == -1) aniId = ID_ANI_JASON_IDLE_RIGHT;
-
 	return aniId;
 }
 void Playablechracter::SetState(int state)
@@ -114,11 +113,16 @@ void Playablechracter::GetBoundingBox(float& left, float& top, float& right, flo
 	right = left + JASON_BIG_BBOX_WIDTH;
 	bottom = top + JASON_BIG_BBOX_HEIGHT;
 }
+void Playablechracter::OnkeyUP(int keycode)
+{
+
+}
 void Playablechracter::OnkeyDown(int keycode)
 {
 }
 void Playablechracter::Keystate(BYTE* key)
 {
+	DebugOut(L"BIG KEYHANDLER\n");
 	LPGAME game = game->GetInstance();
 	if (state == BIG_JASON_STATE_IDLE)
 	{

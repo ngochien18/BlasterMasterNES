@@ -22,7 +22,7 @@ void SmallJason::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 int SmallJason::GetAniIdSmall()
 {
 	int aniId = -1;
-
+	aniId = ID_ANI_SMALLJASON_IDLE_LEFT;
 	if (vx == 0 && vy == 0)
 	{
 		if (nx > 0) aniId = ID_ANI_SMALLJASON_IDLE_RIGHT;
@@ -42,7 +42,6 @@ int SmallJason::GetAniIdSmall()
 		aniId = ID_ANI_SMALLJASON_WALKING_DOWN;
 	}
 	if (aniId == -1) aniId = ID_ANI_SMALLJASON_IDLE_RIGHT;
-
 	return aniId;
 }
 void SmallJason::SetState(int state)
@@ -93,7 +92,7 @@ void SmallJason::SetState(int state)
 
 	Gameobject::setstate(state);
 
-	DebugOut(L"Set stated %d\n", this->state);
+	DebugOut(L"small Set stated %d\n", this->state);
 }
 void SmallJason::SetLevel(int l)
 {
@@ -108,25 +107,7 @@ void SmallJason::GetBoundingBox(float& left, float& top, float& right, float& bo
 void SmallJason::OnkeyUP(int keycode)
 {
 	//SmallJason* jason = (SmallJason*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
-	switch (keycode)
-	{
-		if (GetState() == SMALLJASON_STATE_DIE) return;
-		else {
-			if (GetState() == SMALLJASON_STATE_IDLE) {
-	case DIK_DOWN:
-		SetState(SMALLJASON_STATE_WALK_DOWN);
-		break;
-	case DIK_RIGHT:
-		SetState(SMALLJASON_STATE_WALK_RIGHT);
-		break;
-	case DIK_LEFT:
-		SetState(SMALLJASON_STATE_WALK_LEFT);
-		break;
-	default:
-		DebugOut(L"No key called\n");
-			}
-		}
-	}
+	
 }
 void SmallJason::OnkeyDown(int keycode)
 {
@@ -136,15 +117,15 @@ void SmallJason::Keystate(BYTE* key)
 	LPGAME game = game->GetInstance();
 	if (game->IsKeyDown(DIK_DOWN))
 	{
-
+		SetState(SMALLJASON_STATE_WALK_DOWN);
 	}
 	else if (game->IsKeyDown(DIK_LEFT))
 	{
-
+		SetState(SMALLJASON_STATE_WALK_LEFT);
 	}
-	else if (game->IsKeyDown(DIK_RIGHT))
+	else if (game->IsKeyDown(DIK_D))
 	{
-
+		SetState(SMALLJASON_STATE_WALK_RIGHT);
 	}
 	else
 	{
