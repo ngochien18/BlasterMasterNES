@@ -40,9 +40,6 @@
     <Filter Include="SampleKeyEventHandler">
       <UniqueIdentifier>{0f10c341-daf2-4abe-a6f5-3ef262239e58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{fe0f1254-be34-4287-b98d-97a820993b11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{8bfd62b0-0b6c-41b6-a742-939387f57a94}</UniqueIdentifier>
     </Filter>
@@ -61,15 +58,6 @@
     <Filter Include="Enemy\Bellbomber">
       <UniqueIdentifier>{dff34d7d-924f-431d-b3c8-43bacb90268b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player\PlayerState">
-      <UniqueIdentifier>{e992b8f7-202e-4015-9c0c-3c458c2d3ac4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Player\Playerdata">
-      <UniqueIdentifier>{1f19a2c4-5050-42e5-8333-184c24980e77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Player\SmallJason">
-      <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Enemy\Ground">
       <UniqueIdentifier>{217f4363-71bc-406e-b0b5-7799e8332c78}</UniqueIdentifier>
     </Filter>
@@ -78,6 +66,12 @@
     </Filter>
     <Filter Include="Quadtree">
       <UniqueIdentifier>{5cd02578-28be-4be5-bfb4-add87b411619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{fe0f1254-be34-4287-b98d-97a820993b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player\SmallJason">
+      <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +109,7 @@
       <Filter>SampleKeyEventHandler</Filter>
     </ClCompile>
     <ClCompile Include="Playablechracter.cpp">
-      <Filter>Player</Filter>
+      <Filter>Header Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>Scene</Filter>
@@ -138,14 +132,8 @@
     <ClCompile Include="Bellbomber.cpp">
       <Filter>Enemy\Bellbomber</Filter>
     </ClCompile>
-    <ClCompile Include="JasonBigWalking.cpp">
-      <Filter>Player\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="JasonBigIdle.cpp">
-      <Filter>Player\PlayerState</Filter>
-    </ClCompile>
     <ClCompile Include="SmallJason.cpp">
-      <Filter>Player\SmallJason</Filter>
+      <Filter>Header Files\Player\SmallJason</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Enemy\Ground</Filter>
@@ -155,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="Quadtreenode.cpp">
       <Filter>Quadtree</Filter>
+    </ClCompile>
+    <ClCompile Include="Playerlevel.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,7 +189,7 @@
       <Filter>SampleKeyEventHandler</Filter>
     </ClInclude>
     <ClInclude Include="Playablechracter.h">
-      <Filter>Player</Filter>
+      <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
       <Filter>Scene</Filter>
@@ -224,26 +215,11 @@
     <ClInclude Include="Bellbomber.h">
       <Filter>Enemy\Bellbomber</Filter>
     </ClInclude>
-    <ClInclude Include="JasonBigWalking.h">
-      <Filter>Player\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerState.h">
-      <Filter>Player\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Player\Playerdata</Filter>
-    </ClInclude>
-    <ClInclude Include="Playerdata.h">
-      <Filter>Player\Playerdata</Filter>
-    </ClInclude>
-    <ClInclude Include="JasonBigIdle.h">
-      <Filter>Player\PlayerState</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="SmallJason.h">
-      <Filter>Player\SmallJason</Filter>
+      <Filter>Header Files\Player\SmallJason</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Enemy\Ground</Filter>
@@ -256,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Quadtreenode.h">
       <Filter>Quadtree</Filter>
+    </ClInclude>
+    <ClInclude Include="Playerlevel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

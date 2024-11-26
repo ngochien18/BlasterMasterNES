@@ -2,7 +2,7 @@
 #include "Debug.h"
 #include "Game.h"
 #include "PlayScene.h"
-
+#include"Playerlevel.h"
 #define SMALLJASON_ACCEL_WALK	0.0005f
 #define SMALLJASON_WALKING_SPEED		0.1f
 //aniid small jason id 9xx
@@ -43,20 +43,12 @@
 
 
 
-class SmallJason : public Gameobject
+class SmallJason : public Playerlevel
 {
-public:
-	float maxVx;
-	float maxVy;
-	float ax;				// acceleration on x 
-	float ay;				// acceleration on y 
-	int level;
-	int untouchable;
-	ULONGLONG untouchable_start;
-
+private:
 	int GetAniIdSmall();
 public:
-	SmallJason(float x, float y) :Gameobject(x, y)
+	SmallJason(float x, float y) :Playerlevel(x, y)
 	{
 		maxVx = 0.0f;
 		maxVy = 0.0f;

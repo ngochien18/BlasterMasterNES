@@ -1,7 +1,6 @@
 #pragma once
 #include "Game.h"
 #include "Scene.h"
-#include "Playerdata.h"
 #include "Gameobject.h"
 #include "Textures.h"
 #include "unordered_map"
@@ -43,7 +42,12 @@ public:
 
 	void Clear();
 	void PurgeDeletedObjects();
+	void Setplayerstate(LPGAMEOBJECT newstate)
+	{
 
+		player = newstate;
+		DebugOut(L"state set\n");
+	}
 	static bool IsGameObjectDeleted(const LPGAMEOBJECT& o);
 
 };

@@ -140,12 +140,11 @@
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="JasonBigIdle.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
+    <ClCompile Include="Playerlevel.cpp" />
     <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="Quadtreenode.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
-    <ClCompile Include="JasonBigWalking.cpp" />
     <ClCompile Include="SmallJason.cpp" />
     <ClCompile Include="Sunami.cpp" />
     <ClCompile Include="Textures.cpp" />
@@ -171,12 +170,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Ground.h" />
-    <ClInclude Include="JasonBigIdle.h" />
-    <ClInclude Include="JasonBigWalking.h" />
     <ClInclude Include="KeyEventHandler.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Playerdata.h" />
-    <ClInclude Include="PlayerState.h" />
+    <ClInclude Include="Playerlevel.h" />
     <ClInclude Include="PlayScene.h" />
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Quadtreenode.h" />

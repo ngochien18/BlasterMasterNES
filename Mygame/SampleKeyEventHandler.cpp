@@ -19,5 +19,12 @@ void SampleKeyEventHandler::OnKeyDown(int KeyCode)
 void SampleKeyEventHandler::KeyState(BYTE* state)
 {
 	Playablechracter* jason = (Playablechracter*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
+	LPGAME game = game->GetInstance();
+	float x, y;
+	jason->GetPosition(x, y);
+	if (game->IsKeyDown(DIK_1))
+	{
+		((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+	}
 	jason->Keystate(state);
 }

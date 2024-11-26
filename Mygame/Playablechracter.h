@@ -5,6 +5,7 @@
 #include "Debug.h"
 #include "Game.h"
 #include "PlayScene.h"
+#include "Playerlevel.h"
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2
@@ -35,27 +36,17 @@
 #define BIG_JASON_STATE_WALK_LEFT	200
 #define BIG_JASON_STATE_WALK_UP			300
 #define BIG_JASON_STATE_WALK_DOWN		400
-class Playablechracter : public Gameobject
+class Playablechracter : public Playerlevel
 {	
 private:
-	float maxVx;
-	float maxVy;
-	float ax;				// acceleration on x 
-	float ay;				// acceleration on y 
-	int level;
-	int untouchable;
-	ULONGLONG untouchable_start;
-
 	int GetAniIdBig();
 public:
-	Playablechracter (float x,float y) :Gameobject(x, y)
+	Playablechracter (float x,float y) :Playerlevel(x, y)
 	{
 		maxVx = 0.0f;
 		maxVy = 0.0f;
 		ax = 0.0f;
 		ay = 0.0f;
-
-		level = JASON_LEVEL_BIG;
 		state = BIG_JASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
@@ -67,8 +58,9 @@ public:
 
 		if (state == JASON_STATE_DIE)
 			aniId = ID_ANI_JASON_DIE;
-		else if (level == JASON_LEVEL_BIG)
+		else {
 			aniId = GetAniIdBig();
+		}
 		animations->Get(aniId)->Render(x, y);
 
 		RenderBoundingBox();

@@ -106,12 +106,6 @@ void Playablechracter::SetState(int state)
 }
 void Playablechracter::SetLevel(int l)
 {
-	//// Adjust position to avoid falling off platform
-	////if (this->level == MARIO_LEVEL_SMALL)
-	////{
-	//	y -= (MARIO_BIG_BBOX_HEIGHT - MARIO_SMALL_BBOX_HEIGHT) / 2;
-	//}
-	level = l;
 }
 void Playablechracter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
