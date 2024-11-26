@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Game.h"
 
 #define ID_ANI_GROUND 100000
 #define GROUND_WIDTH 16
@@ -8,9 +9,16 @@
 #define GROUND_BBOX_HEIGHT 16
 
 class Ground : public Gameobject {
+private:
+	int width;
+	int height;
 public:
-	Ground(float x, float y) : Gameobject(x, y) {}
-	void render();
+	Ground();
+	Ground(float x, float y, int width, int height);
+	~Ground();
+	int GetWidth() { return width; }
+	int GetHeight() { return height; }
+	virtual void render();
 	void Update(DWORD dt) {}
-	void GetBoundingBox(float& l, float& t, float& r, float& b);
+	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
 };

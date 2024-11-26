@@ -7,7 +7,7 @@
 #include "Animations.h"
 #include "Sprites.h"
 #include "Player.h"
-#define ID_TEX_BBOX -101		// special texture to draw object bounding box
+#define ID_TEX_BBOX 100		// special texture to draw object bounding box
 #define BBOX_ALPHA 0.25f		// Bounding box transparency
 
 
