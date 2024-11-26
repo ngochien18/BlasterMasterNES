@@ -181,7 +181,6 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 void PlayScene::_ParseSection_QUADTREE(string line)
 {
 	vector<string>tokens = split(line);
-	DebugOut(L"%d\n",tokens.size());
 	int id = atoi(tokens[0].c_str());
 	int PID = atoi(tokens[1].c_str());
 	int x = atoi(tokens[2].c_str());
@@ -193,7 +192,6 @@ void PlayScene::_ParseSection_QUADTREE(string line)
 	{
 		int OID = atoi(tokens[i].c_str());
 		list.push_back(OID);
-		DebugOut(L"%d\n", list[list.size() - 1]);
 	}
 	
 	Quadtreenode* node = new Quadtreenode(id, x, y, w, h, list, PID);

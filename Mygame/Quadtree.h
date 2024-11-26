@@ -72,7 +72,6 @@ public:
 			node.pop();
 			if (currentnode->camerainnode(cx, cy, w, h) == true || currentnode->nodeincamera(cx, cy, w, h) == true)
 			{
-				DebugOut(L"camerainnode:%d\n",currentnode->id);
 				for (int i = 0; i < currentnode->objectID_list.size(); i++)
 				{
 					int currentid = currentnode->objectID_list[i];
