@@ -5,17 +5,17 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 	
-	
 	if (abs(vx) > abs(maxVx)) vx = maxVx;
 	if(abs(vy)>abs(maxVy))	vy=maxVy;
-	x += vx;
-	y += vy;
+	/*x += vx;
+	y += vy;*/
 	// reset untouchable timer if untouchable time has passed
 	if (GetTickCount64() - untouchable_start > JASON_DASH_TIME)
 	{
 		untouchable_start = 0;
 		untouchable = 0;
 	}
+	Colision::GetInstance()->process(this, dt, coObjects);
 }
 int Playablechracter::GetAniIdBig()
 {
@@ -122,7 +122,6 @@ void Playablechracter::OnkeyDown(int keycode)
 }
 void Playablechracter::Keystate(BYTE* key)
 {
-	DebugOut(L"BIG KEYHANDLER\n");
 	LPGAME game = game->GetInstance();
 	if (state == BIG_JASON_STATE_IDLE)
 	{

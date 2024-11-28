@@ -13,7 +13,7 @@ protected:
 public:
 	Playerlevel(float x, float y) :Gameobject(x, y)
 	{
-
+		objecttag = "Player";
 	}
 	virtual void OnkeyUP(int keycode)=0;
 	virtual void OnkeyDown(int keycode)=0;

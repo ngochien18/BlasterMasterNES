@@ -6,6 +6,7 @@
 #include "Game.h"
 #include "PlayScene.h"
 #include "Playerlevel.h"
+#include"Colision.h"
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2
@@ -73,6 +74,10 @@ public:
 	void OnkeyUP(int keycode);
 	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
-
+	void OnNoCollision(DWORD dt)
+	{
+		x += vx ;
+		y += vy ;
+	}
 };
 

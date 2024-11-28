@@ -6,6 +6,8 @@
 #include "Animation.h"
 #include "Animations.h"
 #include "Sprites.h"
+#include "string"
+#include "Colision.h"
 #define ID_TEX_BBOX 100		// special texture to draw object bounding box
 #define BBOX_ALPHA 0.25f		// Bounding box transparency
 
@@ -19,6 +21,7 @@ protected:
 	int nx,ny;
 	int state;
 	bool isdeleted;	
+	string objecttag;
 public:
 	virtual void render()=0;
 	virtual void setstate(int state) { this->state = state;	 }
@@ -36,7 +39,22 @@ public:
 	Gameobject();
 	Gameobject(float x, float y) :Gameobject() { this->x = x; this->y = y; }
 	virtual void SetState(int state) { this->state = state; }
+	//
+	// Collision ON or OFF ? This can change depending on object's state. For example: die
+	//
+	virtual int IsCollidable() { return 0; };
 
+	// When no collision has been detected (triggered by CCollision::Process)
+	virtual void OnNoCollision(DWORD dt) {};
+
+	// When collision with an object has been detected (triggered by CCollision::Process)
+	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
+
+	// Is this object blocking other object? If YES, collision framework will automatically push the other object
+	virtual int IsBlocking() { return 1; }
+
+	// Does this object collide with other object at certain direction ( like ColorBox )
+	virtual int IsDirectionColliable(float nx, float ny) { return 1; }
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
 	~Gameobject();

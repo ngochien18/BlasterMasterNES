@@ -31,6 +31,7 @@ public:
 		state = BELLBOMBER_STATE_FLYING;
 		maxVx = 0.9f;
 		maxVy = 0.0f;
+		objecttag = "Enermy";
 		ax = 0.01f;
 		ay = 0.0f;
 	}

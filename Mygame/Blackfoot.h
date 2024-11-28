@@ -36,6 +36,7 @@ public:
 		state = BLACKFOOT_STATE_WALKING_RL;
 		maxVx = 0.9f;
 		maxVy = 0.9f;
+		objecttag = "Enermy";
 		ax = 0.01f;
 		ay = 0.0f;
 	}

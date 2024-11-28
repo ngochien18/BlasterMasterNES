@@ -32,6 +32,7 @@ public:
 		maxVy = 0.9f;
 		ax = 0.1f;
 		ay = 0.1f;
+		objecttag = "Enermy";
 		//upperbar = 140;
 		//lowerbar = 120;
 	}

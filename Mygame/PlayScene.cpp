@@ -287,16 +287,11 @@ void PlayScene::Update(DWORD dt)
 	// TO-DO: This is a "dirty" way, need a more organized way 
 
 	vector<int> IDtorender = this->quadtree->traversal();
-	DebugOut(L"rendersize:%d\n", IDtorender.size());
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 0; i < IDtorender.size(); i++)
 	{
+		if (i!=0)
 		coObjects.push_back(objects[IDtorender[i]]);
-	}
-	
-	if (IDtorender.size()!=0)
-	{
-		DebugOut(L"IDtorender:%d\n", IDtorender[0]);
 	}
 	
 	this->player->Update(dt, &coObjects);

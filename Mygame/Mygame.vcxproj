@@ -137,6 +137,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Bellbomber.cpp" />
+    <ClCompile Include="Colision.cpp" />
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Ground.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="AssetID.h" />
     <ClInclude Include="Bellbomber.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Colision.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="Game.h" />

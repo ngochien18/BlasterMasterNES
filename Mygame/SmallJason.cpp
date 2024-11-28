@@ -123,7 +123,7 @@ void SmallJason::Keystate(BYTE* key)
 	{
 		SetState(SMALLJASON_STATE_WALK_LEFT);
 	}
-	else if (game->IsKeyDown(DIK_D))
+	else if (game->IsKeyDown(DIK_RIGHT))
 	{
 		SetState(SMALLJASON_STATE_WALK_RIGHT);
 	}

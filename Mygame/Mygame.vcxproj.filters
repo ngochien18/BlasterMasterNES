@@ -67,10 +67,13 @@
     <Filter Include="Quadtree">
       <UniqueIdentifier>{5cd02578-28be-4be5-bfb4-add87b411619}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Player">
+    <Filter Include="Colision">
+      <UniqueIdentifier>{4dbd7383-ec2f-4798-9dc9-e2e066484f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
       <UniqueIdentifier>{fe0f1254-be34-4287-b98d-97a820993b11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Player\SmallJason">
+    <Filter Include="Player\SmallJason">
       <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -109,7 +112,7 @@
       <Filter>SampleKeyEventHandler</Filter>
     </ClCompile>
     <ClCompile Include="Playablechracter.cpp">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>Scene</Filter>
@@ -133,7 +136,7 @@
       <Filter>Enemy\Bellbomber</Filter>
     </ClCompile>
     <ClCompile Include="SmallJason.cpp">
-      <Filter>Header Files\Player\SmallJason</Filter>
+      <Filter>Player\SmallJason</Filter>
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Enemy\Ground</Filter>
@@ -144,8 +147,11 @@
     <ClCompile Include="Quadtreenode.cpp">
       <Filter>Quadtree</Filter>
     </ClCompile>
+    <ClCompile Include="Colision.cpp">
+      <Filter>Colision</Filter>
+    </ClCompile>
     <ClCompile Include="Playerlevel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +195,7 @@
       <Filter>SampleKeyEventHandler</Filter>
     </ClInclude>
     <ClInclude Include="Playablechracter.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="PlayScene.h">
       <Filter>Scene</Filter>
@@ -219,7 +225,7 @@
       <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="SmallJason.h">
-      <Filter>Header Files\Player\SmallJason</Filter>
+      <Filter>Player\SmallJason</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>Enemy\Ground</Filter>
@@ -233,8 +239,11 @@
     <ClInclude Include="Quadtreenode.h">
       <Filter>Quadtree</Filter>
     </ClInclude>
+    <ClInclude Include="Colision.h">
+      <Filter>Colision</Filter>
+    </ClInclude>
     <ClInclude Include="Playerlevel.h">
-      <Filter>Header Files</Filter>
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
