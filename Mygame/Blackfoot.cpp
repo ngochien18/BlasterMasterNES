@@ -17,8 +17,11 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
+	static float initx = x;
+	/*if (ax>=0 && x > initx ) { vx = -vx; nx = -1; };
+	if (ax<0 && x < initx) { vx = -vx; nx = 1; };*/
 	Gameobject::Update(dt, coObjects);
-	//DebugOut(L"ve blackfoot");
+	DebugOut(L"ve blackfoot", y);
 }
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -73,9 +76,10 @@ void Blackfoot::SetState(int state)
 		ay = 0;
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
+	
 
-		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
-		if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
+		if(ax >= 0 && x > initx+100) { ax = -ax; nx = -1; };
+		if (ax < 0 && x < initx-100) { ax = -ax; nx = 1; }
 		/*ay = 0; vy = 0; ny = 0;
 		if (y <= 10)
 		{
