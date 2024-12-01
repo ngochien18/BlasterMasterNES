@@ -2,6 +2,7 @@
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
+#include "Colision.h"
 void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
@@ -10,16 +11,37 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
-	x += vx;
-	y += vy;
+	
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
 		isdeleted = true;
 		return;
 	}
+	Colision::GetInstance()->process(this, dt, coObjects);
 	Gameobject::Update(dt, coObjects);
 	//DebugOut(L"ve blackfoot");
 }
+void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (!e->objd->IsBlocking()) return;
+	if (dynamic_cast<Blackfoot*>(e->objd)) return;
+	DebugOut(L"%d\n", e->nx);
+	if (e->ny != 0)
+	{
+		vy = 0;
+	}
+	
+	else if (e->nx != 0)
+	{
+		vx = -vx;
+	}
+}
+void Blackfoot::OnNoCollision(DWORD dt)
+{
+	x += vx;
+	y += vy;
+}
+
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	if (state == BLACKFOOT_STATE_DIE)

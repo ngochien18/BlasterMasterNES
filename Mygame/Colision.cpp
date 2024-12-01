@@ -25,12 +25,13 @@ void Colision::SweptAABB(
 	t = -1.0f;//no col
 	nx = ny = 0;
 	//Broadphase(mo rong collision box theo phuong di chuyen)
-	float bl = dx > 0 ? ml : ml + dx;
-	float br = dx > 0 ? mr+dx:mr;
-	float bt = dy > 0 ? mt + dx : mt;
-	float bb = dy > 0 ? mb : mb + dy;
-	if (br < sl || bl > sr || bb < st || bt > sb) return;//no col yet
-	if (dx = 0 && dy == 0) return;//relative speed =0-> can not col
+	float bl = dx > 0 ? ml : ml + dx;  // Adjust left bound based on movement
+	float br = dx > 0 ? mr + dx : mr;  // Adjust right bound based on movement
+	float bt = dy > 0 ? mt + dy : mt;  // Fix: Use dy instead of dx
+	float bb = dy > 0 ? mb : mb + dy;  // Adjust bottom bound based on movement
+
+	if (dx == 0 && dy == 0) return;//relative speed =0-> can not col
+	
 	//exit la 2 mat xa nhat theo phuong di chuyen
 	//entry la 2 mat gan nhat neu di chuyen dung phuong co the va cham
 	if (dx > 0)
@@ -50,8 +51,8 @@ void Colision::SweptAABB(
 	}
 	else
 	{
-		dx_entry = st - mb;
-		dx_exit = sb - mt;
+		dy_entry = st - mb;
+		dy_exit = sb - mt;
 	}
 	//calculate time
 	if (dx == 0)
@@ -80,11 +81,14 @@ void Colision::SweptAABB(
 
 	t_entry = max(tx_entry, ty_entry);//all x and y enter col phase ->col
 	t_exit = min(tx_exit, ty_exit);//x or y exit -> no more collision
-
-	if (t_entry > t_exit) return;
+	if (t_entry > t_exit)
+	{
+		DebugOut(L"time: %f\n", t);
+		return;
+	}
 
 	t = t_entry;
-
+	DebugOut(L"time: %f\n", t);
 	if (tx_entry > ty_entry)//direction x or y first
 	{
 		ny = 0.0f;
@@ -141,9 +145,12 @@ void Colision::scan(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* objDest
 	for (UINT i = 0; i < objDests->size(); i++)
 	{
 		LPCOLLISIONEVENT e = SweptAABB(objSrc, dt, objDests->at(i));
-
+		
 		if (e->Collided() == 1)
+		{
 			coEvents.push_back(e);
+			
+		}
 		else
 			delete e;
 	}
@@ -159,6 +166,7 @@ void Colision::filter(LPGAMEOBJECT objSrc,
 	int filterX = 1,			// 1 = process events on X-axis, 0 = skip events on X 
 	int filterY = 1)			// 1 = process events on Y-axis, 0 = skip events on Y
 {
+	
 	float min_tx, min_ty;
 
 	min_tx = 1.0f;
@@ -175,11 +183,18 @@ void Colision::filter(LPGAMEOBJECT objSrc,
 		// ignore collision event with object having IsBlocking = 0 (like coin, mushroom, etc)
 		if (filterBlock == 1 && !c->objd->IsBlocking())
 		{
+			if(c->objd->IsBlocking())
+				DebugOut(L"skipped by none blocking\n");
+			DebugOut(L"skipped\n");
 			continue;
 		}
 		//if x only event happen first return pos in co event and dest blocking
 		if (c->t < min_tx && c->nx != 0 && filterX == 1) {
 			min_tx = c->t; min_ix = i;
+			if (objSrc->objecttag == "Enermy")
+			{
+				DebugOut(L"Enermy col with object %d\n");
+			}
 		}
 		//if y only event happen first return pos in co event and dest blocking
 		if (c->t < min_ty && c->ny != 0 && filterY == 1) {
@@ -220,6 +235,7 @@ void Colision::process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* coOb
 
 		if (colX != NULL && colY != NULL) //check and modified
 		{
+			
 			if (colY->t < colX->t)	// was collision on Y first ?(y block first)
 			{
 				//if blocking
