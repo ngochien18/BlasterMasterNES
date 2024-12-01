@@ -3,29 +3,31 @@
 #include "PlayScene.h"
 #include "Game.h"
 #include "Colision.h"
+#include "string"
 void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
 	vy += ay * dt;
 	vx += ax * dt;
 
-	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
-	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
+	if (abs(vx) > abs(maxVx)) vx = maxVx *nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy*nx;
 	
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
 		isdeleted = true;
 		return;
 	}
-	Colision::GetInstance()->process(this, dt, coObjects);
 	Gameobject::Update(dt, coObjects);
+	Colision::GetInstance()->process(this, dt, coObjects);
+	
 	//DebugOut(L"ve blackfoot");
 }
 void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->objd->IsBlocking()) return;
 	if (dynamic_cast<Blackfoot*>(e->objd)) return;
-	DebugOut(L"%d\n", e->nx);
+	
 	if (e->ny != 0)
 	{
 		vy = 0;
@@ -33,7 +35,8 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 	
 	else if (e->nx != 0)
 	{
-		vx = -vx;
+		this->nx = -this->nx;
+		ax = -ax;
 	}
 }
 void Blackfoot::OnNoCollision(DWORD dt)
@@ -44,19 +47,19 @@ void Blackfoot::OnNoCollision(DWORD dt)
 
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state == BLACKFOOT_STATE_DIE)
+	if (state ==BLACKFOOT_STATE_DIE)
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH / 2;
 		top = y - BLACKFOOT_BBOX_HEIGHT_DIE / 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;
-		bottom = top + BLACKFOOT_BBOX_HEIGHT_DIE;
+		bottom = top - BLACKFOOT_BBOX_HEIGHT_DIE;
 	}
 	else
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH / 2;
 		top = y - BLACKFOOT_BBOX_HEIGHT / 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;
-		bottom = top + BLACKFOOT_BBOX_HEIGHT;
+		bottom = top - BLACKFOOT_BBOX_HEIGHT;
 	}
 }
 void Blackfoot::render()
@@ -96,8 +99,8 @@ void Blackfoot::SetState(int state)
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
 
-		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
-		if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
+		//if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
+		//if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
 		/*ay = 0; vy = 0; ny = 0;
 		if (y <= 10)
 		{

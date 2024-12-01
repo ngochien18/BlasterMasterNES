@@ -15,10 +15,12 @@ private:
 public:
 	Ground();
 	Ground(float x, float y, int width, int height);
+	virtual int IsBlocking() { return 1; }
 	~Ground();
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
 	virtual void render();
 	void Update(DWORD dt) {}
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
+
 };

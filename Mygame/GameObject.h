@@ -21,8 +21,9 @@ protected:
 	int nx,ny;
 	int state;
 	bool isdeleted;	
-	string objecttag;
+	
 public:
+	string objecttag;
 	virtual void render()=0;
 	virtual void setstate(int state) { this->state = state;	 }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }

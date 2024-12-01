@@ -74,10 +74,23 @@ public:
 	void OnkeyUP(int keycode);
 	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
+	virtual int IsCollidable() { return 1; };
 	void OnNoCollision(DWORD dt)
 	{
 		x += vx ;
 		y += vy ;
 	}
+	void OnCollisionWith(LPCOLLISIONEVENT e)
+	{
+		if (e->objd->objecttag == "Blackfoot")
+		{
+			DebugOut(L"Blackfoot\n");
+		}
+		if (e->objd->objecttag == "Ground")
+		{
+			DebugOut(L"Ground\n");
+		}
+	}
+	virtual int IsDirectionColliable(float nx, float ny) { return 1; }
 };
 

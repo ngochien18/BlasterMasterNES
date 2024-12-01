@@ -290,7 +290,6 @@ void PlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 0; i < IDtorender.size(); i++)
 	{
-		if (i!=0)
 		coObjects.push_back(objects[IDtorender[i]]);
 	}
 	
@@ -326,7 +325,7 @@ void PlayScene::Update(DWORD dt)
 void PlayScene::Render()
 {
 	if(background!=NULL)
-		background->Draw(0, 0);
+		//background->Draw(0, 0);
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->render();
 }

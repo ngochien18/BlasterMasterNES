@@ -111,7 +111,7 @@ void Playablechracter::GetBoundingBox(float& left, float& top, float& right, flo
 	left = x - JASON_BIG_BBOX_WIDTH / 2;
 	top = y - JASON_BIG_BBOX_HEIGHT / 2;
 	right = left + JASON_BIG_BBOX_WIDTH;
-	bottom = top + JASON_BIG_BBOX_HEIGHT;
+	bottom = top - JASON_BIG_BBOX_HEIGHT;
 }
 void Playablechracter::OnkeyUP(int keycode)
 {
