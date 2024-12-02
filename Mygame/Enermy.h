@@ -1,5 +1,7 @@
 #pragma once
 #include "GameObject.h"
+#include "Playerlevel.h"
+#include "PlayScene.h"
 struct box
 {
 	float t, l, r, b;
@@ -36,6 +38,15 @@ public:
 		trackingbox.r += range;
 		trackingbox.b -= range;
 		return trackingbox;
+	}
+	float distancewithplayer()
+	{
+		Playerlevel* jason = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
+		float px, py;
+		jason->GetPosition(px, py);
+		float distance2 = (px - x) * (px - x) + (py - y) * (py - y);
+		float distance = sqrtf(distance2);
+		return distance;
 	}
 };
 

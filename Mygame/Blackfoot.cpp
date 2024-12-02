@@ -27,10 +27,6 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->objd->IsBlocking()) return;
 	if (dynamic_cast<Blackfoot*>(e->objd)) return;
-	if (e->objd->objecttag == "Player")
-	{
-		return;
-	}
 	if (e->ny != 0)
 	{
 		vy = 0;
@@ -44,8 +40,12 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void Blackfoot::OnNoCollision(DWORD dt)
 {
-	x += vx;
-	y += vy;
+	float distance = this->distancewithplayer();
+	if (distance>range)
+	{
+		x += vx;
+		y += vy;
+	}
 }
 
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -59,8 +59,8 @@ void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bot
 	}
 	else
 	{
-		left = x - BLACKFOOT_BBOX_WIDTH / 2;
-		top = y - BLACKFOOT_BBOX_HEIGHT / 2;
+		left = x - BLACKFOOT_BBOX_WIDTH/2;
+		top = y - BLACKFOOT_BBOX_HEIGHT/ 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;//+range for the traking box
 		bottom = top - BLACKFOOT_BBOX_HEIGHT;//-range for the traking box
 	}

@@ -36,9 +36,6 @@ void Gameobject::RenderBoundingBox()
 
 	float cx, cy;
 	Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
-	float virx = x;
-	float viry = y;
-	Game::GetInstance()->GetCamera()->Trans(virx, viry);
 	Game::GetInstance()->Draw(x-cx, cy-y, bbox, &rect, BBOX_ALPHA);
 }
 

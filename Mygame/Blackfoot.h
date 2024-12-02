@@ -2,7 +2,7 @@
 #include "Enermy.h"
 #define BLACKFOOT_STATE_DIE 300
 #define BLACKFOOT_DIE_TIMEOUT 500
-#define BLACKFOOT_BBOX_WIDTH 16
+#define BLACKFOOT_BBOX_WIDTH 12
 #define BLACKFOOT_BBOX_HEIGHT 24
 #define BLACKFOOT_BBOX_HEIGHT_DIE 7
 #define BLACKFOOT_STATE_WALKING_RL 100
@@ -34,6 +34,7 @@ public:
 		objecttag = "Enermy";
 		ax = 0.01f;
 		ay = 0.0f;
+		range = 100;
 	}
 	virtual void SetState(int state);
 };

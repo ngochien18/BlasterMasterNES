@@ -82,14 +82,6 @@ public:
 	}
 	void OnCollisionWith(LPCOLLISIONEVENT e)
 	{
-		if (e->objd->objecttag == "Enermy")
-		{
-			DebugOut(L"Blackfoot\n");
-		}
-		if (e->objd->objecttag == "Ground")
-		{
-			DebugOut(L"Ground\n");
-		}
 	}
 };
 
