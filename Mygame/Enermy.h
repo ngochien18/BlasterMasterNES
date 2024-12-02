@@ -1,5 +1,9 @@
 #pragma once
 #include "GameObject.h"
+struct box
+{
+	float t, l, r, b;
+};
 class Enermy :
     public Gameobject
 {
@@ -25,5 +29,13 @@ public:
 	{
 	}
 	virtual void SetState(int state)=0;
+	virtual box GetTrackingBox()
+	{
+		box trackingbox;
+		this->GetBoundingBox(trackingbox.l, trackingbox.t, trackingbox.r, trackingbox.b);
+		trackingbox.r += range;
+		trackingbox.b -= range;
+		return trackingbox;
+	}
 };
 
