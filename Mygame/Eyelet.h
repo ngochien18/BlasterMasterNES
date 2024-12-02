@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Enermy.h"
 #define EYELET_STATE_DIE 300
 #define EYELET_DIE_TIMEOUT 500
 #define EYELET_BBOX_WIDTH 16
@@ -10,7 +10,7 @@
 #define	ID_ANI_EYELET_FLYING_LEFT 4200
 #define ID_ANI_EYELET_DIE 4300
 #define EYELET_WALKING_SPEED 0.1f
-class Eyelet : public Gameobject
+class Eyelet : public Enermy
 {
 protected:
 	float ax;
@@ -25,7 +25,7 @@ protected:
 
 
 public:
-	Eyelet(float x, float y) : Gameobject(x, y)
+	Eyelet(float x, float y) : Enermy(x, y)
 	{
 		state = EYELET_STATE_FLYING;
 		maxVx = 0.9f;

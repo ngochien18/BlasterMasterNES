@@ -27,7 +27,10 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->objd->IsBlocking()) return;
 	if (dynamic_cast<Blackfoot*>(e->objd)) return;
-	
+	if (e->objd->objecttag == "Player")
+	{
+		return;
+	}
 	if (e->ny != 0)
 	{
 		vy = 0;

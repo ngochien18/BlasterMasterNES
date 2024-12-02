@@ -82,7 +82,7 @@ public:
 	}
 	void OnCollisionWith(LPCOLLISIONEVENT e)
 	{
-		if (e->objd->objecttag == "Blackfoot")
+		if (e->objd->objecttag == "Enermy")
 		{
 			DebugOut(L"Blackfoot\n");
 		}
@@ -91,6 +91,5 @@ public:
 			DebugOut(L"Ground\n");
 		}
 	}
-	virtual int IsDirectionColliable(float nx, float ny) { return 1; }
 };
 

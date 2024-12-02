@@ -128,9 +128,9 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 		DebugOut(L"[INFO] Player object has been created!\n");
 		break;
 	case OBJECT_TYPE_BLACKFOOT: obj = new Blackfoot(x, y); break;
-	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
-	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
-	case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
+	//case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
+	//case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	//case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	case OBJECT_TYPE_GROUND: {
 		int w = atoi(tokens[4].c_str());
 		int h = atoi(tokens[5].c_str());
@@ -290,6 +290,7 @@ void PlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 0; i < IDtorender.size(); i++)
 	{
+		if (IDtorender[i] != 0)
 		coObjects.push_back(objects[IDtorender[i]]);
 	}
 	
@@ -325,7 +326,7 @@ void PlayScene::Update(DWORD dt)
 void PlayScene::Render()
 {
 	if(background!=NULL)
-		//background->Draw(0, 0);
+		background->Draw(0, 0);
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->render();
 }

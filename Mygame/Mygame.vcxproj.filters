@@ -153,6 +153,9 @@
     <ClCompile Include="Playerlevel.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="Enermy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Playerlevel.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Enermy.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
