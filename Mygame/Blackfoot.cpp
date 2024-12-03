@@ -27,7 +27,7 @@ void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bot
 {
 	if (state == BLACKFOOT_STATE_DIE)
 	{
-		left = x - BLACKFOOT_BBOX_WIDTH / 2;
+		left = x - BLACKFOOT_BBOX_WIDTH /2;
 		top = y - BLACKFOOT_BBOX_HEIGHT_DIE / 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;
 		bottom = top + BLACKFOOT_BBOX_HEIGHT_DIE;
