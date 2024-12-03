@@ -74,10 +74,14 @@ public:
 	void OnkeyUP(int keycode);
 	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
+	virtual int IsCollidable() { return 1; };
 	void OnNoCollision(DWORD dt)
 	{
 		x += vx ;
 		y += vy ;
+	}
+	void OnCollisionWith(LPCOLLISIONEVENT e)
+	{
 	}
 };
 

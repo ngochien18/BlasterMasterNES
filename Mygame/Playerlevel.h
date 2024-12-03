@@ -23,4 +23,5 @@ public:
 	virtual void SetState(int state) { this->state = state; }
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
+	virtual int IsBlocking() { return 0; }
 };

@@ -32,12 +32,10 @@ void Gameobject::RenderBoundingBox()
 	rect.left = 0;
 	rect.top = 0;
 	rect.right = (int)r - (int)l;
-	rect.bottom = (int)b - (int)t;
+	rect.bottom = (int)t - (int)b;
 
 	float cx, cy;
 	Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
-	float virx = x;
-	float viry = y;
 	Game::GetInstance()->Draw(x-cx, cy-y, bbox, &rect, BBOX_ALPHA);
 }
 
