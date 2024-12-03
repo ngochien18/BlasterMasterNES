@@ -10,7 +10,7 @@
 #define	ID_ANI_BLACKFOOT_WALKING_LEFT 1100
 #define ID_ANI_BLACKFOOT_WALKING_RIGHT 1200
 #define ID_ANI_BLACKFOOT_DIE 1300
-#define BLACKFOOT_WALKING_SPEED 0.1f
+#define BLACKFOOT_WALKING_SPEED 0.2f
 
 class Blackfoot : public Enermy
 {
@@ -29,8 +29,8 @@ public:
 	Blackfoot(float x, float y) : Enermy(x, y)
 	{
 		state = BLACKFOOT_STATE_WALKING_RL;
-		maxVx = 0.9f;
-		maxVy = 0.9f;
+		maxVx = 0.5f;
+		maxVy = 0.5f;
 		objecttag = "Enermy";
 		ax = 0.01f;
 		ay = 0.0f;
