@@ -22,6 +22,8 @@ protected:
 	ULONGLONG die_start;
 	float lastcolX;
 	float lastcolY;
+	float lastXcol;
+	float lastYcol;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void OnCollisionWith(LPCOLLISIONEVENT e);

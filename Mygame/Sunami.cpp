@@ -20,6 +20,7 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (dynamic_cast<Sunami*>(e->objd)) return;
+	DebugOut(L"Collisioned\n");
 	if (e->nx != 0 && e->ny != 0)
 	{
 		if (lastcolY == 0)
@@ -34,23 +35,30 @@ void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (e->objd->IsBlocking() != 0) {
 		lastcolX = e->nx;
 		lastcolY = e->ny;
+		lastXcol = this->x;
+		lastYcol = this->y;
 	}
 }
 void Sunami::OnNoCollision(DWORD dt)
 {
+	DebugOut(L"No collision\n");
 	if (lastcolX==0)
 	{
 		ny = ny;
 		nx = -nx;
+		x = lastXcol;
+		x += vx * dt;
 		y += vy*dt;
-		x += vx*dt;
+		
 	}
 	else if (lastcolY==0)
 	{
 		ny = ny;
 		ny = -ny;
-		x += vx*dt;
-		y += vy*dt;
+		y = lastYcol;
+		y += vy * dt;
+		x += vx * dt;
+		
 	}
 	
 }

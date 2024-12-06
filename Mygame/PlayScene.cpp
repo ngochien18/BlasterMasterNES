@@ -325,10 +325,13 @@ void PlayScene::Update(DWORD dt)
 }
 void PlayScene::Render()
 {
+	vector<int> IDtorender = this->quadtree->traversal();
 	if(background!=NULL)
 		background->Draw(0, 0);
-	for (int i = 0; i < objects.size(); i++)
-		objects[i]->render();
+	for (int i = 0; i < IDtorender.size(); i++)
+	{
+		objects[IDtorender[i]]->render();
+	}
 }
 void PlayScene::Clear()
 {
