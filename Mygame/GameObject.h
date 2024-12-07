@@ -56,6 +56,8 @@ public:
 
 	// Does this object collide with other object at certain direction ( like ColorBox )
 	virtual int IsDirectionColliable(float nx, float ny) { return 1; }
+	// Process Collision
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)=0;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
 	~Gameobject();

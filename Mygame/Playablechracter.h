@@ -82,6 +82,12 @@ public:
 	}
 	void OnCollisionWith(LPCOLLISIONEVENT e)
 	{
+		if (e->objd->objecttag=="Ground")
+		{
+			Colision::GetInstance()->PushingX(e->t, vx, e->nx, x, e);
+			Colision::GetInstance()->PushingY(e->t, vy, e->ny, y, e);
+		}
 	}
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 };
 
