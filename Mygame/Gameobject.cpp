@@ -1,4 +1,4 @@
-#include "Gameobject.h"
+﻿#include "Gameobject.h"
 #include <d3dx9.h>
 #include <algorithm>
 
@@ -36,7 +36,7 @@ void Gameobject::RenderBoundingBox()
 
 	float cx, cy;
 	Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
-	Game::GetInstance()->Draw(x-cx, cy-y, bbox, &rect, BBOX_ALPHA);
+	Game::GetInstance()->Draw(x-cx, cy-(t+b)/2, bbox, &rect, BBOX_ALPHA);// render tu tam ảnh (t+b)/2 la tam
 }
 
 Gameobject::~Gameobject()
