@@ -18,9 +18,7 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-	static float initx = x;
-	/*if (ax>=0 && x > initx ) { vx = -vx; nx = -1; };
-	if (ax<0 && x < initx) { vx = -vx; nx = 1; };*/
+	
 	Gameobject::Update(dt, coObjects);
 	Colision::GetInstance()->process(this, dt, coObjects);
 	
@@ -43,12 +41,14 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void Blackfoot::OnNoCollision(DWORD dt)
 {
-	float distance = this->distancewithplayer();
+	/*float distance = this->distancewithplayer();
 	if (distance>range)
 	{
 		x += vx;
 		y += vy;
-	}
+	}*/
+	x += vx;
+	y += vy;
 }
 
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -105,8 +105,7 @@ void Blackfoot::SetState(int state)
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
 
-		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
-		if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
+		
 		/*ay = 0; vy = 0; ny = 0;
 		if (y <= 10)
 		{
