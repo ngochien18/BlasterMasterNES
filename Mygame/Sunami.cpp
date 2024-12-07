@@ -68,14 +68,14 @@ void Sunami::GetBoundingBox(float& left, float& top, float& right, float& bottom
 	if (state == SUNAMI_STATE_DIE)
 	{
 		left = x - SUNAMI_BBOX_WIDTH / 2;
-		top = y - SUNAMI_BBOX_HEIGHT_DIE / 2;
+		top = y + SUNAMI_BBOX_HEIGHT_DIE / 2;
 		right = left + SUNAMI_BBOX_WIDTH;
-		bottom = top + SUNAMI_BBOX_HEIGHT_DIE;
+		bottom = top - SUNAMI_BBOX_HEIGHT_DIE;
 	}
-	else
+	else //x,y tinh tu diem tren ben trai
 	{
 		left = x - SUNAMI_BBOX_WIDTH / 2;
-		top = y - SUNAMI_BBOX_HEIGHT / 2;
+		top = y + SUNAMI_BBOX_HEIGHT / 2;
 		right = left + SUNAMI_BBOX_WIDTH;
 		bottom = top - SUNAMI_BBOX_HEIGHT;
 	}

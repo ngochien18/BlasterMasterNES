@@ -56,14 +56,14 @@ void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bot
 	if (state ==BLACKFOOT_STATE_DIE)
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH /2;
-		top = y - BLACKFOOT_BBOX_HEIGHT_DIE / 2;
+		top = y + BLACKFOOT_BBOX_HEIGHT_DIE / 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;
 		bottom = top - BLACKFOOT_BBOX_HEIGHT_DIE;
 	}
 	else
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH/2;
-		top = y - BLACKFOOT_BBOX_HEIGHT/ 2;
+		top = y + BLACKFOOT_BBOX_HEIGHT/ 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;//+range for the traking box
 		bottom = top - BLACKFOOT_BBOX_HEIGHT;//-range for the traking box
 	}
