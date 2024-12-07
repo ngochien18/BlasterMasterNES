@@ -109,7 +109,7 @@ void Playablechracter::SetLevel(int l)
 void Playablechracter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x - JASON_BIG_BBOX_WIDTH / 2;
-	top = y + JASON_BIG_BBOX_HEIGHT / 2;
+	top = y +JASON_BIG_BBOX_HEIGHT / 2;
 	right = left + JASON_BIG_BBOX_WIDTH;
 	bottom = top - JASON_BIG_BBOX_HEIGHT;
 }
