@@ -278,7 +278,7 @@ void PlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT>coObjects;
 	for (size_t i = 0; i < Otorender.size(); i++)
 	{
-		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==0)
+		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
 		coObjects.push_back(Otorender[i]);
 	}
 	
