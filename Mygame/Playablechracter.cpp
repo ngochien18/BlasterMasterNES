@@ -15,7 +15,9 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable_start = 0;
 		untouchable = 0;
 	}
+	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
+	
 }
 int Playablechracter::GetAniIdBig()
 {
