@@ -43,7 +43,7 @@ public:
 	//
 	// Collision ON or OFF ? This can change depending on object's state. For example: die
 	//
-	virtual int IsCollidable() { return 0; };
+	virtual int IsCollidable() { return 1; };//0 for off and 1 for on 
 
 	// When no collision has been detected (triggered by CCollision::Process)
 	virtual void OnNoCollision(DWORD dt) {};
@@ -56,6 +56,8 @@ public:
 
 	// Does this object collide with other object at certain direction ( like ColorBox )
 	virtual int IsDirectionColliable(float nx, float ny) { return 1; }
+	// Process Collision
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)=0;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
 	~Gameobject();

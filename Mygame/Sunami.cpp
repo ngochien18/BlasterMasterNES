@@ -15,7 +15,6 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 	Gameobject::Update(dt, coObjects);
-	Colision::GetInstance()->process(this, dt, coObjects);
 }
 void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 {

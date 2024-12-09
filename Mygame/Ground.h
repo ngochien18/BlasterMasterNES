@@ -22,5 +22,8 @@ public:
 	virtual void render();
 	void Update(DWORD dt) {}
 	virtual void GetBoundingBox(float& l, float& t, float& r, float& b);
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+	{
 
+	}
 };
