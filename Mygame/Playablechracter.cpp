@@ -101,8 +101,6 @@ void Playablechracter::SetState(int state)
 		ay = 0.0f;
 		break;
 	}
-
-	
 	Gameobject::setstate(state);
 }
 void Playablechracter::SetLevel(int l)
@@ -245,5 +243,18 @@ void Playablechracter::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject
 				}
 			}
 		}
+	// Scan all non-blocking collisions for further collision logic
+	//
+	for (UINT i = 0; i < event.size(); i++)//check col with all collsion that from non blocking object
+	{
+		LPCOLLISIONEVENT e = event[i];
+		if (e->isdelete) continue;
+		if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
+
+		OnCollisionWith(e);
+	}
+
+
+	for (UINT i = 0; i <event.size(); i++) delete event[i];//xoa toan bo nhung event 
 	}
 }
