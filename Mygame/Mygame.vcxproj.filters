@@ -156,6 +156,9 @@
     <ClCompile Include="Enermy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="Enermy.h">
       <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

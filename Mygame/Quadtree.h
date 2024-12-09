@@ -115,6 +115,29 @@ public:
 		}
 		return list;
 	}
+	void deletequadtree()
+	{
+		float cx, cy;
+		Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
+		int w = Game::GetInstance()->GetBackBufferWidth();
+		int h = Game::GetInstance()->GetBackBufferHeight();
+		queue<Quadtreenode*> node;
+		node.push(this->root);
+		Quadtreenode* currentnode;
+		while (node.empty() == false)
+		{
+			currentnode = node.front();
+			node.pop();
+			for (int i = 0; i < 4; i++)
+			{
+					if (currentnode->ChildNodeList[i] != NULL)
+					{
+						node.push(currentnode->ChildNodeList[i]);
+					}
+			}
+			delete currentnode;
+		}
+	}
 	void split(Quadtreenode* node)//chia 1 node thanh 4 node
 	{
 		float x, y, width, height;

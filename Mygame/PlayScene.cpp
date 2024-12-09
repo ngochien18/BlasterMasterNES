@@ -18,7 +18,7 @@ PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
 	player = NULL;
 	key_handler = new SampleKeyEventHandler(this);
-	quadtree = new Quadtree();
+	quadtree = NULL;
 }
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
@@ -263,6 +263,10 @@ void PlayScene::Update(DWORD dt)
 {
 	// We know that Jason is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
+	if (quadtree != NULL)
+	{
+		quadtree->deletequadtree();
+	}
 	vector<LPGAMEOBJECT>Owithoutplayer;
 	for (int i = 1; i < objects.size(); i++)
 	{
@@ -273,6 +277,7 @@ void PlayScene::Update(DWORD dt)
 	{
 		DebugOut(L"root is null\n");
 	}
+	
 	quadtree = new Quadtree(root);
 	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
 	vector<LPGAMEOBJECT>coObjects;
