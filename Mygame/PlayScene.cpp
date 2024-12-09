@@ -183,25 +183,6 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 
 	objects.push_back(obj);
 }
-void PlayScene::_ParseSection_QUADTREE(string line)
-{
-	vector<string>tokens = split(line);
-	int id = atoi(tokens[0].c_str());
-	int PID = atoi(tokens[1].c_str());
-	int x = atoi(tokens[2].c_str());
-	int y = atoi(tokens[3].c_str());
-	int w = atoi(tokens[4].c_str());
-	int h = atoi(tokens[5].c_str());
-	vector<int>list;
-	for (int i = 6; i < tokens.size(); i++)
-	{
-		int OID = atoi(tokens[i].c_str());
-		list.push_back(OID);
-	}
-	
-	Quadtreenode* node = new Quadtreenode(id, x, y, w, h, list, PID);
-	this->quadtree->ADD(node);
-}
 void PlayScene::LoadAssets(LPCWSTR assetFile)
 {
 	DebugOut(L"[INFO] Start loading assets from : %s \n", assetFile);
@@ -259,7 +240,6 @@ void PlayScene::Load()
 			section = SCENE_SECTION_BACKGROUND;
 			continue;
 		}
-		if (line == "[QUADTREE]") { section = SCENE_SECTION_QUADTREE; continue; }
 		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
 
 		//
@@ -272,8 +252,6 @@ void PlayScene::Load()
 		case SCENE_SECTION_BACKGROUND:
 			_ParseSectionBackGround(line);
 			break;
-		case SCENE_SECTION_QUADTREE:_ParseSection_QUADTREE(line); break;
-		
 		}
 	}
 
@@ -285,19 +263,29 @@ void PlayScene::Update(DWORD dt)
 {
 	// We know that Jason is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
-
-	vector<int> IDtorender = this->quadtree->traversal();
-	vector<LPGAMEOBJECT> coObjects;
-	for (size_t i = 0; i < IDtorender.size(); i++)
+	vector<LPGAMEOBJECT>Owithoutplayer;
+	for (int i = 1; i < objects.size(); i++)
 	{
-		if (IDtorender[i] != 0)
-		coObjects.push_back(objects[IDtorender[i]]);
+		Owithoutplayer.push_back(objects[i]);
+	}
+	Quadtreenode* root = new Quadtreenode(0, x, y, width, height, Owithoutplayer);
+	if (root == NULL)
+	{
+		DebugOut(L"root is null\n");
+	}
+	quadtree = new Quadtree(root);
+	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
+	vector<LPGAMEOBJECT>coObjects;
+	for (size_t i = 0; i < Otorender.size(); i++)
+	{
+		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
+		coObjects.push_back(Otorender[i]);
 	}
 	
 	this->player->Update(dt, &coObjects);
-	for (size_t i = 0; i < IDtorender.size(); i++)
+	for (size_t i = 0; i < Otorender.size(); i++)
 	{
-		objects[IDtorender[i]]->Update(dt, &coObjects);
+		Otorender[i]->Update(dt, &coObjects);
 	}
 
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
@@ -325,12 +313,13 @@ void PlayScene::Update(DWORD dt)
 }
 void PlayScene::Render()
 {
-	vector<int> IDtorender = this->quadtree->traversal();
+	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
 	if(background!=NULL)
 		background->Draw(0, 0);
-	for (int i = 0; i < IDtorender.size(); i++)
+	player->render();
+	for (int i = 0; i < Otorender.size(); i++)
 	{
-		objects[IDtorender[i]]->render();
+		Otorender[i]->render();
 	}
 }
 void PlayScene::Clear()
@@ -359,14 +348,18 @@ void PlayScene::_ParseSectionBackGround(string line)
 	vector<string> tokens = split(line);
 	int ID = atoi(tokens[0].c_str());
 	int l = atoi(tokens[1].c_str());
-	int t = atoi(tokens[2].c_str());
+	int b = atoi(tokens[2].c_str());
 	int r = atoi(tokens[3].c_str());
-	int b = atoi(tokens[4].c_str());
+	int t = atoi(tokens[4].c_str());
 	int texID = atoi(tokens[5].c_str());
 	DebugOut(L"enter back ground %d,%d,%d,%d,%d,%d \n", ID, l, t, r, b, texID);
-
+	width = r - l;
+	height = t - b;
+	DebugOut(L"PLayscencesize:%f,%f\n", width, height);
+	x = 0-width/2;
+	y=0+height/2;
 	LPTEXTURE tex = Textures::GetInstance()->Get(30);
-	background = new Sprite(ID, l, t, r, b, tex);
+	background = new Sprite(ID, l, b, r, t, tex);
 }
 void PlayScene::PurgeDeletedObjects()
 {

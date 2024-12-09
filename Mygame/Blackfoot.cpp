@@ -20,7 +20,7 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 	
 	Gameobject::Update(dt, coObjects);
-	Colision::GetInstance()->process(this, dt, coObjects);
+	CollisionProcess(dt, coObjects);
 	
 	//DebugOut(L"ve blackfoot");
 }
@@ -104,97 +104,10 @@ void Blackfoot::SetState(int state)
 		ay = 0;
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
-
-		
-		/*ay = 0; vy = 0; ny = 0;
-		if (y <= 10)
-		{
-			y = 10;
-			ax = 1; nx = 1;
-		}
-		else if (y >= 150)
-		{
-			y = 150;
-			ax = -1; nx = -1;
-		}
-		else
-		{
-			ax = 1; nx = 1;
-		}
-		if (ax > 0 && x >= 250) { this->state = BLACKFOOT_WALKING_DU; }
-		if (ax < 0 && x <= 10) {
-
-			this->state = BLACKFOOT_WALKING_DU;
-		}
-		DebugOut(L"WALKX");*/
 		break;
-	case BLACKFOOT_WALKING_DU:
-		ax = 0;  nx = 0; vx = 0;
-		if (x <= 15)
-		{
-			x = 15;
-			ay = -1; ny = -1;
-		}
-		else if (x >= 250)
-		{
-			x = 250;
-			ay = 1; ny = 1;
-		}
-		else
-		{
-			ay = -1; ny = -1;
-		}
-		if (ay > 0 && y >= 150) {
-
-			this->state = BLACKFOOT_STATE_WALKING_RL;
-		}
-		if (ay < 0 && y <= 10) {
-
-			this->state = BLACKFOOT_STATE_WALKING_RL;
-		}
-
-		break;
-	
-		/*if (x < 50 || x > 200)
-		{
-			ax = -0.001f; nx = -1;
-		}
-		else
-		{
-			ax = 0.001f; nx = 1;
-		}
-		break;*/
-		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
-		{
-			ax = 0.001f; nx = 1;
-		}
-		else if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx()-this->x < 0)
-		{
-			ax = -0.001f;
-			nx = -1;
-		}
-		else
-		{
-			vx = 0;
-			ax = 0;
-		}
-
-		if (this->y - ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Gety() > 0)
-		{
-			ay = -0.001f; ny = -1;
-		}
-		else if (this->y - ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Gety()< 0)
-		{
-			ay = 0.001f;
-			ny = 1;
-		}
-		else
-		{
-			vy = 0;
-			ay = 0;
-		}
-		maxVx = BLACKFOOT_WALKING_SPEED;
-		maxVy = BLACKFOOT_WALKING_SPEED;
-		break;*/
 	}
+}
+void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+{
+
 }

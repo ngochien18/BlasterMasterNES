@@ -23,7 +23,8 @@ class PlayScene : public Scene
 	std::unordered_map<int, bool> keyboardstate;
 	void _ParseSection_SPRITES(string line);
 	void _ParseSection_ANIMATIONS(string line);
-
+	float width; float height;
+	float x; float y;
 	void _ParseSection_ASSETS(string line);
 	void _ParseSection_OBJECTS(string line);
 	void _ParseSection_QUADTREE(string line);

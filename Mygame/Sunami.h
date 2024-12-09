@@ -41,5 +41,9 @@ public:
 		ny = -1;
 	}
 	virtual void SetState(int state);
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+	{
+
+	}
 };
 
