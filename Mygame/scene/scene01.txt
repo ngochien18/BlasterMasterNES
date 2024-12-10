@@ -9,6 +9,7 @@ object\SmallJason.txt
 object\Ground.txt
 object\Wall.txt
 object\Bullet.txt
+object\HealUp.txt
 #
 [BACKGROUND]
 -2	1	1	2047	2047	30
@@ -31,6 +32,10 @@ object\Bullet.txt
 2	752	104	10
 2	816	104	10
 2	880	104	10
+
+3	-600	90	10
+
+20	-600	90	40
 
 #GROUND10-31
 100	-728	144	20	16	96
@@ -55,4 +60,3 @@ object\Bullet.txt
 100	816	88	20	32	16
 100	880	88	20	32	16
 100	944	88	20	32	16
-101	880	120	20	32	32

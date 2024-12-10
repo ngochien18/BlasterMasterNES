@@ -9,6 +9,7 @@ protected:
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
 	int untouchable;
+	
 	ULONGLONG untouchable_start;
 public:
 	Playerlevel(float x, float y) :Gameobject(x, y)

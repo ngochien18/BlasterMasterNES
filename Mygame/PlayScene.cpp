@@ -13,12 +13,13 @@
 #include "Bellbomber.h"
 #include  "SmallJason.h"
 #include "Ground.h"
+#include "HealUp.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
 	player = NULL;
 	key_handler = new SampleKeyEventHandler(this);
-	quadtree = new Quadtree();
+	quadtree = NULL;
 }
 #define SCENE_SECTION_UNKNOWN -1
 #define SCENE_SECTION_ASSETS	1
@@ -129,7 +130,8 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BLACKFOOT: obj = new Blackfoot(x, y); break;
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
-	//case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	case OBJECT_TYPE_HEALUP: obj = new HealUp(x, y); break;
 	//case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	case OBJECT_TYPE_GROUND: {
 		int w = atoi(tokens[4].c_str());
@@ -263,6 +265,10 @@ void PlayScene::Update(DWORD dt)
 {
 	// We know that Jason is the first object in the list hence we won't add him into the colliable object list
 	// TO-DO: This is a "dirty" way, need a more organized way 
+	if (quadtree != NULL)
+	{
+		quadtree->deletequadtree();
+	}
 	vector<LPGAMEOBJECT>Owithoutplayer;
 	for (int i = 1; i < objects.size(); i++)
 	{
@@ -273,6 +279,7 @@ void PlayScene::Update(DWORD dt)
 	{
 		DebugOut(L"root is null\n");
 	}
+	
 	quadtree = new Quadtree(root);
 	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
 	vector<LPGAMEOBJECT>coObjects;
@@ -379,4 +386,18 @@ void PlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), PlayScene::IsGameObjectDeleted),
 		objects.end());
+}
+
+void PlayScene::AddObject(Gameobject* obj) {
+	objects.push_back(obj);
+}
+
+void PlayScene::DeleteObject(Gameobject* obj) {
+	vector<LPGAMEOBJECT>::iterator it;
+	for (it = objects.begin(); it != objects.end(); it++)
+	{
+		if (*it == obj) {
+			delete(*it);
+		}
+	}
 }

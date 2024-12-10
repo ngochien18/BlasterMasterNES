@@ -43,11 +43,10 @@ public:
 	//
 	// Collision ON or OFF ? This can change depending on object's state. For example: die
 	//
-	virtual int IsCollidable() { return 1; };//0 for off and 1 for on 
+	virtual int IsCollidable() { return 1; };//0 for off and 1 for onfloat 
 
 	// When no collision has been detected (triggered by CCollision::Process)
 	virtual void OnNoCollision(DWORD dt) {};
-
 	// When collision with an object has been detected (triggered by CCollision::Process)
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) {};
 
@@ -64,5 +63,9 @@ public:
 	float Getx(){ return x; }
 	float Gety() { return y; }
 	static bool IsDeleted(const Gameobject* & o) { return o->isdeleted; }
+	virtual void impactwithbullet(int dam)
+	{
+
+	}
 };
 typedef Gameobject* LPGAMEOBJECT;
