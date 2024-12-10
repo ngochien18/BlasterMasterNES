@@ -76,6 +76,9 @@
     <Filter Include="Player\SmallJason">
       <UniqueIdentifier>{5ebcbd12-e0cc-43d1-93eb-ff1a97d8ad5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Wall">
+      <UniqueIdentifier>{9e9633a9-2d80-4bad-9866-6001465ec4b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -158,6 +161,15 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Enemy\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="HealUp.cpp">
+      <Filter>EffectItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>EffectItem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +268,15 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Enemy\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="HealUp.h">
+      <Filter>EffectItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>EffectItem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

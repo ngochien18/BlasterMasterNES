@@ -3,20 +3,20 @@
 #include "GameObject.h"
 #include "Game.h"
 
-#define ID_ANI_GROUND 100000
-#define GROUND_WIDTH 16
-#define GROUND_BBOX_WIDTH 16
-#define GROUND_BBOX_HEIGHT 16
+#define ID_ANI_WALL 100000
+#define WALL_WIDTH 16
+#define WALL_BBOX_WIDTH 16
+#define WALL_BBOX_HEIGHT 16
 
-class Ground : public Gameobject {
+class Wall : public Gameobject {
 private:
 	int width;
 	int height;
 public:
-	Ground();
-	Ground(float x, float y, int width, int height);
+	Wall();
+	Wall(float x, float y, int width, int height);
 	virtual int IsBlocking() { return 1; }
-	~Ground();
+	~Wall();
 	int GetWidth() { return width; }
 	int GetHeight() { return height; }
 	virtual void render();

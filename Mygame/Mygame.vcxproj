@@ -146,6 +146,7 @@
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="Playerlevel.cpp" />
     <ClCompile Include="PlayScene.cpp" />
+    <ClCompile Include="HealUp.cpp" />
     <ClCompile Include="Quadtreenode.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="SmallJason.cpp" />
@@ -159,7 +160,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Sprites.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -179,6 +182,7 @@
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Playerlevel.h" />
     <ClInclude Include="PlayScene.h" />
+    <ClInclude Include="HealUp.h" />
     <ClInclude Include="Quadtree.h" />
     <ClInclude Include="Quadtreenode.h" />
     <ClInclude Include="SampleKeyEventHandler.h" />
@@ -193,7 +197,9 @@
     <ClInclude Include="Playablechracter.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Sprites.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icon\Blaster_master_icon.ico" />

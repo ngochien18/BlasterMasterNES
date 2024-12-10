@@ -13,6 +13,7 @@
 #include "Bellbomber.h"
 #include  "SmallJason.h"
 #include "Ground.h"
+#include "HealUp.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -129,7 +130,8 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 		break;
 	case OBJECT_TYPE_BLACKFOOT: obj = new Blackfoot(x, y); break;
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
-	//case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
+	case OBJECT_TYPE_HEALUP: obj = new HealUp(x, y); break;
 	//case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	case OBJECT_TYPE_GROUND: {
 		int w = atoi(tokens[4].c_str());
@@ -384,4 +386,18 @@ void PlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), PlayScene::IsGameObjectDeleted),
 		objects.end());
+}
+
+void PlayScene::AddObject(Gameobject* obj) {
+	objects.push_back(obj);
+}
+
+void PlayScene::DeleteObject(Gameobject* obj) {
+	vector<LPGAMEOBJECT>::iterator it;
+	for (it = objects.begin(); it != objects.end(); it++)
+	{
+		if (*it == obj) {
+			delete(*it);
+		}
+	}
 }

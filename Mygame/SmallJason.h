@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Animations.h"
 #include "Debug.h"
 #include "Game.h"

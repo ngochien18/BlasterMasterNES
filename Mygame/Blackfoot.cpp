@@ -109,5 +109,75 @@ void Blackfoot::SetState(int state)
 }
 void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {
-
+	vector<LPCOLLISIONEVENT>event;
+	LPCOLLISIONEVENT colX = NULL;
+	LPCOLLISIONEVENT colY = NULL;
+	event.clear();
+	if (IsCollidable())
+	{
+		Colision::GetInstance()->scan(this, dt, coObject, event);
+	}
+	if (event.size() == 0)
+	{
+		OnNoCollision(dt);
+	}
+	else
+	{
+		Colision::GetInstance()->filter(this, event, colX, colY, 1, 1, 1);
+		if (colX != NULL && colY != NULL)
+		{
+			if (colX < colY)
+			{
+				this->OnCollisionWith(colX);
+				LPCOLLISIONEVENT colY_other = NULL;
+				colX->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colX->objd));
+				Colision::GetInstance()->filter(this, event, colX, colY_other, 1, 0, 1);
+				if (colY_other != NULL)
+				{
+					OnCollisionWith(colY_other);
+				}
+				else
+				{
+					y += vy;
+				}
+			}
+			else
+			{
+				this->OnCollisionWith(colY);
+				LPCOLLISIONEVENT colX_other = NULL;
+				colY->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colY->objd));
+				Colision::GetInstance()->filter(this, event, colX_other, colY, 1, 1, 0);
+				if (colX_other != NULL)
+				{
+					OnCollisionWith(colX_other);
+				}
+				else
+				{
+					x += vx;
+				}
+			}
+		}
+		else
+		{
+			if (colX != NULL)//hoac colx hoac coly null
+			{
+				y += vy;
+				this->OnCollisionWith(colX);
+			}
+			else {//x null
+				if (colY != NULL)
+				{
+					x += vx;
+					this->OnCollisionWith(colY);
+				}
+				else // both colX & colY are NULL 
+				{
+					x += vx;
+					y += vy;
+				}
+			}
+		}
+	}
 }
