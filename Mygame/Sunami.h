@@ -2,7 +2,7 @@
 #include "Enermy.h"
 #define SUNAMI_STATE_DIE 300
 #define SUNAMI_DIE_TIMEOUT 500
-#define SUNAMI_BBOX_WIDTH 16
+#define SUNAMI_BBOX_WIDTH 14
 #define SUNAMI_BBOX_HEIGHT 14
 #define SUNAMI_BBOX_HEIGHT_DIE 7
 #define SUNAMI_STATE_WALKING_X 100
@@ -41,5 +41,7 @@ public:
 		ny = -1;
 	}
 	virtual void SetState(int state);
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
+	
 };
 

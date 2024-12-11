@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Animations.h"
 #include "Debug.h"
 #include "Game.h"
@@ -80,6 +82,10 @@ public:
 	void OnkeyUP(int keycode);
 	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
+	void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+	{
+
+	}
 };
 
 

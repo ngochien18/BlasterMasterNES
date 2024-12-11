@@ -18,11 +18,9 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
-	static float initx = x;
-	/*if (ax>=0 && x > initx ) { vx = -vx; nx = -1; };
-	if (ax<0 && x < initx) { vx = -vx; nx = 1; };*/
+	
 	Gameobject::Update(dt, coObjects);
-	Colision::GetInstance()->process(this, dt, coObjects);
+	CollisionProcess(dt, coObjects);
 	
 	//DebugOut(L"ve blackfoot");
 }
@@ -43,12 +41,14 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void Blackfoot::OnNoCollision(DWORD dt)
 {
-	float distance = this->distancewithplayer();
+	/*float distance = this->distancewithplayer();
 	if (distance>range)
 	{
 		x += vx;
 		y += vy;
-	}
+	}*/
+	x += vx;
+	y += vy;
 }
 
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -56,14 +56,14 @@ void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bot
 	if (state ==BLACKFOOT_STATE_DIE)
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH /2;
-		top = y - BLACKFOOT_BBOX_HEIGHT_DIE / 2;
+		top = y + BLACKFOOT_BBOX_HEIGHT_DIE / 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;
 		bottom = top - BLACKFOOT_BBOX_HEIGHT_DIE;
 	}
 	else
 	{
 		left = x - BLACKFOOT_BBOX_WIDTH/2;
-		top = y - BLACKFOOT_BBOX_HEIGHT/ 2;
+		top = y + BLACKFOOT_BBOX_HEIGHT/ 2;
 		right = left + BLACKFOOT_BBOX_WIDTH;//+range for the traking box
 		bottom = top - BLACKFOOT_BBOX_HEIGHT;//-range for the traking box
 	}
@@ -104,98 +104,80 @@ void Blackfoot::SetState(int state)
 		ay = 0;
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
-
-		if(ax >= 0 && x > 200) { ax = -ax; nx = -1; };
-		if (ax < 0 && x < 90) { ax = -ax; nx = 1; }
-		/*ay = 0; vy = 0; ny = 0;
-		if (y <= 10)
-		{
-			y = 10;
-			ax = 1; nx = 1;
-		}
-		else if (y >= 150)
-		{
-			y = 150;
-			ax = -1; nx = -1;
-		}
-		else
-		{
-			ax = 1; nx = 1;
-		}
-		if (ax > 0 && x >= 250) { this->state = BLACKFOOT_WALKING_DU; }
-		if (ax < 0 && x <= 10) {
-
-			this->state = BLACKFOOT_WALKING_DU;
-		}
-		DebugOut(L"WALKX");*/
 		break;
-	case BLACKFOOT_WALKING_DU:
-		ax = 0;  nx = 0; vx = 0;
-		if (x <= 15)
+	}
+}
+void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT>event;
+	LPCOLLISIONEVENT colX = NULL;
+	LPCOLLISIONEVENT colY = NULL;
+	event.clear();
+	if (IsCollidable())
+	{
+		Colision::GetInstance()->scan(this, dt, coObject, event);
+	}
+	if (event.size() == 0)
+	{
+		OnNoCollision(dt);
+	}
+	else
+	{
+		Colision::GetInstance()->filter(this, event, colX, colY, 1, 1, 1);
+		if (colX != NULL && colY != NULL)
 		{
-			x = 15;
-			ay = -1; ny = -1;
-		}
-		else if (x >= 250)
-		{
-			x = 250;
-			ay = 1; ny = 1;
+			if (colX < colY)
+			{
+				this->OnCollisionWith(colX);
+				LPCOLLISIONEVENT colY_other = NULL;
+				colX->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colX->objd));
+				Colision::GetInstance()->filter(this, event, colX, colY_other, 1, 0, 1);
+				if (colY_other != NULL)
+				{
+					OnCollisionWith(colY_other);
+				}
+				else
+				{
+					y += vy;
+				}
+			}
+			else
+			{
+				this->OnCollisionWith(colY);
+				LPCOLLISIONEVENT colX_other = NULL;
+				colY->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colY->objd));
+				Colision::GetInstance()->filter(this, event, colX_other, colY, 1, 1, 0);
+				if (colX_other != NULL)
+				{
+					OnCollisionWith(colX_other);
+				}
+				else
+				{
+					x += vx;
+				}
+			}
 		}
 		else
 		{
-			ay = -1; ny = -1;
+			if (colX != NULL)//hoac colx hoac coly null
+			{
+				y += vy;
+				this->OnCollisionWith(colX);
+			}
+			else {//x null
+				if (colY != NULL)
+				{
+					x += vx;
+					this->OnCollisionWith(colY);
+				}
+				else // both colX & colY are NULL 
+				{
+					x += vx;
+					y += vy;
+				}
+			}
 		}
-		if (ay > 0 && y >= 150) {
-
-			this->state = BLACKFOOT_STATE_WALKING_RL;
-		}
-		if (ay < 0 && y <= 10) {
-
-			this->state = BLACKFOOT_STATE_WALKING_RL;
-		}
-
-		break;
-	
-		/*if (x < 50 || x > 200)
-		{
-			ax = -0.001f; nx = -1;
-		}
-		else
-		{
-			ax = 0.001f; nx = 1;
-		}
-		break;*/
-		/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
-		{
-			ax = 0.001f; nx = 1;
-		}
-		else if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx()-this->x < 0)
-		{
-			ax = -0.001f;
-			nx = -1;
-		}
-		else
-		{
-			vx = 0;
-			ax = 0;
-		}
-
-		if (this->y - ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Gety() > 0)
-		{
-			ay = -0.001f; ny = -1;
-		}
-		else if (this->y - ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Gety()< 0)
-		{
-			ay = 0.001f;
-			ny = 1;
-		}
-		else
-		{
-			vy = 0;
-			ay = 0;
-		}
-		maxVx = BLACKFOOT_WALKING_SPEED;
-		maxVy = BLACKFOOT_WALKING_SPEED;
-		break;*/
 	}
 }

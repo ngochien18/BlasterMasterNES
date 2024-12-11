@@ -1,4 +1,4 @@
-#include "Ground.h"
+#include "Wall.h"
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
@@ -8,14 +8,14 @@
 #include "sprite.h"
 #include "AnimationFrame.h"
 
-Ground::Ground()
+Wall::Wall()
 {
 	width = 0;
 	height = 0;
 }
-Ground::Ground(float x, float y, int width, int height)
+Wall::Wall(float x, float y, int width, int height)
 {
-	objecttag = "Ground";
+	objecttag = "Wall";
 	this->x = x;
 	vx = 0;
 	vy = 0;
@@ -23,23 +23,19 @@ Ground::Ground(float x, float y, int width, int height)
 	this->width = width;
 	this->height = height;
 }
-void Ground::render()
+void Wall::render()
 {
-	//Animations::GetInstance()->Get(ID_ANI_GROUND)->Render(x, y);
-//	//Animations* animations = Animations::GetInstance();
-//	//animations->Get(ID_ANI_GROUND)->render(x, y);
 	RenderBoundingBox();
-
 }
 
-void Ground::GetBoundingBox(float& l, float& t, float& r, float& b)
+void Wall::GetBoundingBox(float& l, float& t, float& r, float& b)
 {
 	l = x - width / 2;
 	t = y + height / 2;
 	r = l + width;
 	b = t - height;
 }
-Ground::~Ground()
+Wall::~Wall()
 {
 
 }

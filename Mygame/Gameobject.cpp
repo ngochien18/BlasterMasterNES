@@ -21,22 +21,22 @@ Gameobject::Gameobject()
 
 void Gameobject::RenderBoundingBox()
 {
-	D3DXVECTOR3 p(x, y, 0);
-	RECT rect;
+		D3DXVECTOR3 p(x, y, 0);
+		RECT rect;
 
-	LPTEXTURE bbox = Textures::GetInstance()->Get(ID_TEX_BBOX);
+		LPTEXTURE bbox = Textures::GetInstance()->Get(ID_TEX_BBOX);
 
-	float l, t, r, b;
+		float l, t, r, b;
 
-	GetBoundingBox(l, t, r, b);
-	rect.left = 0;
-	rect.top = 0;
-	rect.right = (int)r - (int)l;
-	rect.bottom = (int)t - (int)b;
+		GetBoundingBox(l, t, r, b);
+		rect.left = 0;
+		rect.top = 0;
+		rect.right = (int)r - (int)l;
+		rect.bottom = (int)t - (int)b;
 
-	float cx, cy;
-	Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
-	Game::GetInstance()->Draw(x-cx, cy-y, bbox, &rect, BBOX_ALPHA);
+		float cx, cy;
+		Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
+		Game::GetInstance()->Draw(x-cx, cy-(t+b)/2, bbox, &rect, BBOX_ALPHA);
 }
 
 Gameobject::~Gameobject()

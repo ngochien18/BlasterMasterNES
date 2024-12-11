@@ -9,6 +9,7 @@ protected:
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
 	int untouchable;
+	
 	ULONGLONG untouchable_start;
 public:
 	Playerlevel(float x, float y) :Gameobject(x, y)
@@ -24,4 +25,5 @@ public:
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
 	virtual int IsBlocking() { return 0; }
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)=0;
 };

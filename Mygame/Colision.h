@@ -1,6 +1,7 @@
 #pragma once
 #include "Windows.h"
 #include <vector>
+#define BLOCK_PUSH_FACTOR 0.01f
 using namespace std;
 
 class Gameobject;
@@ -59,7 +60,16 @@ public:
 		 vector<LPCOLLISIONEVENT>&coEvents,
 		LPCOLLISIONEVENT &COLX, LPCOLLISIONEVENT& COLY,
 		int filterblock,int filterX,int filterY);//check collision condition
-	void process(LPGAMEOBJECT objsrc, DWORD dt, vector<LPGAMEOBJECT>*coobj);
+	//void process(LPGAMEOBJECT objsrc, DWORD dt, vector<LPGAMEOBJECT>* coobj);
 	static Colision* GetInstance();
+
+	void PushingX(float t,float speedx, float nx, float& x,LPCOLLISIONEVENT e)
+	{
+		x += e->t * speedx + e->nx * BLOCK_PUSH_FACTOR;
+	}
+	void PushingY(float t, float speedy, float ny, float& y, LPCOLLISIONEVENT e)
+	{
+		y += e->t * speedy + e->ny * BLOCK_PUSH_FACTOR;
+	}
 };
 

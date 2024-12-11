@@ -1,7 +1,6 @@
 #include "Colision.h"
 #include"GameObject.h"
 #include <algorithm>
-#define BLOCK_PUSH_FACTOR 0.01f
 Colision* Colision::__instance = NULL; //pre def
 int CollisionEvent::Collided()
 {
@@ -197,141 +196,141 @@ void Colision::filter(LPGAMEOBJECT objSrc,
 	if (min_ix >= 0) colX = coEvents[min_ix];
 	if (min_iy >= 0) colY = coEvents[min_iy];
 }
-void Colision::process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* coObjects)
-{
-	vector<LPCOLLISIONEVENT> coEvents;
-	LPCOLLISIONEVENT colX = NULL;
-	LPCOLLISIONEVENT colY = NULL;
-
-	coEvents.clear();
-
-	if (objSrc->IsCollidable())//check for any co available for src and coobj
-	{
-		scan(objSrc, dt, coObjects, coEvents);
-	}
-	// No collision detected
-	if (coEvents.size() == 0)
-	{
-		objSrc->OnNoCollision(dt);
-	}
-	else
-	{
-		filter(objSrc, coEvents, colX, colY);
-
-		float x, y, vx, vy, dx, dy;
-		objSrc->GetPosition(x, y);
-		objSrc->GetSpeed(vx, vy);
-		dx = vx ;
-		dy = vy ;
-		if (colX != NULL && colY != NULL) //check and modified
-		{
-			
-			if (colY->t < colX->t)	// was collision on Y first ?(y block first)
-			{
-				//if blocking
-				y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
-				objSrc->SetPosition(x, y);
-
-				objSrc->OnCollisionWith(colY);
-
-				//
-				// see if after correction on Y, is there still a collision on X ? 
-				//
-				LPCOLLISIONEVENT colX_other = NULL;
-
-				//
-				// check again if there is true collision on X 
-				//
-				colX->isdelete = true;		// remove current collision event on X
-
-				// replace with a new collision event using corrected location 
-				coEvents.push_back(SweptAABB(objSrc, dt, colX->objd));
-
-				// re-filter on X only
-				filter(objSrc, coEvents, colX_other, colY, /*filterBlock = */ 1, 1, /*filterY=*/0);//skip Y event for this filter because Y already done
-				//still has event on x
-				if (colX_other != NULL)
-				{
-					x += colX_other->t * dx + colX_other->nx * BLOCK_PUSH_FACTOR;
-					objSrc->OnCollisionWith(colX_other);
-				}
-				else
-				{
-					x += dx;
-				}
-			}
-			else // collision on X first
-			{
-				//if blocking
-				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
-				objSrc->SetPosition(x, y);
-
-				objSrc->OnCollisionWith(colX);
-
-				//
-				// see if after correction on X, is there still a collision on Y ? 
-				//
-				LPCOLLISIONEVENT colY_other = NULL;
-
-				//
-				// check again if there is true collision on Y
-				//
-				colY->isdelete = true;		// remove current collision event on Y
-
-				// replace with a new collision event using corrected location 
-				coEvents.push_back(SweptAABB(objSrc, dt, colY->objd));
-
-				// re-filter on Y only
-				filter(objSrc, coEvents, colX, colY_other, /*filterBlock = */ 1, /*filterX=*/0, /*filterY=*/1);
-				//still has event on Y
-				if (colY_other != NULL)
-				{
-					y += colY_other->t * dy + colY_other->ny * BLOCK_PUSH_FACTOR;
-					objSrc->OnCollisionWith(colY_other);
-				}
-				else
-				{
-					y += dy;
-				}
-			}
-		}
-		else
-			if (colX != NULL)//hoac colx hoac coly null
-			{
-				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
-				y += dy;
-				objSrc->OnCollisionWith(colX);
-			}
-			else {//x null
-				if (colY != NULL)
-				{
-					
-					x += dx;
-					y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
-					objSrc->OnCollisionWith(colY);
-				}
-				else // both colX & colY are NULL 
-				{
-					x += dx;
-					y += dy;
-				}
-			}
-
-		objSrc->SetPosition(x, y);
-	}
-
-	//
-	// Scan all non-blocking collisions for further collision logic
-	//
-	for (UINT i = 0; i < coEvents.size(); i++)//check col with all collsion that from non blocking object
-	{
-		LPCOLLISIONEVENT e = coEvents[i];
-		if (e->isdelete) continue;
-		if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
-
-		objSrc->OnCollisionWith(e);
-	}
-
-
-	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];//xoa toan bo nhung event 
-}
+//void Colision::process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+//{
+//	vector<LPCOLLISIONEVENT> coEvents;
+//	LPCOLLISIONEVENT colX = NULL;
+//	LPCOLLISIONEVENT colY = NULL;
+//
+//	coEvents.clear();
+//
+//	if (objSrc->IsCollidable())//check for any co available for src and coobj
+//	{
+//		scan(objSrc, dt, coObjects, coEvents);
+//	}
+//	// No collision detected
+//	if (coEvents.size() == 0)
+//	{
+//		objSrc->OnNoCollision(dt);
+//	}
+//	else
+//	{
+//		filter(objSrc, coEvents, colX, colY);
+//
+//		float x, y, vx, vy, dx, dy;
+//		objSrc->GetPosition(x, y);
+//		objSrc->GetSpeed(vx, vy);
+//		dx = vx ;
+//		dy = vy ;
+//		if (colX != NULL && colY != NULL) //check and modified
+//		{
+//			
+//			if (colY->t < colX->t)	// was collision on Y first ?(y block first)
+//			{
+//				//if blocking
+//				y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
+//				objSrc->SetPosition(x, y);
+//
+//				objSrc->OnCollisionWith(colY);
+//
+//				//
+//				// see if after correction on Y, is there still a collision on X ? 
+//				//
+//				LPCOLLISIONEVENT colX_other = NULL;
+//
+//				//
+//				// check again if there is true collision on X 
+//				//
+//				colX->isdelete = true;		// remove current collision event on X
+//
+//				// replace with a new collision event using corrected location 
+//				coEvents.push_back(SweptAABB(objSrc, dt, colX->objd));
+//
+//				// re-filter on X only
+//				filter(objSrc, coEvents, colX_other, colY, /*filterBlock = */ 1, 1, /*filterY=*/0);//skip Y event for this filter because Y already done giai quyet tiep qua de quy
+//				//still has event on x
+//				if (colX_other != NULL)
+//				{
+//					x += colX_other->t * dx + colX_other->nx * BLOCK_PUSH_FACTOR;
+//					objSrc->OnCollisionWith(colX_other);
+//				}
+//				else
+//				{
+//					x += dx;
+//				}
+//			}
+//			else // collision on X first
+//			{
+//				//if blocking
+//				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
+//				objSrc->SetPosition(x, y);
+//
+//				objSrc->OnCollisionWith(colX);
+//
+//				//
+//				// see if after correction on X, is there still a collision on Y ? 
+//				//
+//				LPCOLLISIONEVENT colY_other = NULL;
+//
+//				//
+//				// check again if there is true collision on Y
+//				//
+//				colY->isdelete = true;		// remove current collision event on Y
+//
+//				// replace with a new collision event using corrected location 
+//				coEvents.push_back(SweptAABB(objSrc, dt, colY->objd));
+//
+//				// re-filter on Y only
+//				filter(objSrc, coEvents, colX, colY_other, /*filterBlock = */ 1, /*filterX=*/0, /*filterY=*/1);
+//				//still has event on Y
+//				if (colY_other != NULL)
+//				{
+//					y += colY_other->t * dy + colY_other->ny * BLOCK_PUSH_FACTOR;
+//					objSrc->OnCollisionWith(colY_other);
+//				}
+//				else
+//				{
+//					y += dy;
+//				}
+//			}
+//		}
+//		else
+//			if (colX != NULL)//hoac colx hoac coly null
+//			{
+//				x += colX->t * dx + colX->nx * BLOCK_PUSH_FACTOR;
+//				y += dy;
+//				objSrc->OnCollisionWith(colX);
+//			}
+//			else {//x null
+//				if (colY != NULL)
+//				{
+//					
+//					x += dx;
+//					y += colY->t * dy + colY->ny * BLOCK_PUSH_FACTOR;
+//					objSrc->OnCollisionWith(colY);
+//				}
+//				else // both colX & colY are NULL 
+//				{
+//					x += dx;
+//					y += dy;
+//				}
+//			}
+//
+//		objSrc->SetPosition(x, y);
+//	}
+//
+//	//
+//	// Scan all non-blocking collisions for further collision logic
+//	//
+//	for (UINT i = 0; i < coEvents.size(); i++)//check col with all collsion that from non blocking object
+//	{
+//		LPCOLLISIONEVENT e = coEvents[i];
+//		if (e->isdelete) continue;
+//		if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
+//
+//		objSrc->OnCollisionWith(e);
+//	}
+//
+//
+//	for (UINT i = 0; i < coEvents.size(); i++) delete coEvents[i];//xoa toan bo nhung event 
+//}

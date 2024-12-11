@@ -7,12 +7,14 @@
 #include "PlayScene.h"
 #include "Playerlevel.h"
 #include"Colision.h"
+#include"HealUp.h"
+#include"SmallJason.h"
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2
 
 #define JASON_ACCEL_WALK	0.005f
-#define JASON_WALKING_SPEED		1.5
+#define JASON_WALKING_SPEED		3.5
 //aniid
 #pragma region ANIMATION_ID
 
@@ -82,6 +84,23 @@ public:
 	}
 	void OnCollisionWith(LPCOLLISIONEVENT e)
 	{
+		if (e->objd->objecttag=="Ground")
+		{
+			Colision::GetInstance()->PushingX(e->t, vx, e->nx, x, e);
+			Colision::GetInstance()->PushingY(e->t, vy, e->ny, y, e);
+		}
+		/*if (dynamic_cast<HealUp*>(e->obj))
+		{
+			HealUp* healup = dynamic_cast<HealUp*>(e->obj);
+			healup->SetState(HEALUP_STATE_DIE);
+			this->ResetHeal();
+		}*/
+		if (e->objd->objecttag == "Item")
+		{			
+			//this->SetState(JASON_LEVEL_SMALL);
+			((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+		}
 	}
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 };
 
