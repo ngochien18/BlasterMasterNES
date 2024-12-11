@@ -9,22 +9,12 @@ protected:
 	float ax;				// acceleration on x 
 	float ay;				// acceleration on y 
 	int untouchable;
-	static int health;
-	static int created;
 	ULONGLONG untouchable_start;
+	static int health;
 public:
 	Playerlevel(float x, float y) :Gameobject(x, y)
 	{
-		createhealth();
 		objecttag = "Player";
-	}
-	static void createhealth()
-	{
-		if (created == 0)
-		{
-			health = 100;
-			created = 1;
-		}
 	}
 	static void changehealth(int value)
 	{
