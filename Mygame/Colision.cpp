@@ -113,12 +113,12 @@ LPCOLLISIONEVENT Colision::SweptAABB(LPGAMEOBJECT objSrc, DWORD dt, LPGAMEOBJECT
 
 	float mvx, mvy;
 	objSrc->GetSpeed(mvx, mvy);
-	float mdx = mvx * dt;//distance in one frame(speed calculate depend on frame
-	float mdy = mvy * dt;
+	float mdx = mvx ;//distance in one frame(speed calculate depend on frame
+	float mdy = mvy ;
 	float svx, svy;
 	objDest->GetSpeed(svx, svy);
-	float sdx = svx * dt;//distance in one frame(speed calculate depend on frame
-	float sdy = svy * dt;
+	float sdx = svx ;//distance in one frame(speed calculate depend on frame
+	float sdy = svy ;
 	//
 	// NOTE: new m speed = original m speed - collide object speed
 	// 
