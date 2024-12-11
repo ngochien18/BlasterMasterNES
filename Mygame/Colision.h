@@ -65,10 +65,12 @@ public:
 
 	void PushingX(float t,float speedx, float nx, float& x,LPCOLLISIONEVENT e)
 	{
+		if(nx!=0)
 		x += e->t * speedx + e->nx * BLOCK_PUSH_FACTOR;
 	}
 	void PushingY(float t, float speedy, float ny, float& y, LPCOLLISIONEVENT e)
 	{
+		if(ny!=0)
 		y += e->t * speedy + e->ny * BLOCK_PUSH_FACTOR;
 	}
 };
