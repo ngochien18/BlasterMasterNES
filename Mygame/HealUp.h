@@ -25,6 +25,8 @@ public:
 	{
 		state = HEALUP_STATE_ACTIVE;
 		objecttag = "Item";
+		vx = 0;
+		vy = 0;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};

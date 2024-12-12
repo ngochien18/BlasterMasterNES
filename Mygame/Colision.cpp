@@ -91,11 +91,13 @@ void Colision::SweptAABB(
 	t = t_entry;
 	if (tx_entry > ty_entry)//direction x or y first
 	{
+		DebugOut(L"have col x\n");
 		ny = 0.0f;
 		dx > 0 ? nx = -1.0f : nx = 1.0f;//col left or right
 	}
 	else
 	{
+		DebugOut(L"have col y\n");
 		nx = 0.0f;
 		dy > 0 ? ny = -1.0f : ny = 1.0f;//col top or bot
 	}
@@ -112,12 +114,12 @@ LPCOLLISIONEVENT Colision::SweptAABB(LPGAMEOBJECT objSrc, DWORD dt, LPGAMEOBJECT
 
 	float mvx, mvy;
 	objSrc->GetSpeed(mvx, mvy);
-	float mdx = mvx ;//distance in one frame(speed calculate depend on frame
-	float mdy = mvy ;
+	float mdx = mvx *dt;//distance in one frame(speed calculate depend on frame
+	float mdy = mvy *dt;
 	float svx, svy;
 	objDest->GetSpeed(svx, svy);
-	float sdx = svx ;//distance in one frame(speed calculate depend on frame
-	float sdy = svy ;
+	float sdx = svx *dt;//distance in one frame(speed calculate depend on frame
+	float sdy = svy *dt;
 	//
 	// NOTE: new m speed = original m speed - collide object speed
 	// 
@@ -135,6 +137,10 @@ LPCOLLISIONEVENT Colision::SweptAABB(LPGAMEOBJECT objSrc, DWORD dt, LPGAMEOBJECT
 		t, nx, ny
 	);
 	CollisionEvent* e = new CollisionEvent(t, nx, ny, dx, dy, objSrc,objDest );
+	if (e->ny != 0)
+	{
+		
+	}
 	return e;
 }
 //scan all possible col event for src and dest
@@ -144,7 +150,6 @@ void Colision::scan(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* objDest
 	{
 		if (objSrc->objecttag != objDests->at(i)->objecttag) {
 			LPCOLLISIONEVENT e = SweptAABB(objSrc, dt, objDests->at(i));
-
 			if (e->Collided() == 1)
 			{
 				coEvents.push_back(e);

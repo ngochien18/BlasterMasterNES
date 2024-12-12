@@ -79,15 +79,15 @@ public:
 	virtual int IsCollidable() { return 1; };
 	void OnNoCollision(DWORD dt)
 	{
-		x += vx ;
-		y += vy ;
+		x += vx *dt;
+		y += vy *dt;
 	}
 	void OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		if (e->objd->objecttag=="Ground")
 		{
-			Colision::GetInstance()->PushingX(e->t, vx, e->nx, x, e);
-			Colision::GetInstance()->PushingY(e->t, vy, e->ny, y, e);
+			Colision::GetInstance()->PushingX(e->t, e->dx, e->nx, x, e);
+			Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, y, e);
 		}
 		/*if (dynamic_cast<HealUp*>(e->obj))
 		{

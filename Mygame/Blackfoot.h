@@ -32,7 +32,8 @@ public:
 		maxVy = 0.9f;
 		objecttag = "Enermy";
 		ax = 0.1f;
-		ay = 0.0f;
+		ay = -0.1f;
+		ny = -1;
 		range = 100;
 	}
 	virtual void SetState(int state);

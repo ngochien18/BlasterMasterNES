@@ -7,11 +7,11 @@
 void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
-	vy += ay * dt;
-	vx += ax * dt;
+	vy = ay*dt;
+	vx = ax*dt;
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx *nx;
-	if (abs(vy) > abs(maxVy))	vy = maxVy*nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy*ny;
 	
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
@@ -30,6 +30,8 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<Blackfoot*>(e->objd)) return;
 	if (e->ny != 0)
 	{
+		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, this->y, e);
+		DebugOut(L"col Y\n");
 		vy = 0;
 	}
 	
@@ -47,8 +49,8 @@ void Blackfoot::OnNoCollision(DWORD dt)
 		x += vx;
 		y += vy;
 	}*/
-	x += vx;
-	y += vy;
+	x += vx*dt;
+	y += vy*dt;
 }
 
 void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -119,6 +121,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 	}
 	if (event.size() == 0)
 	{
+		DebugOut(L"Col\n");
 		OnNoCollision(dt);
 	}
 	else
@@ -139,7 +142,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					y += vy;
+					y += vy*dt;
 				}
 			}
 			else
@@ -155,7 +158,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					x += vx;
+					x += vx*dt;
 				}
 			}
 		}
@@ -163,21 +166,32 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		{
 			if (colX != NULL)//hoac colx hoac coly null
 			{
-				y += vy;
+				y += vy*dt;
 				this->OnCollisionWith(colX);
 			}
 			else {//x null
 				if (colY != NULL)
 				{
-					x += vx;
+					x += vx*dt;
 					this->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx;
-					y += vy;
+					x += vx*dt;
+					y += vy*dt;
 				}
 			}
 		}
+		for (UINT i = 0; i < event.size(); i++)//check col with all collsion that from non blocking object
+		{
+			LPCOLLISIONEVENT e = event[i];
+			if (e->isdelete) continue;
+			if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
+
+			OnCollisionWith(e);
+		}
+
+
+		for (UINT i = 0; i < event.size(); i++) delete event[i];//xoa toan bo nhung event 
 	}
 }

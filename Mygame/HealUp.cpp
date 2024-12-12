@@ -11,7 +11,6 @@ void HealUp::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	Gameobject::Update(dt, coObjects);
 	//Colision::GetInstance()->process(this, dt, coObjects);
 
-	DebugOut(L"Ve Item");
 }
 void HealUp::OnCollisionWith(LPCOLLISIONEVENT e)
 {
