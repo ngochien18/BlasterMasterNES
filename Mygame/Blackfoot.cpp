@@ -31,7 +31,6 @@ void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (e->ny != 0)
 	{
 		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, this->y, e);
-		DebugOut(L"col Y\n");
 		vy = 0;
 	}
 	
@@ -121,7 +120,6 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 	}
 	if (event.size() == 0)
 	{
-		DebugOut(L"Col\n");
 		OnNoCollision(dt);
 	}
 	else

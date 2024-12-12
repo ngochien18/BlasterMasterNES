@@ -91,13 +91,11 @@ void Colision::SweptAABB(
 	t = t_entry;
 	if (tx_entry > ty_entry)//direction x or y first
 	{
-		DebugOut(L"have col x\n");
 		ny = 0.0f;
 		dx > 0 ? nx = -1.0f : nx = 1.0f;//col left or right
 	}
 	else
 	{
-		DebugOut(L"have col y\n");
 		nx = 0.0f;
 		dy > 0 ? ny = -1.0f : ny = 1.0f;//col top or bot
 	}
