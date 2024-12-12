@@ -175,7 +175,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx*dt;
+					x += vx*dt;//nho them *dt de phu hop voi tinh frame a nhe
 					y += vy*dt;
 				}
 			}
