@@ -290,7 +290,11 @@ void PlayScene::Update(DWORD dt)
 		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
 		coObjects.push_back(Otorender[i]);
 	}
-	
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	this->player->Update(dt, &coObjects);
 	for (size_t i = 0; i < Otorender.size(); i++)
 	{
@@ -325,6 +329,11 @@ void PlayScene::Render()
 	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
 	if(background!=NULL)
 		background->Draw(0, 0);
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	player->render();
 	for (int i = 0; i < Otorender.size(); i++)
 	{
