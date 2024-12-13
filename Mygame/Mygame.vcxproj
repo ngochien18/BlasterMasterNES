@@ -143,6 +143,7 @@
     <ClCompile Include="Eyelet.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="Playerlevel.cpp" />
     <ClCompile Include="PlayScene.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Playerlevel.h" />
     <ClInclude Include="PlayScene.h" />

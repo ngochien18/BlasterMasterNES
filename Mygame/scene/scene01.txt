@@ -10,6 +10,7 @@ object\Ground.txt
 object\Wall.txt
 object\Bullet.txt
 object\HealUp.txt
+object\HUD.txt
 #
 [BACKGROUND]
 -2	1	1	2047	2047	30
@@ -22,11 +23,11 @@ object\HealUp.txt
 # jason0
 0	-710	130	10
 #BLACKFOOT1-5
-1	-550	90	10
-1	-320	90	10
-1	-110	126	10
-1	-10	90	10
-1	130	90	10
+1	-550	97	10
+1	-320	97	10
+1	-110	131	10
+1	-10	97	10
+1	130	97	10
 #SUNAMI6-9
 2	688	104	10
 2	752	104	10
@@ -36,6 +37,8 @@ object\HealUp.txt
 3	-600	90	10
 
 20	-600	90	40
+
+30	-600	150	50
 
 #GROUND10-31
 100	-728	144	20	16	96

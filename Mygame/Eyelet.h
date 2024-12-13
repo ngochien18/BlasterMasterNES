@@ -30,8 +30,8 @@ public:
 	Eyelet(float x, float y) : Enermy(x, y)
 	{
 		state = EYELET_STATE_FLYING;
-		maxVx = 0.9f;
-		maxVy = 0.9f;
+		maxVx = 0.5f;
+		maxVy = 0.5f;
 		ax = 0.1f;
 		ay = 0.1f;
 		objecttag = "Enermy";

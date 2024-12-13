@@ -79,6 +79,9 @@
     <Filter Include="Enemy\Wall">
       <UniqueIdentifier>{9e9633a9-2d80-4bad-9866-6001465ec4b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HUD">
+      <UniqueIdentifier>{e3bc228e-349c-4ad1-8cca-731eb7c05865}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>EffectItem</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>EffectItem</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
