@@ -7,7 +7,7 @@
 void HealUp::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
-
+	Game::GetInstance()->GetCamera()->GetCamPos(x, y);
 	Gameobject::Update(dt, coObjects);
 	//Colision::GetInstance()->process(this, dt, coObjects);
 
