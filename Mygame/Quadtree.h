@@ -3,6 +3,7 @@
 #include "Quadtreenode.h"
 #include "Camera.h"
 #include"Game.h"
+//muon dung quadtree phai xac dinh boundingbox
 class Quadtree
 {
 	Quadtreenode* root;
