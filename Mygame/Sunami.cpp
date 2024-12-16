@@ -175,7 +175,7 @@ void Sunami::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {
 				}
 				else
 				{
-					x += vx;
+					x += vx ;
 				}
 			}
 		}
@@ -183,19 +183,19 @@ void Sunami::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {
 		{
 			if (colX != NULL)//hoac colx hoac coly null
 				{
-							y += vy;
+							y += vy ;
 							this->OnCollisionWith(colX);
 				}
 			else {//x null
 				if (colY != NULL)
 				{
-					x += vx;
+					x += vx ;
 					this->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx;
-					y += vy;
+					x += vx ;
+					y += vy ;
 				}
 			}
 		}

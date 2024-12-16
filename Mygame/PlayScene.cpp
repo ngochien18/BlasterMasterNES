@@ -224,43 +224,45 @@ void PlayScene::LoadAssets(LPCWSTR assetFile)
 void PlayScene::Load()
 {
 	DebugOut(L"[INFO] Start loading scene from : %s \n", sceneFilePath);
-
-	ifstream f;
-	f.open(sceneFilePath);
-
-	// current resource section flag
-	int section = SCENE_SECTION_UNKNOWN;
-
-	char str[MAX_SCENE_LINE];
-	while (f.getline(str, MAX_SCENE_LINE))
+	if (isloaded == false)
 	{
-		string line(str);
-		DebugOut(L"[INFO] Parsing line: %s\n", ToWSTR(line).c_str());
-		if (line[0] == '#') continue;	// skip comment lines	
-		if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
-		if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
-		if (line == "[BACKGROUND]") {
-			DebugOut(L"[INFO] BACKGROUND section detected\n");
-			section = SCENE_SECTION_BACKGROUND;
-			continue;
-		}
-		if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
+		ifstream f;
+		f.open(sceneFilePath);
 
-		//
-		// data section
-		//
-		switch (section)
+		// current resource section flag
+		int section = SCENE_SECTION_UNKNOWN;
+
+		char str[MAX_SCENE_LINE];
+		while (f.getline(str, MAX_SCENE_LINE))
 		{
-		case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
-		case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
-		case SCENE_SECTION_BACKGROUND:
-			_ParseSectionBackGround(line);
-			break;
+			string line(str);
+			DebugOut(L"[INFO] Parsing line: %s\n", ToWSTR(line).c_str());
+			if (line[0] == '#') continue;	// skip comment lines	
+			if (line == "[ASSETS]") { section = SCENE_SECTION_ASSETS; continue; };
+			if (line == "[OBJECTS]") { section = SCENE_SECTION_OBJECTS; continue; };
+			if (line == "[BACKGROUND]") {
+				DebugOut(L"[INFO] BACKGROUND section detected\n");
+				section = SCENE_SECTION_BACKGROUND;
+				continue;
+			}
+			if (line[0] == '[') { section = SCENE_SECTION_UNKNOWN; continue; }
+
+			//
+			// data section
+			//
+			switch (section)
+			{
+			case SCENE_SECTION_ASSETS: _ParseSection_ASSETS(line); break;
+			case SCENE_SECTION_OBJECTS: _ParseSection_OBJECTS(line); break;
+			case SCENE_SECTION_BACKGROUND:
+				_ParseSectionBackGround(line);
+				break;
+			}
 		}
+
+		f.close();
+		isloaded = true;
 	}
-
-	f.close();
-
 	DebugOut(L"[INFO] Done loading scene  %s\n", sceneFilePath);
 }
 void PlayScene::Update(DWORD dt)
@@ -290,7 +292,11 @@ void PlayScene::Update(DWORD dt)
 		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
 		coObjects.push_back(Otorender[i]);
 	}
-	
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	this->player->Update(dt, &coObjects);
 	for (size_t i = 0; i < Otorender.size(); i++)
 	{
@@ -325,6 +331,11 @@ void PlayScene::Render()
 	vector<LPGAMEOBJECT> Otorender = quadtree->traversal();
 	if(background!=NULL)
 		background->Draw(0, 0);
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	player->render();
 	for (int i = 0; i < Otorender.size(); i++)
 	{
@@ -342,12 +353,14 @@ void PlayScene::Clear()
 }
 void PlayScene::Unload()
 {
-	for (int i = 0; i < objects.size(); i++)
-		delete objects[i];
+	if (isloaded == true)
+	{
+		for (int i = 0; i < objects.size(); i++)
+			delete objects[i];
 
-	objects.clear();
-	player = NULL;
-
+		objects.clear();
+		player = NULL;
+	}
 	DebugOut(L"[INFO] Scene %d unloaded! \n", id);
 }
 
@@ -392,14 +405,4 @@ void PlayScene::PurgeDeletedObjects()
 
 void PlayScene::AddObject(Gameobject* obj) {
 	objects.push_back(obj);
-}
-
-void PlayScene::DeleteObject(Gameobject* obj) {
-	vector<LPGAMEOBJECT>::iterator it;
-	for (it = objects.begin(); it != objects.end(); it++)
-	{
-		if (*it == obj) {
-			delete(*it);
-		}
-	}
 }

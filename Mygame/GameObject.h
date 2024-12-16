@@ -24,6 +24,7 @@ protected:
 	
 public:
 	string objecttag;
+	bool alwaysrender = false;
 	virtual void render()=0;
 	virtual void setstate(int state) { this->state = state;	 }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }

@@ -29,11 +29,12 @@ public:
 	Blackfoot(float x, float y) : Enermy(x, y)
 	{
 		state = BLACKFOOT_STATE_WALKING_RL;
-		maxVx = 0.5f;
+		maxVx = 0.2f;
 		maxVy = 0.5f;
 		objecttag = "Enermy";
-		ax = 0.01f;
-		ay = 0.0f;
+		ax = 0.1f;
+		ay = -0.1f;
+		ny = -1;
 		range = 100;
 		vy = GRAVITY;
 	}

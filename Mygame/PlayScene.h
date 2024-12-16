@@ -44,7 +44,6 @@ public:
 	void Clear();
 	void PurgeDeletedObjects();
 	void AddObject(Gameobject* obj);
-	void DeleteObject(Gameobject* obj);
 	void Setplayerstate(LPGAMEOBJECT newstate)
 	{
 		delete player;

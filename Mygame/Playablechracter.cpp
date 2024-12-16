@@ -203,7 +203,7 @@ void Playablechracter::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject
 				}
 				else
 				{
-					y += vy;
+					y += vy*dt;
 				}
 			}
 			else
@@ -219,7 +219,7 @@ void Playablechracter::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject
 				}
 				else
 				{
-					x +=vx;
+					x +=vx*dt;
 				}
 			}
 		}
@@ -227,19 +227,19 @@ void Playablechracter::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject
 		{
 			if (colX != NULL)//hoac colx hoac coly null
 				{
-							y += vy;
+							y += vy*dt;
 							this->OnCollisionWith(colX);
 				}
 			else {//x null
 				if (colY != NULL)
 				{
-					x += vx;
+					x += vx*dt;
 					this->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx;
-					y += vy;
+					x += vx*dt;
+					y += vy*dt;
 				}
 			}
 		}

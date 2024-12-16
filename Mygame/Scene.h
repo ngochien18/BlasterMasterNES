@@ -7,10 +7,11 @@ protected:
 	LPKEYEVENTHANDLER key_handler;
 	int id;
 	LPCWSTR sceneFilePath;
-
+	bool isloaded;
 public:
 	Scene(int id, LPCWSTR filePath)
 	{
+		isloaded = false;
 		this->id = id;
 		this->sceneFilePath = filePath;
 		this->key_handler = NULL;
