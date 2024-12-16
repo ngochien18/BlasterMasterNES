@@ -3,6 +3,7 @@
 #include "Quadtreenode.h"
 #include "Camera.h"
 #include"Game.h"
+//muon su dung quadtree phai co boundingbox
 class Quadtree
 {
 	Quadtreenode* root;
@@ -138,6 +139,36 @@ public:
 			delete currentnode;
 		}
 	}
+	void deleteObject(LPGAMEOBJECT obj)
+	{
+		float cx, cy;
+		Game::GetInstance()->GetCamera()->GetCamPos(cx, cy);
+		int w = Game::GetInstance()->GetBackBufferWidth();
+		int h = Game::GetInstance()->GetBackBufferHeight();
+		queue<Quadtreenode*> node;
+		node.push(this->root);
+		Quadtreenode* currentnode;
+		while (node.empty() == false)
+		{
+			currentnode = node.front();
+			node.pop();
+			for (int j = 0; j < currentnode->object_list.size(); j++)
+			{
+				if (currentnode->object_list[j] == obj)
+				{
+					currentnode->object_list.erase(currentnode->object_list.begin() + j);
+					return;
+				}
+			}
+			for (int i = 0; i < 4; i++)
+			{
+				if (currentnode->ChildNodeList[i] != NULL)
+				{
+					node.push(currentnode->ChildNodeList[i]);
+				}
+			}
+		}
+	}
 	void split(Quadtreenode* node)//chia 1 node thanh 4 node
 	{
 		float x, y, width, height;
@@ -167,6 +198,10 @@ public:
 					{
 						
 						node->ChildNodeList[j]->object_list.push_back(node->object_list[i]);
+						if (node->object_list[i]->objecttag == "HUD")
+						{
+							DebugOut(L"node of HUD:%d\n", node->ChildNodeList[j]->id);
+						}
 					}
 				}
 				else

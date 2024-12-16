@@ -23,6 +23,7 @@ protected:
 	bool isdeleted;	
 	
 public:
+	bool alwaysrender = false;
 	string objecttag;
 	virtual void render()=0;
 	virtual void setstate(int state) { this->state = state;	 }

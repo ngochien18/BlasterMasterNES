@@ -3,12 +3,10 @@
 void HUD::Update(DWORD dt, vector<Gameobject*>* coObjects)
 {
 
-	Game::GetInstance()->GetCamera()->GetCamPos(this->x, this->y);
-
-	x += 20;
-	y -= 150;
-
+	SetState(this->state);
+	Game::GetInstance()->GetCamera()->GetCamPos(x, y);
 	Gameobject::Update(dt, coObjects);
+	//Colision::GetInstance()->process(this, dt, coObjects);
 }
 
 

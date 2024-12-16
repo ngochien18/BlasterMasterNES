@@ -17,7 +17,7 @@ object\HUD.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber
+# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber	30=HUD
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # jason0
@@ -33,13 +33,13 @@ object\HUD.txt
 2	752	104	10
 2	816	104	10
 2	880	104	10
-
+#
 3	-600	90	10
-
+#
+#
+30	-600	90	50
 20	-600	90	40
-
-30	-600	150	50
-
+#
 #GROUND10-31
 100	-728	144	20	16	96
 100	-664	88	20	112	16
