@@ -23,6 +23,7 @@ protected:
 	bool isdeleted;	
 	
 public:
+	bool alwaysrender = false;
 	string objecttag;
 	bool alwaysrender = false;
 	virtual void render()=0;

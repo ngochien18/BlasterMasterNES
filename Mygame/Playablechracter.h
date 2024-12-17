@@ -52,6 +52,7 @@ public:
 		maxVy = 0.0f;
 		ax = 0.0f;
 		ay = 0.0f;
+		objecttag = "Player";
 		state = BIG_JASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
@@ -102,6 +103,7 @@ public:
 		{			
 			//this->SetState(JASON_LEVEL_SMALL);
 			((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+			e->objd->Delete();
 		}
 	}
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
