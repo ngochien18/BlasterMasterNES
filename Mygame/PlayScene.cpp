@@ -278,6 +278,11 @@ void PlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT>Owithoutplayer;
 	for (int i = 1; i < objects.size(); i++)
 	{
+		if (objects[i]->objecttag == "HUD")
+		{
+			float hudx, hudy;
+			objects[i]->GetPosition(hudx, hudy);
+		}
 		Owithoutplayer.push_back(objects[i]);
 	}
 	Quadtreenode* root = new Quadtreenode(0, x, y, width, height, Owithoutplayer);
@@ -339,6 +344,11 @@ void PlayScene::Render()
 			Otorender.push_back(objects[i]);
 	}
 	player->render();
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	for (int i = 0; i < Otorender.size(); i++)
 	{
 		Otorender[i]->render();
@@ -393,6 +403,7 @@ void PlayScene::PurgeDeletedObjects()
 		LPGAMEOBJECT o = *it;
 		if (o->IsDeleted())
 		{
+			quadtree->deleteObject(o);
 			delete o;
 			*it = NULL;
 		}

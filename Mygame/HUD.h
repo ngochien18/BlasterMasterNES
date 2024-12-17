@@ -31,9 +31,12 @@ private:
 	DWORD dt;
 	Camera* camera;
 	Playerlevel* player;
+	float width, height;
 public:
 	HUD(float x, float y) : Gameobject(x, y) {
-
+		alwaysrender = false;
+		width = 10;
+		height = 55;
 	};
 
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
@@ -42,11 +45,11 @@ public:
 	virtual int IsBlocking() { return 0; }
 
 	virtual void render();
-	virtual void GetBoundingBox(float& l, float& t, float& r, float& b) {
-		l = x - HUD_BBOX_WIDTH/2;
-		t = y+ HUD_BBOX_HEIGHT / 2;
-		r = l+HUD_BBOX_WIDTH;
-		b = t - HUD_BBOX_HEIGHT;
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {//muon su dung quadtree phai co bounding box
+		left = x - width / 2;
+		top = y + height / 2;
+		right = left + width;
+		bottom = top - height;
 	};
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
 
