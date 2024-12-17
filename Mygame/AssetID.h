@@ -12,6 +12,7 @@
 #define OBJECT_TYPE_GROUND 100
 #define OBJECT_TYPE_HEALUP 20
 #define OBJECT_TYPE_HUD 30
+#define OBJECT_TYPE_PLAYERBULLET 40
 
 #pragma region JASON 
 // big

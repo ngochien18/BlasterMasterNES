@@ -20,7 +20,9 @@
 #define HUD_ANI_10				50010
 
 
-#define HUD_ANI_SETS_ID					40
+#define HUD_WIDTH 55
+#define HUD_BBOX_WIDTH 55
+#define HUD_BBOX_HEIGHT 180
 
 class HUD : public Gameobject
 {
@@ -40,7 +42,12 @@ public:
 	virtual int IsBlocking() { return 0; }
 
 	virtual void render();
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
+	virtual void GetBoundingBox(float& l, float& t, float& r, float& b) {
+		l = x - HUD_BBOX_WIDTH/2;
+		t = y+ HUD_BBOX_HEIGHT / 2;
+		r = l+HUD_BBOX_WIDTH;
+		b = t - HUD_BBOX_HEIGHT;
+	};
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
 
 };
