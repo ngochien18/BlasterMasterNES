@@ -13,9 +13,9 @@ void HealUp::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 void HealUp::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (e->objd->objecttag == "Player")
+	if (e->objd->objecttag == "Player"|| e->objs->objecttag == "Player")
 	{
-		
+		isdeleted = true;
 	}
 }
 void HealUp::OnNoCollision(DWORD dt)

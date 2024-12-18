@@ -79,6 +79,7 @@ void Playablechracter::SetState(int state)
 		vy =0 ;
 		nx = 1;
 		ny = 0;
+		GunDirection = 1;
 		break;
 	case BIG_JASON_STATE_WALK_LEFT:
 		maxVx = -JASON_WALKING_SPEED;
@@ -87,6 +88,7 @@ void Playablechracter::SetState(int state)
 		vy = 0;
 		nx = -1;
 		ny = 0;
+		GunDirection = -1;
 		break;
 	case BIG_JASON_STATE_IDLE:
 		ax = 0.0f;
@@ -105,6 +107,11 @@ void Playablechracter::SetState(int state)
 }
 void Playablechracter::SetLevel(int l)
 {
+}
+
+void Playablechracter::Shoot() {
+	PlayerBullet* pBullet = new PlayerBullet(x, y);
+	pBullet->ShootService(GunDirection, 0);
 }
 void Playablechracter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -140,6 +147,10 @@ void Playablechracter::Keystate(BYTE* key)
 		else if (game->IsKeyDown(DIK_W))
 		{
 			SetState(BIG_JASON_STATE_WALK_UP);
+		}
+		else if (game->IsKeyDown(DIK_C))
+		{
+			Shoot();
 		}
 		else
 		{

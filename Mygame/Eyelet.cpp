@@ -73,10 +73,6 @@ void Eyelet::SetState(int state)
 		ay = 0;
 		break;
 	case EYELET_STATE_FLYING:
-		/*if (ax > 0 && x > Game::GetInstance()->GetBackBufferWidth()-10) { 
-			ax = -ax; nx = -1;
-		}
-		if (ax < 0 && x < 10) { ax = -ax; nx = 1; }*/
 		break;
 
 	}

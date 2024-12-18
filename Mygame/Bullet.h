@@ -14,16 +14,17 @@ protected:
 public:
     string fireobjecttag;
     virtual void render() = 0;
-    virtual void OnNoCollision(DWORD dt);
-    virtual int IsBlocking() { return 0; }
-    virtual void CollisionProcess()
-    {
+    virtual void OnNoCollision(DWORD dt) = 0;
+    virtual void OnCollisionWith(LPCOLLISIONEVENT e) = 0;
+    virtual int IsBlocking() { return 0; };
+    virtual int IsCollidable() { return 1; };
+    virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) = 0;
 
-    }
     Bullet(float  x, float y) :Gameobject(x, y)
     {
         timetodestroy = new Timer(3000);
         objecttag = "Bullet";
+
     }
     virtual void Destroy() { isdeleted = true; }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
@@ -37,7 +38,7 @@ public:
     };
     void ShootService(float nx, float ny)
     {
-        this->nx=nx;
+        this->nx = nx;
         this->ny = ny;
         ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
     }

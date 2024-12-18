@@ -9,6 +9,7 @@
 #include"Colision.h"
 #include"HealUp.h"
 #include"SmallJason.h"
+#include"PlayerBullet.h"
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2
@@ -42,6 +43,7 @@
 class Playablechracter : public Playerlevel
 {	
 private:
+	int GunDirection;
 	int GetAniIdBig();
 public:
 	Playablechracter (float x,float y) :Playerlevel(x, y)
@@ -50,9 +52,11 @@ public:
 		maxVy = 0.0f;
 		ax = 0.0f;
 		ay = 0.0f;
+		objecttag = "Player";
 		state = BIG_JASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
+		GunDirection = 1;
 	}
 	void render()
 	{
@@ -99,8 +103,10 @@ public:
 		{			
 			//this->SetState(JASON_LEVEL_SMALL);
 			((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+			e->objd->Delete();
 		}
 	}
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
+	void Shoot();
 };
 

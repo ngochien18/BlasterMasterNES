@@ -11,6 +11,8 @@
 #define OBJECT_TYPE_SMALLJASON	9
 #define OBJECT_TYPE_GROUND 100
 #define OBJECT_TYPE_HEALUP 20
+#define OBJECT_TYPE_HUD 30
+#define OBJECT_TYPE_PLAYERBULLET 40
 
 #pragma region JASON 
 // big
@@ -93,4 +95,7 @@
 #define ID_SPRITE_BELLBOMBER_DIE (ID_SPRITE_BELLBOMER+4000)
 
 #pragma region item
-#define ID_ANI_HEALUP_ACTIVE 300000
+#define ID_SPRITE_HEALUP 300000
+
+#pragma region hud
+#define ID_SPRITE_HUD 600000

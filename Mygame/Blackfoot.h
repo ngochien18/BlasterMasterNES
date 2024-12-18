@@ -11,6 +11,7 @@
 #define ID_ANI_BLACKFOOT_WALKING_RIGHT 1200
 #define ID_ANI_BLACKFOOT_DIE 1300
 #define BLACKFOOT_WALKING_SPEED 0.2f
+#define GRAVITY -0.1f
 
 class Blackfoot : public Enermy
 {
@@ -35,6 +36,7 @@ public:
 		ay = -0.1f;
 		ny = -1;
 		range = 100;
+		vy = GRAVITY;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);

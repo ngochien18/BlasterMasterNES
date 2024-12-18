@@ -14,6 +14,8 @@
 #include  "SmallJason.h"
 #include "Ground.h"
 #include "HealUp.h"
+#include "HUD.h"
+#include "PlayerBullet.h"
 using namespace std;
 PlayScene::PlayScene(int id, LPCWSTR filePath) :Scene(id, filePath)
 {
@@ -132,6 +134,8 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_SUNAMI: obj = new Sunami(x, y); break;
 	case OBJECT_TYPE_EYELET: obj = new Eyelet(x, y); break;
 	case OBJECT_TYPE_HEALUP: obj = new HealUp(x, y); break;
+	case OBJECT_TYPE_HUD: obj = new HUD(x, y); break;
+	case OBJECT_TYPE_PLAYERBULLET: obj = new PlayerBullet(x, y); break;
 	//case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	case OBJECT_TYPE_GROUND: {
 		int w = atoi(tokens[4].c_str());
@@ -274,8 +278,14 @@ void PlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT>Owithoutplayer;
 	for (int i = 1; i < objects.size(); i++)
 	{
+		if (objects[i]->objecttag == "HUD")
+		{
+			float hudx, hudy;
+			objects[i]->GetPosition(hudx, hudy);
+		}
 		Owithoutplayer.push_back(objects[i]);
 	}
+	
 	Quadtreenode* root = new Quadtreenode(0, x, y, width, height, Owithoutplayer);
 	if (root == NULL)
 	{
@@ -290,15 +300,12 @@ void PlayScene::Update(DWORD dt)
 		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
 		coObjects.push_back(Otorender[i]);
 	}
-	for (int i = 1; i < objects.size(); i++)
-	{
-		if (objects[i]->alwaysrender)
-			Otorender.push_back(objects[i]);
-	}
+	
 	this->player->Update(dt, &coObjects);
 	for (size_t i = 0; i < Otorender.size(); i++)
 	{
 		Otorender[i]->Update(dt, &coObjects);
+
 	}
 
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
@@ -335,6 +342,11 @@ void PlayScene::Render()
 			Otorender.push_back(objects[i]);
 	}
 	player->render();
+	for (int i = 1; i < objects.size(); i++)
+	{
+		if (objects[i]->alwaysrender)
+			Otorender.push_back(objects[i]);
+	}
 	for (int i = 0; i < Otorender.size(); i++)
 	{
 		Otorender[i]->render();
@@ -389,6 +401,7 @@ void PlayScene::PurgeDeletedObjects()
 		LPGAMEOBJECT o = *it;
 		if (o->IsDeleted())
 		{
+			quadtree->deleteObject(o);
 			delete o;
 			*it = NULL;
 		}

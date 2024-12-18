@@ -10,13 +10,14 @@ object\Ground.txt
 object\Wall.txt
 object\Bullet.txt
 object\HealUp.txt
+object\HUD.txt
 #
 [BACKGROUND]
 -2	1	1	2047	2047	30
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
-# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber
+# type: 0 = Jason	1=Blackfoot	2=Sunami	3=Eyelet	4=Bellbomber	30=HUD
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # jason0
@@ -32,11 +33,13 @@ object\HealUp.txt
 2	752	104	10
 2	816	104	10
 2	880	104	10
-
+#
 3	-600	90	10
-
+#
+#
+30	-600	90	50
 20	-600	90	40
-
+#
 #GROUND10-31
 100	-728	144	20	16	96
 100	-664	88	20	112	16
