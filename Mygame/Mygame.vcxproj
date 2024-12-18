@@ -152,6 +152,12 @@
     <ClCompile Include="Quadtreenode.cpp" />
     <ClCompile Include="SampleKeyEventHandler.cpp" />
     <ClCompile Include="SmallJason.cpp" />
+    <ClCompile Include="Sophia.cpp" />
+    <ClCompile Include="SophiaCabin.cpp" />
+    <ClCompile Include="SophiaGun.cpp" />
+    <ClCompile Include="SophiaLeftWheel.cpp" />
+    <ClCompile Include="SophiaMiddle.cpp" />
+    <ClCompile Include="SophiaRightWheel.cpp" />
     <ClCompile Include="Sunami.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Debug.cpp" />
@@ -192,6 +198,12 @@
     <ClInclude Include="SampleKeyEventHandler.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SmallJason.h" />
+    <ClInclude Include="Sophia.h" />
+    <ClInclude Include="SophiaCabin.h" />
+    <ClInclude Include="SophiaGun.h" />
+    <ClInclude Include="SophiaLeftWheel.h" />
+    <ClInclude Include="SophiaMiddle.h" />
+    <ClInclude Include="SophiaRightWheel.h" />
     <ClInclude Include="Sunami.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />

@@ -11,6 +11,7 @@ object\Wall.txt
 object\Bullet.txt
 object\HealUp.txt
 object\HUD.txt
+object\Sophia.txt
 #
 [BACKGROUND]
 -2	1	1	2047	2047	30
