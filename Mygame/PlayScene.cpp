@@ -285,6 +285,7 @@ void PlayScene::Update(DWORD dt)
 		}
 		Owithoutplayer.push_back(objects[i]);
 	}
+	
 	Quadtreenode* root = new Quadtreenode(0, x, y, width, height, Owithoutplayer);
 	if (root == NULL)
 	{
@@ -299,15 +300,12 @@ void PlayScene::Update(DWORD dt)
 		if (Otorender[i] != NULL&&Otorender[i]->IsCollidable()==1)
 		coObjects.push_back(Otorender[i]);
 	}
-	for (int i = 1; i < objects.size(); i++)
-	{
-		if (objects[i]->alwaysrender)
-			Otorender.push_back(objects[i]);
-	}
+	
 	this->player->Update(dt, &coObjects);
 	for (size_t i = 0; i < Otorender.size(); i++)
 	{
 		Otorender[i]->Update(dt, &coObjects);
+
 	}
 
 	// skip the rest if scene was already unloaded (Jason::Update might trigger PlayScene::Unload)
