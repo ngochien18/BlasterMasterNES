@@ -45,12 +45,7 @@ public:
 	virtual int IsBlocking() { return 0; }
 
 	virtual void render();
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {//muon su dung quadtree phai co bounding box
-		left = x - width / 2;
-		top = y + height / 2;
-		right = left + width;
-		bottom = top - height;
-	};
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
 
 };

@@ -10,6 +10,7 @@ start	1
 # id	file 
 [TEXTURES]
 0	textures\Player.png
+1	textures\player-right.png
 10	textures\Enermy.png
 20	textures\tileset.png
 30 	textures\01-level1-a.png

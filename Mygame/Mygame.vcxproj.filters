@@ -85,6 +85,9 @@
     <Filter Include="Bullet">
       <UniqueIdentifier>{091ecf3f-a227-4ceb-aa4f-d9f963e5243a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player\Sophia">
+      <UniqueIdentifier>{33830192-c1fe-495c-b146-9b5a490ba7a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -182,6 +185,24 @@
     </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Sophia.cpp">
+      <Filter>Player\Sophia</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaCabin.cpp">
+      <Filter>Player\Sophia</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaGun.cpp">
+      <Filter>Player\Sophia</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaMiddle.cpp">
+      <Filter>Player\Sophia</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaLeftWheel.cpp">
+      <Filter>Player\Sophia</Filter>
+    </ClCompile>
+    <ClCompile Include="SophiaRightWheel.cpp">
+      <Filter>Player\Sophia</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +316,24 @@
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Sophia.h">
+      <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaCabin.h">
+      <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaGun.h">
+      <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaMiddle.h">
+      <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaLeftWheel.h">
+      <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="SophiaRightWheel.h">
+      <Filter>Player\Sophia</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
