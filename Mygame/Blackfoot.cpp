@@ -13,6 +13,11 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vx) > abs(maxVx)) vx = maxVx *nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy*ny;
 	
+	if (health <= 0) 
+	{
+		SetState(BLACKFOOT_STATE_DIE);
+	}
+	
 	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
 	{
 		isdeleted = true;
@@ -27,7 +32,12 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->objd->IsBlocking()) return;
-	if (dynamic_cast<Blackfoot*>(e->objd)) return;
+	if (e->objd->objecttag == "Blackfoot") return;
+	if (e->objd->objecttag == "PlayerBullet")
+	{
+		PlayerBullet* pBullet = new PlayerBullet(0, 0);
+		TakeDamage(pBullet->dame);
+	}
 	if (e->ny != 0)
 	{
 		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, this->y, e);
@@ -93,7 +103,6 @@ void Blackfoot::render()
 void Blackfoot::TakeDamage(int dame) {
 	if (dame == 0)
 		return;
-
 
 	if (dame < health)
 	{
