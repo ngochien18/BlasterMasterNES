@@ -8,10 +8,10 @@ class Bullet :
 protected:
     float ax, ay;
     float maxVx, maxVy;
-    int dam;
     int size;
     Timer* timetodestroy;
 public:
+    int dame;
     string fireobjecttag;
     virtual void render() = 0;
     virtual void OnNoCollision(DWORD dt) = 0;

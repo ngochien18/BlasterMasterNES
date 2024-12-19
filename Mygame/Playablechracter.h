@@ -10,6 +10,8 @@
 #include"HealUp.h"
 #include"SmallJason.h"
 #include"PlayerBullet.h"
+#include"Bomb.h"
+
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2
@@ -81,32 +83,10 @@ public:
 	void OnkeyDown(int keycode);
 	void Keystate(BYTE* key);
 	virtual int IsCollidable() { return 1; };
-	void OnNoCollision(DWORD dt)
-	{
-		x += vx *dt;
-		y += vy *dt;
-	}
-	void OnCollisionWith(LPCOLLISIONEVENT e)
-	{
-		if (e->objd->objecttag=="Ground")
-		{
-			Colision::GetInstance()->PushingX(e->t, e->dx, e->nx, x, e);
-			Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, y, e);
-		}
-		/*if (dynamic_cast<HealUp*>(e->obj))
-		{
-			HealUp* healup = dynamic_cast<HealUp*>(e->obj);
-			healup->SetState(HEALUP_STATE_DIE);
-			this->ResetHeal();
-		}*/
-		if (e->objd->objecttag == "Item")
-		{			
-			//this->SetState(JASON_LEVEL_SMALL);
-			((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
-			e->objd->Delete();
-		}
-	}
+	void OnNoCollision(DWORD dt);
+	void OnCollisionWith(LPCOLLISIONEVENT e);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 	void Shoot();
+	void TakeDamage(int dame);
 };
 

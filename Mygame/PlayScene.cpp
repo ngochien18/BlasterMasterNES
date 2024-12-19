@@ -136,7 +136,7 @@ void PlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_HEALUP: obj = new HealUp(x, y); break;
 	case OBJECT_TYPE_HUD: obj = new HUD(x, y); break;
 	case OBJECT_TYPE_PLAYERBULLET: obj = new PlayerBullet(x, y); break;
-	//case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
+	case OBJECT_TYPE_BELLBOMBER: obj = new Bellbomber(x, y); break;
 	case OBJECT_TYPE_GROUND: {
 		int w = atoi(tokens[4].c_str());
 		int h = atoi(tokens[5].c_str());

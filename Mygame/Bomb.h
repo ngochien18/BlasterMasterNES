@@ -1,20 +1,15 @@
 #pragma once
 #include "Bullet.h";
 
-#define PLAYERBULLET_STATE_ACTIVE 3000
-#define PLAYERBULLET_STATE_FINISH 3001
+#define BOMB_STATE_ACTIVE 3100
+#define BOMB_STATE_FINISH 3101
 
-#define ID_ANI_PLAYERBULLET_RIGHT 30001
-#define ID_ANI_PLAYERBULLET_UP 30002
-#define ID_ANI_PLAYERBULLET_LEFT 30003
-#define ID_ANI_PLAYERBULLET_DOWN 30004
+#define ID_ANI_BOMB 31001
 
-#define ID_ANI_PLAYERBULLET_FINISH 30009
+#define BOMB_BBOX_WIDTH 9
+#define BOMB_BBOX_HEIGHT 9
 
-#define PLAYERBULLET_BBOX_WIDTH 9
-#define PLAYERBULLET_BBOX_HEIGHT 6
-
-class PlayerBullet : public Bullet
+class Bomb : public Bullet
 {
 public:
     virtual void render();
@@ -24,15 +19,17 @@ public:
     virtual int IsCollidable() { return 1; };
     virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 
-    PlayerBullet(float  x, float y) :Bullet(x, y)
+    Bomb(float  x, float y) :Bullet(x, y)
     {
         timetodestroy = new Timer(1000);
-        objecttag = "PlayerBullet";
-        dame = 50;
+        objecttag = "Bomb";
+        dame = 30;
         vx = 0;
         vy = 0;
-        maxVx = 0.9f;
+        maxVx = 0.1f;
         ax = 0.1f;
+        maxVy = 0.1f;
+        vy = 0.1f;
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
@@ -40,4 +37,3 @@ public:
 
 
 };
-

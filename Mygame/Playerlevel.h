@@ -20,6 +20,9 @@ public:
 	{
 		health += value;
 	}
+	int GetHealth() {
+		return health;
+	}
 	virtual void OnkeyUP(int keycode)=0;
 	virtual void OnkeyDown(int keycode)=0;
 	virtual void Keystate(BYTE* key)=0;

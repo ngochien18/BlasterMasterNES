@@ -37,8 +37,10 @@ public:
 		ny = -1;
 		range = 100;
 		vy = GRAVITY;
+		health = 100;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
+	void TakeDamage(int dame);
 };
 

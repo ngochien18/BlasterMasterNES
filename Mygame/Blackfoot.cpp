@@ -89,6 +89,21 @@ void Blackfoot::render()
 	Animations::GetInstance()->Get(aniID)->Render(x, y);
 	RenderBoundingBox();
 }
+
+void Blackfoot::TakeDamage(int dame) {
+	if (dame == 0)
+		return;
+
+
+	if (dame < health)
+	{
+		health -= dame;
+	}
+	else
+	{
+		health = 0;
+	}
+}
 void Blackfoot::SetState(int state)
 {
 	// class game co ham get campos cho a lay ra campos va gan vao bien nha a

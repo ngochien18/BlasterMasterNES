@@ -204,6 +204,9 @@
     <ClCompile Include="SophiaRightWheel.cpp">
       <Filter>Player\Sophia</Filter>
     </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="SophiaRightWheel.h">
       <Filter>Player\Sophia</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
