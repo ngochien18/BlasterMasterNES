@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Playerlevel.h"
 #include "PlayScene.h"
+#include "PlayerBullet.h"
 struct box
 {
 	float t, l, r, b;
