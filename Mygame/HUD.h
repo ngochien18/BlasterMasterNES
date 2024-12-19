@@ -41,11 +41,11 @@ public:
 
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
 
-	virtual int IsCollidable() { return 1; };
+	virtual int IsCollidable() { return 0; };
 	virtual int IsBlocking() { return 0; }
 
 	virtual void render();
-	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
+	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
 
 };

@@ -5,16 +5,24 @@ void HUD::Update(DWORD dt, vector<Gameobject*>* coObjects)
 
 	SetState(this->state);
 	Game::GetInstance()->GetCamera()->GetCamPos(x, y);
+	x += 20;
+	y -= 150;
 	Gameobject::Update(dt, coObjects);
 	//Colision::GetInstance()->process(this, dt, coObjects);
 }
 
-
+void HUD::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+{
+	left = x - JASON_BIG_BBOX_WIDTH / 2;
+	top = y + JASON_BIG_BBOX_HEIGHT / 2;
+	right = left + JASON_BIG_BBOX_WIDTH;
+	bottom = top - JASON_BIG_BBOX_HEIGHT;
+}
 void HUD::render() {
 
 	int aniID = HUD_ANI_100;
 
-	/*switch (player->GetHealth())
+	switch (player->GetHealth())
 	{
 	case 100:
 		aniID = HUD_ANI_100;
@@ -57,7 +65,7 @@ void HUD::render() {
 
 	default:
 		break;
-	}*/
+	}
 
 	Animations::GetInstance()->Get(aniID)->Render(x, y);
 }

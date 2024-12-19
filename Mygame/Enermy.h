@@ -15,7 +15,7 @@ protected:
 	float maxVx, maxVy;
 	ULONGLONG die_start;
 	float range;
-	
+	int health;
 
 public:
 	Enermy(float x, float y) : Gameobject(x, y)

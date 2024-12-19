@@ -137,6 +137,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Animations.cpp" />
     <ClCompile Include="Bellbomber.cpp" />
+    <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Colision.cpp" />
     <ClCompile Include="Enermy.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="AssetID.h" />
     <ClInclude Include="Bellbomber.h" />
+    <ClInclude Include="Bomb.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Colision.h" />

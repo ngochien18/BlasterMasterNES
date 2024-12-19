@@ -35,6 +35,7 @@ public:
 		ax = 0.1f;
 		ay = 0.1f;
 		objecttag = "Enermy";
+		health = 50;
 		
 	}
 	virtual void SetState(int state);

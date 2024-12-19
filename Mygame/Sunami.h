@@ -39,6 +39,7 @@ public:
 		objecttag = "Enermy";
 		nx = 1;
 		ny = -1;
+		health = 100;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);

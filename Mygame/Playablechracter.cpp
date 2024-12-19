@@ -15,10 +15,19 @@ void Playablechracter::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable_start = 0;
 		untouchable = 0;
 	}
+	if (health <= 0) {
+		this->SetState(JASON_STATE_DIE);
+	}
+	if (state == JASON_STATE_DIE) {
+		isdeleted = true;
+		return;
+	}
 	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
 	
 }
+
+
 int Playablechracter::GetAniIdBig()
 {
 	int aniId = -1;
@@ -113,12 +122,62 @@ void Playablechracter::Shoot() {
 	PlayerBullet* pBullet = new PlayerBullet(x, y);
 	pBullet->ShootService(GunDirection, 0);
 }
+void Playablechracter::TakeDamage(int dame) {
+	if (dame == 0)
+		return;
+
+
+	if (dame < health)
+	{
+		health -= dame;
+	}
+	else
+	{
+		health = 0;
+	}
+}
 void Playablechracter::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	left = x - JASON_BIG_BBOX_WIDTH / 2;
 	top = y +JASON_BIG_BBOX_HEIGHT / 2;
 	right = left + JASON_BIG_BBOX_WIDTH;
 	bottom = top - JASON_BIG_BBOX_HEIGHT;
+}
+
+void Playablechracter::OnNoCollision(DWORD dt)
+{
+	x += vx * dt;
+	y += vy * dt;
+}
+void Playablechracter::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (e->objd->objecttag == "Ground")
+	{
+		Colision::GetInstance()->PushingX(e->t, e->dx, e->nx, x, e);
+		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, y, e);
+	}
+	/*if (dynamic_cast<HealUp*>(e->obj))
+	{
+		HealUp* healup = dynamic_cast<HealUp*>(e->obj);
+		healup->SetState(HEALUP_STATE_DIE);
+		this->ResetHeal();
+	}*/
+	if (e->objd->objecttag == "Item")
+	{
+		//this->SetState(JASON_LEVEL_SMALL);
+		((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+		e->objd->Delete();
+	}
+	if (e->objd->objecttag == "Enermy")
+	{
+		TakeDamage(10);
+	}
+	if (e->objd->objecttag == "Bomb")
+	{
+		Bomb* bomb = new Bomb(0, 0);
+		TakeDamage(bomb->dame);
+		//e->objd->Delete();
+	}
 }
 void Playablechracter::OnkeyUP(int keycode)
 {
