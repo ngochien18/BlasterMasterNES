@@ -30,7 +30,6 @@ void Bomb::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 void Bomb::OnNoCollision(DWORD dt) {
 	x += vx * dt;
 	y += vy * dt;
-	DebugOut(L"bullet collision:%f", vx);
 }
 
 void Bomb::OnCollisionWith(LPCOLLISIONEVENT e) {

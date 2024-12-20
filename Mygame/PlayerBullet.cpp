@@ -1,13 +1,11 @@
 #include "PlayerBullet.h"
 
 void PlayerBullet::render() {
-	int aniID = ID_ANI_PLAYERBULLET_RIGHT;
-	if (state == PLAYERBULLET_STATE_ACTIVE)
-	{
-		aniID = ID_ANI_PLAYERBULLET_RIGHT;
+	if (isdeleted == false) {
+		int aniID = ID_ANI_PLAYERBULLET_RIGHT;
+		Animations::GetInstance()->Get(aniID)->Render(x, y);
+		RenderBoundingBox();
 	}
-	Animations::GetInstance()->Get(aniID)->Render(x, y);
-	RenderBoundingBox();
 }
 
 void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
@@ -30,11 +28,11 @@ void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 void PlayerBullet::OnNoCollision(DWORD dt) {
 	x += vx * dt;
 	y += vy * dt;
-	DebugOut(L"bullet collision:%f", vx);
 }
 
 void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
 	if (!e->objd->IsBlocking()) return;
+	Destroy();
 }
 
 void PlayerBullet::GetBoundingBox(float& left, float& top, float& right, float& bottom) {

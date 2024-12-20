@@ -347,10 +347,22 @@ void PlayScene::Render()
 		if (objects[i]->alwaysrender)
 			Otorender.push_back(objects[i]);
 	}
+	int countbullet = 0;
 	for (int i = 0; i < Otorender.size(); i++)
 	{
-		Otorender[i]->render();
+		if (Otorender.size() != 0)
+		{
+			if (Otorender[i] != NULL)
+			{
+				if (Otorender[i]->objecttag == "PlayerBullet")
+				{
+					countbullet++;
+				}
+				Otorender[i]->render();
+			}	
+		}
 	}
+	DebugOut(L"Numberof bull:%d\n", countbullet);
 }
 void PlayScene::Clear()
 {
@@ -395,15 +407,12 @@ void PlayScene::_ParseSectionBackGround(string line)
 }
 void PlayScene::PurgeDeletedObjects()
 {
-	vector<LPGAMEOBJECT>::iterator it;
-	for (it = objects.begin(); it != objects.end(); it++)
+	for (int j = 0; j < objects.size(); j++)
 	{
-		LPGAMEOBJECT o = *it;
-		if (o->IsDeleted())
+		if (objects[j]->IsDeleted())
 		{
-			quadtree->deleteObject(o);
-			delete o;
-			*it = NULL;
+			objects.erase(objects.begin() + j);
+			j -= 1;
 		}
 	}
 
