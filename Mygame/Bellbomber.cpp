@@ -2,7 +2,6 @@
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
-#include <stdlib.h> 
 
 void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
@@ -20,6 +19,11 @@ void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		isdeleted = true;
 		return;
 	}
+
+	/*if (timetodestroy->IsTimeUp())
+	{
+		Destroy();
+	}*/
 
 	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
@@ -48,7 +52,10 @@ void Bellbomber::render()
 	{
 		aniID = ID_ANI_BELLBOMBER_DIE;
 	}
-	else if (vx >= 0)
+	if (vx == 0) {
+		aniID = ID_ANI_BELLBOMBER_IDLE;
+	}
+	else if (vx > 0)
 	{
 		aniID = ID_ANI_BELLBOMBER_FLYING_RIGHT;
 	}
@@ -105,7 +112,6 @@ void Bellbomber::SetState(int state)
 		break;
 	case BELLBOMBER_STATE_DROPPING_BOMB:
 		DropBomb();
-		//sleep(2000);
 		break;
 	case BELLBOMBER_STATE_FLYING_AWAY:
 		ax = 0;
@@ -128,11 +134,11 @@ void Bellbomber::OnNoCollision(DWORD dt)
 	{
 		this->SetState(BELLBOMBER_STATE_FLYING);
 	}
-	/*if (abs(distance) <= 30)
+	if (abs(distance) <= 30)
 	{
 		this->SetState(BELLBOMBER_STATE_DROPPING_BOMB);
 		this->SetState(BELLBOMBER_STATE_FLYING_AWAY);
-	}*/
+	}
 	if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
 	{
 		this->SetState(BELLBOMBER_STATE_DIE);

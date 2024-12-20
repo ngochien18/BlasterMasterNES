@@ -32,7 +32,9 @@ public:
         vx = 0;
         vy = 0;
         maxVx = 0.9f;
+        maxVy = 0.9f;
         ax = 0.1f;
+        ay = 0.1f;
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);

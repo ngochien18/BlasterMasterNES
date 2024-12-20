@@ -35,5 +35,12 @@ public:
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
     virtual void SetState(int state);
 
+    void ShootService(float nx, float ny)
+    {
+        this->nx = nx;
+        this->ny = ny;
+        ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
+    }
+
 
 };

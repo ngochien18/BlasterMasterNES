@@ -32,6 +32,7 @@ protected:
 
 	float distance;
 	int GunDirectionX;
+	int delaytimetoshoot;
 
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -55,6 +56,7 @@ public:
 		maxVy = 0.5f;
 		GunDirectionX = -1;
 		health = 50;
+		delaytimetoshoot = 100;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
