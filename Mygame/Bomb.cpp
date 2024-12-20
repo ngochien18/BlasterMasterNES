@@ -38,7 +38,10 @@ void Bomb::OnCollisionWith(LPCOLLISIONEVENT e) {
 	if (e->objd->objecttag == "Player")
 	{
 		this->Delete();
-		//e->objs->Delete();
+	}
+	if (e->objd->objecttag == "Ground")
+	{
+		this->Delete();
 	}
 }
 

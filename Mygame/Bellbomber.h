@@ -4,8 +4,8 @@
 #include "PlayerBullet.h"
 #include "Bomb.h"
 
-#define BELLBOMBER_STATE_DIE 300
-#define BELLBOMBER_DIE_TIMEOUT 500
+#define BELLBOMBER_STATE_DIE 5500
+#define BELLBOMBER_DIE_TIMEOUT 5500
 #define BELLBOMBER_BBOX_WIDTH 16
 #define BELLBOMBER_BBOX_HEIGHT 16
 #define BELLBOMBER_BBOX_HEIGHT_DIE 7
@@ -19,6 +19,7 @@
 #define ID_ANI_BELLBOMBER_DROPPING_BOMB_RIGHT 5400
 #define ID_ANI_BELLBOMBER_DIE 5500
 #define	ID_ANI_BELLBOMBER_IDLE 5600
+#define ID_ANI_BELLBOMBER_FLYING_AWAY 5700
 #define BELLBOMBER_FLYING_SPEED 0.1f
 
 class Bellbomber : public Enermy
@@ -29,7 +30,9 @@ protected:
 	float maxVx, maxVy;
 	ULONGLONG die_start;
 
-	int GunDirection;
+	float distance;
+	int GunDirectionX;
+
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void render();
@@ -50,7 +53,7 @@ public:
 		ay = 0.0f;
 		maxVx = 0.2f;
 		maxVy = 0.5f;
-		GunDirection = -1;
+		GunDirectionX = -1;
 		health = 50;
 	}
 	virtual void SetState(int state);

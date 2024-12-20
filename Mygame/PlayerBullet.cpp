@@ -35,6 +35,10 @@ void PlayerBullet::OnNoCollision(DWORD dt) {
 
 void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
 	if (!e->objd->IsBlocking()) return;
+	/*if (e->objd->objecttag == "Ground")
+	{
+		this->Delete();
+	}*/
 }
 
 void PlayerBullet::GetBoundingBox(float& left, float& top, float& right, float& bottom) {
