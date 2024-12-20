@@ -406,7 +406,6 @@ void PlayScene::_ParseSectionBackGround(string line)
 }
 void PlayScene::PurgeDeletedObjects()
 {
-	vector<LPGAMEOBJECT>::iterator it;
 	for (int j = 0; j < objects.size(); j++)
 	{
 		if (objects[j]->IsDeleted())
