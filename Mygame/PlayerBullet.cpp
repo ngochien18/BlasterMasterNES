@@ -28,6 +28,7 @@ void PlayerBullet::render() {
 		{
 			aniID = ID_ANI_PLAYERBULLET_FINISH;
 		}*/
+
 		Animations::GetInstance()->Get(aniID)->Render(x, y);
 		RenderBoundingBox();
 	}
@@ -54,7 +55,6 @@ void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 void PlayerBullet::OnNoCollision(DWORD dt) {
 	x += vx * dt;
 	y += vy * dt;
-	DebugOut(L"bullet collision:%f", vx);
 }
 
 void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
