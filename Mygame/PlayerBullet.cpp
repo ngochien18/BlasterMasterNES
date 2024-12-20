@@ -2,7 +2,33 @@
 
 void PlayerBullet::render() {
 	if (isdeleted == false) {
-		int aniID = ID_ANI_PLAYERBULLET_RIGHT;
+		int aniID = 0;
+		if (vx >= 0 && vy == 0)
+		{
+			aniID = ID_ANI_PLAYERBULLET_RIGHT;
+		}
+		else if (vx < 0 && vy == 0)
+		{
+			aniID = ID_ANI_PLAYERBULLET_LEFT;
+		}
+		else if (vy >= 0 && vx == 0)
+		{
+			aniID = ID_ANI_PLAYERBULLET_UP;
+		}
+		else if (vy < 0 && vx == 0)
+		{
+			aniID = ID_ANI_PLAYERBULLET_DOWN;
+		}
+
+		/*if (timetodestroy->IsTimeUp())
+		{
+			isdeleted = true;
+		}*/
+		/*if (state == PLAYERBULLET_STATE_FINISH)
+		{
+			aniID = ID_ANI_PLAYERBULLET_FINISH;
+		}*/
+
 		Animations::GetInstance()->Get(aniID)->Render(x, y);
 		RenderBoundingBox();
 	}
@@ -10,10 +36,11 @@ void PlayerBullet::render() {
 
 void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 	SetState(this->state);
-	/*if (timetodestroy->IsTimeUp())
+	if (timetodestroy->IsTimeUp())
 	{
-		Destroy();
-	}*/
+		//isdeleted=true;
+		//Delete();
+	}
 
 	vy = ay * dt;
 	vx = ax * dt;
@@ -32,7 +59,11 @@ void PlayerBullet::OnNoCollision(DWORD dt) {
 
 void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
 	if (!e->objd->IsBlocking()) return;
-	Destroy();
+	if (e->objd->objecttag == "Ground")
+	{
+		//this->Delete();
+		isdeleted = true;
+	}
 }
 
 void PlayerBullet::GetBoundingBox(float& left, float& top, float& right, float& bottom) {

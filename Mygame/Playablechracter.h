@@ -23,8 +23,8 @@
 
 #define ID_ANI_JASON_IDLE_RIGHT 400
 #define ID_ANI_JASON_IDLE_LEFT 401
-#define ID_ANI_JASON_IDLE_UP 402
-#define ID_ANI_JASON_IDLE_DOWN 403
+#define ID_ANI_JASON_IDLE_UP 403
+#define ID_ANI_JASON_IDLE_DOWN 402
 
 
 #define ID_ANI_JASON_WALKING_RIGHT 500
@@ -45,7 +45,8 @@
 class Playablechracter : public Playerlevel
 {	
 private:
-	int GunDirection;
+	int GunDirectionX;
+	int GunDirectionY;
 	int GetAniIdBig();
 public:
 	Playablechracter (float x,float y) :Playerlevel(x, y)
@@ -58,7 +59,8 @@ public:
 		state = BIG_JASON_STATE_IDLE;
 		untouchable = 0;
 		untouchable_start = -1;
-		GunDirection = 1;
+		GunDirectionX = 1;
+		GunDirectionY = 1;
 	}
 	void render()
 	{

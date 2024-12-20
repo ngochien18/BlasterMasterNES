@@ -22,7 +22,7 @@ public:
 
     Bullet(float  x, float y) :Gameobject(x, y)
     {
-        timetodestroy = new Timer(3000);
+        timetodestroy = new Timer(500);
         objecttag = "Bullet";
 
     }

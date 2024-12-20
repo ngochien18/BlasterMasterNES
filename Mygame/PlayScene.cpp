@@ -359,6 +359,8 @@ void PlayScene::Render()
 					countbullet++;
 				}
 				Otorender[i]->render();
+			}
+
 			}	
 		}
 	}

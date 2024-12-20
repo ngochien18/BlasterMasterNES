@@ -72,6 +72,8 @@ void Playablechracter::SetState(int state)
 		vx = 0;
 		ny = -1;
 		nx = 0;
+		GunDirectionX = 0;
+		GunDirectionY = -1;
 		break;
 	case BIG_JASON_STATE_WALK_UP:
 		maxVy = JASON_WALKING_SPEED;
@@ -80,6 +82,8 @@ void Playablechracter::SetState(int state)
 		vx = 0;
 		ny = 1;
 		nx = 0;
+		GunDirectionX = 0;
+		GunDirectionY = 1;
 		break;
 	case BIG_JASON_STATE_WALK_RIGHT:
 		maxVx = JASON_WALKING_SPEED;
@@ -88,7 +92,8 @@ void Playablechracter::SetState(int state)
 		vy =0 ;
 		nx = 1;
 		ny = 0;
-		GunDirection = 1;
+		GunDirectionX = 1;
+		GunDirectionY = 0;
 		break;
 	case BIG_JASON_STATE_WALK_LEFT:
 		maxVx = -JASON_WALKING_SPEED;
@@ -97,7 +102,8 @@ void Playablechracter::SetState(int state)
 		vy = 0;
 		nx = -1;
 		ny = 0;
-		GunDirection = -1;
+		GunDirectionX = -1;
+		GunDirectionY = 0;
 		break;
 	case BIG_JASON_STATE_IDLE:
 		ax = 0.0f;
@@ -117,10 +123,10 @@ void Playablechracter::SetState(int state)
 void Playablechracter::SetLevel(int l)
 {
 }
-
+//4 - 600	140	10
 void Playablechracter::Shoot() {
 	PlayerBullet* pBullet = new PlayerBullet(x, y);
-	pBullet->ShootService(GunDirection, 0);
+	pBullet->ShootService(GunDirectionX, GunDirectionY);
 }
 void Playablechracter::TakeDamage(int dame) {
 	if (dame == 0)

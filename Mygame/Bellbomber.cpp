@@ -2,6 +2,7 @@
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
+
 void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
@@ -11,12 +12,18 @@ void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 
+	distance = this->distancewithplayerx();
 
 	if ((state == BELLBOMBER_STATE_DIE) && (GetTickCount64() - die_start > BELLBOMBER_DIE_TIMEOUT))
 	{
 		isdeleted = true;
 		return;
 	}
+
+	/*if (timetodestroy->IsTimeUp())
+	{
+		Destroy();
+	}*/
 
 	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
@@ -45,11 +52,14 @@ void Bellbomber::render()
 	{
 		aniID = ID_ANI_BELLBOMBER_DIE;
 	}
-	else if (vx >= 0)
+	if (vx == 0) {
+		aniID = ID_ANI_BELLBOMBER_IDLE;
+	}
+	else if (vx > 0)
 	{
 		aniID = ID_ANI_BELLBOMBER_FLYING_RIGHT;
 	}
-	else
+	else if (vx<0)
 	{
 		aniID = ID_ANI_BELLBOMBER_FLYING_LEFT;
 		if (state == BELLBOMBER_STATE_DROPPING_BOMB) {
@@ -58,9 +68,9 @@ void Bellbomber::render()
 
 	}
 
-	if (vy >= 0)
+	else if (vy >= 0)
 	{
-		aniID = ID_ANI_BELLBOMBER_FLYING_LEFT;
+		aniID = ID_ANI_BELLBOMBER_FLYING_AWAY;
 	}
 
 
@@ -70,6 +80,7 @@ void Bellbomber::render()
 void Bellbomber::SetState(int state)
 {
 	Gameobject::SetState(state);
+
 	switch (state)
 	{
 	case BELLBOMBER_STATE_DIE:
@@ -77,10 +88,23 @@ void Bellbomber::SetState(int state)
 		y += (BELLBOMBER_BBOX_HEIGHT - BELLBOMBER_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
+		ax = 0;
 		ay = 0;
+		maxVx = 0;
+		maxVy = 0;
 		break;
 	case BELLBOMBER_STATE_FLYING:
-		vx = -BELLBOMBER_FLYING_SPEED;
+		vx = BELLBOMBER_FLYING_SPEED;
+		if (distance >0)
+		{
+			nx = 1;
+			vx = vx;
+		}
+		else if (distance < 0)
+		{
+			nx = -1;
+			vx = -vx;
+		}
 		break;
 	case BELLBOMBER_STATE_IDLE:
 		ax = 0;
@@ -88,11 +112,11 @@ void Bellbomber::SetState(int state)
 		break;
 	case BELLBOMBER_STATE_DROPPING_BOMB:
 		DropBomb();
-		this->SetState(BELLBOMBER_STATE_FLYING_AWAY);
 		break;
 	case BELLBOMBER_STATE_FLYING_AWAY:
 		ax = 0;
 		vx = 0;
+		maxVx = 0;
 		vy = BELLBOMBER_FLYING_SPEED;
 	}
 }
@@ -105,25 +129,25 @@ void Bellbomber::OnNoCollision(DWORD dt)
 {
 	x += vx * dt;
 	y += vy * dt;
-	float distance = this->distancewithplayer();
-	if (distance <= 200)
+
+	if (abs(distance) <= 200)
 	{
 		this->SetState(BELLBOMBER_STATE_FLYING);
 	}
-	if (distance <= 30)
+	if (abs(distance) <= 30)
 	{
 		this->SetState(BELLBOMBER_STATE_DROPPING_BOMB);
+		this->SetState(BELLBOMBER_STATE_FLYING_AWAY);
 	}
-	if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (y >= 300) && (GetTickCount64() - die_start > BELLBOMBER_DIE_TIMEOUT))
+	if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
 	{
-		isdeleted = true;
-		return;
+		this->SetState(BELLBOMBER_STATE_DIE);
 	}
 }
 
 void Bellbomber::DropBomb() {
 	Bomb* pBomb = new Bomb(x, y);
-	pBomb->ShootService(GunDirection, 0);
+	pBomb->ShootService(GunDirectionX, 0);
 }
 void Bellbomber::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {

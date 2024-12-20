@@ -31,12 +31,12 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 }
 void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->objd->IsBlocking()) return;
 	if (e->objd->objecttag == "Blackfoot") return;
 	if (e->objd->objecttag == "PlayerBullet")
 	{
-		PlayerBullet* pBullet = new PlayerBullet(0, 0);
-		TakeDamage(pBullet->dame);
+		PlayerBullet* pBu = new PlayerBullet(0, 0);
+		TakeDamage(pBu->dame);
+		//e->objd->Delete();
 	}
 	if (e->ny != 0)
 	{
