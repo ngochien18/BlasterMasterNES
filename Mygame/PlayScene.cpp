@@ -360,8 +360,11 @@ void PlayScene::Render()
 				}
 				Otorender[i]->render();
 			}
+
+			}	
 		}
 	}
+	DebugOut(L"Numberof bull:%d\n", countbullet);
 }
 void PlayScene::Clear()
 {
