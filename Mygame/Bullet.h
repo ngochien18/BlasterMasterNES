@@ -24,7 +24,13 @@ public:
     {
         timetodestroy = new Timer(500);
         objecttag = "Bullet";
-
+        vx = 0;
+        vy = 0;
+        maxVx = 0;
+        maxVy = 0;
+        ax = 0;
+        ay = 0;
+        dame = 0;
     }
     virtual void Destroy() { isdeleted = true; }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;

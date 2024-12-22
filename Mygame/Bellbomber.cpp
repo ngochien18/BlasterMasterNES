@@ -16,7 +16,7 @@ void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if ((state == BELLBOMBER_STATE_DIE) && (GetTickCount64() - die_start > BELLBOMBER_DIE_TIMEOUT))
 	{
-		isdeleted = true;
+		isdeleted=true;
 		return;
 	}
 
@@ -112,6 +112,7 @@ void Bellbomber::SetState(int state)
 		break;
 	case BELLBOMBER_STATE_DROPPING_BOMB:
 		DropBomb();
+		isDropBomb = true;
 		break;
 	case BELLBOMBER_STATE_FLYING_AWAY:
 		ax = 0;
@@ -136,13 +137,16 @@ void Bellbomber::OnNoCollision(DWORD dt)
 	}
 	if (abs(distance) <= 30)
 	{
-		this->SetState(BELLBOMBER_STATE_DROPPING_BOMB);
-		this->SetState(BELLBOMBER_STATE_FLYING_AWAY);
+		this->setstate(BELLBOMBER_STATE_DROPPING_BOMB);
 	}
-	if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
-	{
-		this->SetState(BELLBOMBER_STATE_DIE);
+	if (isDropBomb == true) {
+		this->setstate(BELLBOMBER_STATE_FLYING_AWAY);
 	}
+	//if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
+	//{
+	//	this->SetState(BELLBOMBER_STATE_DIE);
+	//	//isdeleted = true;
+	//}
 }
 
 void Bellbomber::DropBomb() {

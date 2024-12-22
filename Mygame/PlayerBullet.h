@@ -35,6 +35,7 @@ public:
         maxVy = 0.9f;
         ax = 0.1f;
         ay = 0.1f;
+        state = PLAYERBULLET_STATE_ACTIVE;
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
