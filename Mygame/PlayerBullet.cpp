@@ -3,32 +3,33 @@
 void PlayerBullet::render() {
 	if (isdeleted == false) {
 		int aniID = 0;
-		if (vx >= 0 && vy == 0)
-		{
-			aniID = ID_ANI_PLAYERBULLET_RIGHT;
-		}
-		else if (vx < 0 && vy == 0)
-		{
-			aniID = ID_ANI_PLAYERBULLET_LEFT;
-		}
-		else if (vy >= 0 && vx == 0)
-		{
-			aniID = ID_ANI_PLAYERBULLET_UP;
-		}
-		else if (vy < 0 && vx == 0)
-		{
-			aniID = ID_ANI_PLAYERBULLET_DOWN;
-		}
+		if (state == PLAYERBULLET_STATE_ACTIVE) {
+			if (vx >= 0 && vy == 0)
+			{
+				aniID = ID_ANI_PLAYERBULLET_RIGHT;
+			}
+			else if (vx < 0 && vy == 0)
+			{
+				aniID = ID_ANI_PLAYERBULLET_LEFT;
+			}
+			else if (vy >= 0 && vx == 0)
+			{
+				aniID = ID_ANI_PLAYERBULLET_UP;
+			}
+			else if (vy < 0 && vx == 0)
+			{
+				aniID = ID_ANI_PLAYERBULLET_DOWN;
+			}
 
-		/*if (timetodestroy->IsTimeUp())
-		{
-			isdeleted = true;
-		}*/
-		/*if (state == PLAYERBULLET_STATE_FINISH)
-		{
-			aniID = ID_ANI_PLAYERBULLET_FINISH;
-		}*/
-
+			/*if (timetodestroy->IsTimeUp())
+			{
+				isdeleted = true;
+			}*/
+			/*if (state == PLAYERBULLET_STATE_FINISH)
+			{
+				aniID = ID_ANI_PLAYERBULLET_FINISH;
+			}*/
+		}
 		Animations::GetInstance()->Get(aniID)->Render(x, y);
 		RenderBoundingBox();
 	}

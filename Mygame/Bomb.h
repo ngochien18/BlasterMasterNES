@@ -27,9 +27,10 @@ public:
         vx = 0;
         vy = 0;
         maxVx = 0.1f;
-        ax = 0.1f;
         maxVy = 0.1f;
-        vy = 0.1f;
+        ax = 0.1;
+        ay = -0.1f;
+        DebugOut(L"vx%f", ax);
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
@@ -39,7 +40,17 @@ public:
     {
         this->nx = nx;
         this->ny = ny;
+        //Timer* timer = new Timer(1000);
         ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
+        /*for (int i = 0; i < 3; i++)
+        {
+            if (timer->IsTimeUp()) {
+                      ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
+                      timer->Reset(1000);
+                      
+                   }
+            timer->Reset(1000);
+        }*/
     }
 
 

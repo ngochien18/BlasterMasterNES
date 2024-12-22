@@ -33,7 +33,6 @@ void Bomb::OnNoCollision(DWORD dt) {
 }
 
 void Bomb::OnCollisionWith(LPCOLLISIONEVENT e) {
-	if (!e->objd->IsBlocking()) return;
 	if (e->objd->objecttag == "Player")
 	{
 		this->Delete();
