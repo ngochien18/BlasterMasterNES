@@ -11,6 +11,7 @@ protected:
 	int untouchable;
 	ULONGLONG untouchable_start;
 	static int health;
+	DWORD lastShoot;
 public:
 	Playerlevel(float x, float y) :Gameobject(x, y)
 	{
@@ -33,4 +34,6 @@ public:
 	virtual void Update(DWORD dt, vector<Gameobject*>* coObjects = NULL) {};
 	virtual int IsBlocking() { return 0; }
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)=0;
+	DWORD GetLastShoot() { return this->lastShoot; }
+	void SetLastShoot() { this->lastShoot = GetTickCount64(); }
 };

@@ -40,6 +40,17 @@ public:
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);
     virtual void SetState(int state);
+    void ShootService(float nx, float ny)
+    {
+        Playerlevel* player = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
+        this->nx = nx;
+        this->ny = ny;
+        if (GetTickCount64() - player->GetLastShoot() >= 500) {
+
+            ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
+            player->SetLastShoot();
+        }
+    }
 
 
 };
