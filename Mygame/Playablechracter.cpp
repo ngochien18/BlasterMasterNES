@@ -190,7 +190,11 @@ void Playablechracter::OnkeyDown(int keycode)
 void Playablechracter::Keystate(BYTE* key)
 {
 	LPGAME game = game->GetInstance();
-	if (state == BIG_JASON_STATE_IDLE)
+	if (state == JASON_STATE_DIE)
+	{
+		return;
+	}
+	else if (state == BIG_JASON_STATE_IDLE)
 	{
 		if (game->IsKeyDown(DIK_S))
 		{

@@ -5,7 +5,7 @@
 #define HEALUP_BBOX_HEIGHT 16
 
 #define HEALUP_STATE_ACTIVE 100
-#define ID_ANI_HEALUP_ACTIVE 200000
+#define ID_ANI_HEALUP_ACTIVE 21000
 
 class HealUp : public EffectItem
 {
@@ -28,13 +28,13 @@ public:
 		objecttag = "HealUp";
 		amount = 50;
 		vx = 0;
-		vy = -0.01f;
+		vy = 0;
 		ay = -0.01f;
 		maxVy = 0.1f;
 		nx = 0;
 		ny = -1;
 	}
 	virtual void SetState(int state);
-	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 	int GetAmount() { return amount; };
 };

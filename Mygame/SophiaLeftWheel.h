@@ -1,11 +1,9 @@
 #pragma once
 #include "Sophia.h"
 
-#define SOPHIA_ANI_STANDING			0
-#define SOPHIA_ANI_LEFT_WALK		1
-#define SOPHIA_ANI_RIGHT_WALK		2
-
-#define SOPHIA_PART_ANI_SETS_ID		1
+#define SOPHIA_ANI_STANDING			24000
+#define SOPHIA_ANI_LEFT_WALK		24001
+#define SOPHIA_ANI_RIGHT_WALK		24002
 
 class SophiaLeftWheel : public Playerlevel {
 protected:

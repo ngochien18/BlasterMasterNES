@@ -88,6 +88,9 @@
     <Filter Include="Player\Sophia">
       <UniqueIdentifier>{33830192-c1fe-495c-b146-9b5a490ba7a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{df3dff7d-5061-465e-9306-afb48fa011a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -174,9 +177,6 @@
     <ClCompile Include="HealUp.cpp">
       <Filter>EffectItem</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>EffectItem</Filter>
-    </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>HUD</Filter>
     </ClCompile>
@@ -206,6 +206,9 @@
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
       <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +311,6 @@
     <ClInclude Include="HealUp.h">
       <Filter>EffectItem</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>EffectItem</Filter>
-    </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>HUD</Filter>
     </ClInclude>
@@ -340,6 +340,9 @@
     </ClInclude>
     <ClInclude Include="Bomb.h">
       <Filter>Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,12 @@ void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	distance = this->distancewithplayerx();
 
+	if (health <= 0)
+	{
+		isdeleted = true;
+		return;
+	}
+
 	if ((state == BELLBOMBER_STATE_DIE) && (GetTickCount64() - die_start > BELLBOMBER_DIE_TIMEOUT))
 	{
 		isdeleted=true;
@@ -147,6 +153,20 @@ void Bellbomber::OnNoCollision(DWORD dt)
 void Bellbomber::DropBomb() {
 	Bomb* pBomb = new Bomb(x, y);
 	pBomb->ShootService(GunDirectionX, -1);
+}
+
+void Bellbomber::TakeDamage(int dame) {
+	if (dame == 0)
+		return;
+
+	if (dame < health)
+	{
+		health -= dame;
+	}
+	else
+	{
+		health = 0;
+	}
 }
 void Bellbomber::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {

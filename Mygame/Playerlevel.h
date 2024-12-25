@@ -14,6 +14,7 @@ protected:
 	static int health;
 	DWORD lastShoot;
 public:
+	Playerlevel();
 	Playerlevel(float x, float y) :Gameobject(x, y)
 	{
 		objecttag = "Player";
