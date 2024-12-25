@@ -1,12 +1,12 @@
 #pragma once
 #include "Sophia.h"
 
-#define SOPHIA_ANI_GUN_0_LEFT			4
-#define SOPHIA_ANI_GUN_45_LEFT			5
-#define SOPHIA_ANI_GUN_90_LEFT			6
+#define SOPHIA_ANI_GUN_0_LEFT			24004
+#define SOPHIA_ANI_GUN_45_LEFT			24005
+#define SOPHIA_ANI_GUN_90_LEFT			24006
 
-#define SOPHIA_ANI_GUN_0_RIGHT			9
-#define SOPHIA_ANI_GUN_45_RIGHT			10
+#define SOPHIA_ANI_GUN_0_RIGHT			24009
+#define SOPHIA_ANI_GUN_45_RIGHT			24010
 
 #define SOPHIA_PART_ANI_SETS_ID		1
 

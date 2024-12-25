@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "Game.h"
 
-#define ID_ANI_GROUND 100000
+#define ID_ANI_GROUND 20000
 #define GROUND_WIDTH 16
 #define GROUND_BBOX_WIDTH 16
 #define GROUND_BBOX_HEIGHT 16

@@ -1,7 +1,7 @@
 #pragma once
 #include "Sophia.h"
 
-#define SOPHIA_ANI_MIDDLE			3
+#define SOPHIA_ANI_MIDDLE			24003
 
 #define SOPHIA_PART_ANI_SETS_ID		1
 

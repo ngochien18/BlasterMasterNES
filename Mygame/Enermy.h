@@ -3,6 +3,7 @@
 #include "Playerlevel.h"
 #include "PlayScene.h"
 #include "PlayerBullet.h"
+#include "HealUp.h"
 struct box
 {
 	float t, l, r, b;
@@ -56,7 +57,7 @@ public:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt) = 0;
-	//virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)=0;
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) = 0;
+	//virtual void DropItem();
 };
 

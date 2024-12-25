@@ -29,6 +29,12 @@ void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	
 	//DebugOut(L"ve blackfoot");
 }
+
+void Blackfoot::DropItem() 
+{
+	HealUp* healup = new HealUp(x, y);
+	((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(healup);
+}
 void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (e->objd->objecttag == "Blackfoot") return;
@@ -127,6 +133,10 @@ void Blackfoot::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ay = 0;
+		if (isDropItem == false) {
+			DropItem();
+			isDropItem = true;
+		}
 		break;
 	case BLACKFOOT_STATE_WALKING_RL:
 		break;

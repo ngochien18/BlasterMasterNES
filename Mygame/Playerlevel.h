@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HealUp.h"
 class Playerlevel :
 	public Gameobject
 {
@@ -13,11 +14,12 @@ protected:
 	static int health;
 	DWORD lastShoot;
 public:
+	Playerlevel();
 	Playerlevel(float x, float y) :Gameobject(x, y)
 	{
 		objecttag = "Player";
 	}
-	static void changehealth(int value)
+	static void resHealth(int value)
 	{
 		health += value;
 	}
