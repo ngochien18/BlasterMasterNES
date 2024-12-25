@@ -16,6 +16,7 @@
 class Blackfoot : public Enermy
 {
 protected:
+	bool isDropItem;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void render();
@@ -38,9 +39,11 @@ public:
 		range = 100;
 		vy = GRAVITY;
 		health = 100;
+		isDropItem = false;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 	void TakeDamage(int dame);
+	void DropItem();
 };
 

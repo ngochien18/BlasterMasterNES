@@ -7,6 +7,11 @@
 void HealUp::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
+	vy = ay * dt;
+	vx = ax * dt;
+
+	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 	Gameobject::Update(dt, coObjects);
 	//Colision::GetInstance()->process(this, dt, coObjects);
 
@@ -20,7 +25,8 @@ void HealUp::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void HealUp::OnNoCollision(DWORD dt)
 {
-
+	x += vx * dt;
+	y += vy * dt;
 }
 
 void HealUp::GetBoundingBox(float& left, float& top, float& right, float& bottom)

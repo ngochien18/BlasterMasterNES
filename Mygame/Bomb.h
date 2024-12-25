@@ -26,9 +26,9 @@ public:
         dame = 30;
         vx = 0;
         vy = 0;
-        maxVx = 0.1f;
+        maxVx = 0;
         maxVy = 0.1f;
-        ax = 0.1;
+        ax = 0;
         ay = -0.1f;
         DebugOut(L"vx%f", ax);
     }

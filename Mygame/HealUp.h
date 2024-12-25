@@ -10,6 +10,7 @@
 class HealUp : public EffectItem
 {
 protected:
+	int amount;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void render();
@@ -24,10 +25,16 @@ public:
 	HealUp(float x, float y) : EffectItem(x, y)
 	{
 		state = HEALUP_STATE_ACTIVE;
-		objecttag = "Item";
+		objecttag = "HealUp";
+		amount = 50;
 		vx = 0;
-		vy = 0;
+		vy = -0.01f;
+		ay = -0.01f;
+		maxVy = 0.1f;
+		nx = 0;
+		ny = -1;
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
+	int GetAmount() { return amount; };
 };

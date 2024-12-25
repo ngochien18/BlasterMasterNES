@@ -20,11 +20,6 @@ void Bellbomber::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		return;
 	}
 
-	/*if (timetodestroy->IsTimeUp())
-	{
-		Destroy();
-	}*/
-
 	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
 }
@@ -131,27 +126,27 @@ void Bellbomber::OnNoCollision(DWORD dt)
 	x += vx * dt;
 	y += vy * dt;
 
-	if (abs(distance) <= 200)
+	if (abs(distance) <= FLYING_RANGE)
 	{
 		this->SetState(BELLBOMBER_STATE_FLYING);
 	}
-	if (abs(distance) <= 30)
+	if (abs(distance) <= DROP_BOMB_RANGE)
 	{
 		this->setstate(BELLBOMBER_STATE_DROPPING_BOMB);
 	}
 	if (isDropBomb == true) {
 		this->setstate(BELLBOMBER_STATE_FLYING_AWAY);
 	}
-	//if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
-	//{
-	//	this->SetState(BELLBOMBER_STATE_DIE);
-	//	//isdeleted = true;
-	//}
+	if ((state == BELLBOMBER_STATE_FLYING_AWAY) && (this->y >= 300))
+	{
+		this->SetState(BELLBOMBER_STATE_DIE);
+		//isdeleted = true;
+	}
 }
 
 void Bellbomber::DropBomb() {
 	Bomb* pBomb = new Bomb(x, y);
-	pBomb->ShootService(GunDirectionX, 0);
+	pBomb->ShootService(GunDirectionX, -1);
 }
 void Bellbomber::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {

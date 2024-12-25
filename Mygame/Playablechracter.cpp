@@ -162,17 +162,12 @@ void Playablechracter::OnCollisionWith(LPCOLLISIONEVENT e)
 		Colision::GetInstance()->PushingX(e->t, e->dx, e->nx, x, e);
 		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, y, e);
 	}
-	/*if (dynamic_cast<HealUp*>(e->obj))
+	if (e->objd->objecttag == "HealUp")
 	{
-		HealUp* healup = dynamic_cast<HealUp*>(e->obj);
-		healup->SetState(HEALUP_STATE_DIE);
-		this->ResetHeal();
-	}*/
-	if (e->objd->objecttag == "Item")
-	{
-		//this->SetState(JASON_LEVEL_SMALL);
-		((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+		HealUp* healup = new HealUp(0,0);
+		resHealth(healup->GetAmount());
 		e->objd->Delete();
+
 	}
 	if (e->objd->objecttag == "Enermy")
 	{

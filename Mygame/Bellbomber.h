@@ -21,6 +21,8 @@
 #define	ID_ANI_BELLBOMBER_IDLE 5600
 #define ID_ANI_BELLBOMBER_FLYING_AWAY 5700
 #define BELLBOMBER_FLYING_SPEED 0.1f
+#define FLYING_RANGE 200
+#define DROP_BOMB_RANGE 5
 
 class Bellbomber : public Enermy
 {

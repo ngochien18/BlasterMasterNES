@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "HealUp.h"
 class Playerlevel :
 	public Gameobject
 {
@@ -17,7 +18,7 @@ public:
 	{
 		objecttag = "Player";
 	}
-	static void changehealth(int value)
+	static void resHealth(int value)
 	{
 		health += value;
 	}
