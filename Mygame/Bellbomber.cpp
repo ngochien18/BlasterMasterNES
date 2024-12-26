@@ -155,19 +155,6 @@ void Bellbomber::DropBomb() {
 	pBomb->ShootService(GunDirectionX, -1);
 }
 
-void Bellbomber::TakeDamage(int dame) {
-	if (dame == 0)
-		return;
-
-	if (dame < health)
-	{
-		health -= dame;
-	}
-	else
-	{
-		health = 0;
-	}
-}
 void Bellbomber::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {
 	vector<LPCOLLISIONEVENT>event;

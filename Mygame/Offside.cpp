@@ -1,97 +1,94 @@
-#include "Blackfoot.h"
+#include "Offside.h"
 #include"Playablechracter.h"
 #include "PlayScene.h"
 #include "Game.h"
 #include "Colision.h"
 #include "string"
-void Blackfoot::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
+void Offside::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	SetState(this->state);
-	vy = ay*dt;
-	vx = ax*dt;
+	vy = ay * dt;
+	vx = ax * dt;
 
-	if (abs(vx) > abs(maxVx)) vx = maxVx *nx;
-	if (abs(vy) > abs(maxVy))	vy = maxVy*ny;
-	
-	if (health <= 0) 
+	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
+	distance = this->distancewithplayerx();
+	if (health <= 0)
 	{
-		SetState(BLACKFOOT_STATE_DIE);
+		SetState(OFFSIDE_STATE_DIE);
 	}
-	
-	if ((state == BLACKFOOT_STATE_DIE) && (GetTickCount64() - die_start > BLACKFOOT_DIE_TIMEOUT))
+
+	if ((state == OFFSIDE_STATE_DIE) && (GetTickCount64() - die_start > OFFSIDE_DIE_TIMEOUT))
 	{
 		isdeleted = true;
 		return;
 	}
-	
+
 	Gameobject::Update(dt, coObjects);
 	CollisionProcess(dt, coObjects);
-	
+
 }
 
-void Blackfoot::DropItem() 
+void Offside::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	HealUp* healup = new HealUp(x, y);
-	((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(healup);
-}
-void Blackfoot::OnCollisionWith(LPCOLLISIONEVENT e)
-{
-	if (e->objd->objecttag == "Blackfoot") return;
+	if (e->objd->objecttag == "Offside") return;
 	if (e->objd->objecttag == "PlayerBullet")
 	{
 		PlayerBullet* pBu = new PlayerBullet(0, 0);
 		TakeDamage(pBu->dame);
 		e->objd->Delete();
 	}
-	if (e->ny != 0)
-	{
-		Colision::GetInstance()->PushingY(e->t, e->dy, e->ny, this->y, e);
-		vy = 0;
-	}
-	
-	else if (e->nx != 0)
-	{
-		this->nx = -this->nx;
-		ax = -ax;
-	}
 }
-void Blackfoot::OnNoCollision(DWORD dt)
+void Offside::OnNoCollision(DWORD dt)
 {
-	x += vx*dt;
-	y += vy*dt;
+	x += vx * dt;
+	y += vy * dt;
+
+	if (distance >= 0 && distance <= OFFSIDE_SHOOT_RANGE)
+	{
+		this->SetState(OFFSIDE_STATE_SHOOT_RIGHT);
+	}
+	else if (distance >= -OFFSIDE_SHOOT_RANGE && distance < 0)
+	{
+		this->SetState(OFFSIDE_STATE_SHOOT_LEFT);
+	}
+	else
+	{
+		this->SetState(OFFSIDE_STATE_IDLE);
+	}
 }
 
-void Blackfoot::GetBoundingBox(float& left, float& top, float& right, float& bottom)
+void Offside::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	if (state ==BLACKFOOT_STATE_DIE)
+	if (state == OFFSIDE_STATE_DIE)
 	{
-		left = x - BLACKFOOT_BBOX_WIDTH /2;
-		top = y + BLACKFOOT_BBOX_HEIGHT_DIE / 2;
-		right = left + BLACKFOOT_BBOX_WIDTH;
-		bottom = top - BLACKFOOT_BBOX_HEIGHT_DIE;
+		left = x - OFFSIDE_BBOX_WIDTH / 2;
+		top = y + OFFSIDE_BBOX_HEIGHT_DIE / 2;
+		right = left + OFFSIDE_BBOX_WIDTH;
+		bottom = top - OFFSIDE_BBOX_HEIGHT_DIE;
 	}
 	else
 	{
-		left = x - BLACKFOOT_BBOX_WIDTH/2;
-		top = y + BLACKFOOT_BBOX_HEIGHT/ 2;
-		right = left + BLACKFOOT_BBOX_WIDTH;//+range for the traking box
-		bottom = top - BLACKFOOT_BBOX_HEIGHT;//-range for the traking box
+		left = x - OFFSIDE_BBOX_WIDTH / 2;
+		top = y + OFFSIDE_BBOX_HEIGHT / 2;
+		right = left + OFFSIDE_BBOX_WIDTH;
+		bottom = top - OFFSIDE_BBOX_HEIGHT;
 	}
 }
-void Blackfoot::render()
+void Offside::render()
 {
-	int aniID = 0;
-	if (state == BLACKFOOT_STATE_DIE)
+	int aniID = ID_ANI_OFFSIDE_IDLE;
+	if (state == OFFSIDE_STATE_DIE)
 	{
-		aniID = ID_ANI_BLACKFOOT_DIE;
+		aniID = ID_ANI_OFFSIDE_DIE;
 	}
-	else if (vx >= 0)
+	else if (state == OFFSIDE_STATE_SHOOT_RIGHT)
 	{
-		aniID = ID_ANI_BLACKFOOT_WALKING_RIGHT;
+		aniID = ID_ANI_OFFSIDE_SHOOT_RIGHT;
 	}
-	else
+	else if (state == OFFSIDE_STATE_SHOOT_LEFT)
 	{
-		aniID = ID_ANI_BLACKFOOT_WALKING_LEFT;
+		aniID = ID_ANI_OFFSIDE_SHOOT_LEFT;
 	}
 
 
@@ -99,27 +96,45 @@ void Blackfoot::render()
 	RenderBoundingBox();
 }
 
-void Blackfoot::SetState(int state)
+void Offside::SetState(int state)
 {
 	Gameobject::SetState(state);
 	switch (state)
 	{
-	case BLACKFOOT_STATE_DIE:
+	case OFFSIDE_STATE_DIE:
 		die_start = GetTickCount64();
-		y += (BLACKFOOT_BBOX_HEIGHT - BLACKFOOT_BBOX_HEIGHT_DIE) / 2;
+		y += (OFFSIDE_BBOX_HEIGHT - OFFSIDE_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
 		ay = 0;
-		if (isDropItem == false) {
-			DropItem();
-			isDropItem = true;
+		break;
+	case OFFSIDE_STATE_IDLE:
+		break;
+	case OFFSIDE_STATE_SHOOT_LEFT:
+		GunDirectionX = -1;
+		if (GetTickCount64() - this->GetLastShoot() >= 1000) {
+
+			Shoot();
+			this->SetLastShoot();
 		}
 		break;
-	case BLACKFOOT_STATE_WALKING_RL:
+	case OFFSIDE_STATE_SHOOT_RIGHT:
+		GunDirectionX = 1;
+		if (GetTickCount64() - this->GetLastShoot() >= 1000) {
+
+			Shoot();
+			this->SetLastShoot();
+		}
 		break;
+
 	}
 }
-void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+
+void Offside::Shoot() {
+	OffBullet* oBullet = new OffBullet(x, y);
+	oBullet->ShootService(GunDirectionX, -1);
+}
+void Offside::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 {
 	vector<LPCOLLISIONEVENT>event;
 	LPCOLLISIONEVENT colX = NULL;
@@ -151,7 +166,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					y += vy*dt;
+					y += vy * dt;
 				}
 			}
 			else
@@ -167,7 +182,7 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					x += vx*dt;
+					x += vx * dt;
 				}
 			}
 		}
@@ -175,19 +190,19 @@ void Blackfoot::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		{
 			if (colX != NULL)//hoac colx hoac coly null
 			{
-				y += vy*dt;
+				y += vy * dt;
 				this->OnCollisionWith(colX);
 			}
 			else {//x null
 				if (colY != NULL)
 				{
-					x += vx*dt;
+					x += vx * dt;
 					this->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx*dt;//nho them *dt de phu hop voi tinh frame a nhe
-					y += vy*dt;
+					x += vx * dt;//nho them *dt de phu hop voi tinh frame a nhe
+					y += vy * dt;
 				}
 			}
 		}

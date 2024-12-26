@@ -91,6 +91,9 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{df3dff7d-5061-465e-9306-afb48fa011a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Offisde">
+      <UniqueIdentifier>{1fdb7dc0-27a9-423c-aa9f-4c4b3214711b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -126,9 +129,6 @@
     <ClCompile Include="SampleKeyEventHandler.cpp">
       <Filter>SampleKeyEventHandler</Filter>
     </ClCompile>
-    <ClCompile Include="Playablechracter.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="PlayScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -155,9 +155,6 @@
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Enemy\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="Global.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Quadtreenode.cpp">
       <Filter>Quadtree</Filter>
@@ -209,6 +206,15 @@
     </ClCompile>
     <ClCompile Include="Timer.cpp">
       <Filter>Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Offside.cpp">
+      <Filter>Enemy\Offisde</Filter>
+    </ClCompile>
+    <ClCompile Include="OffBullet.cpp">
+      <Filter>Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Playablechracter.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,9 +293,6 @@
     <ClInclude Include="Ground.h">
       <Filter>Enemy\Ground</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Quadtree.h">
       <Filter>Quadtree</Filter>
     </ClInclude>
@@ -343,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Offside.h">
+      <Filter>Enemy\Offisde</Filter>
+    </ClInclude>
+    <ClInclude Include="OffBullet.h">
+      <Filter>Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

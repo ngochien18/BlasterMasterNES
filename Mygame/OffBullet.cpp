@@ -1,40 +1,20 @@
-#include "PlayerBullet.h"
+#include "OffBullet.h"
 
-void PlayerBullet::render() {
-	if (isdeleted == false) {
-		int aniID = 0;
-		if (state == PLAYERBULLET_STATE_ACTIVE) {
-			if (vx >= 0 && vy == 0)
-			{
-				aniID = ID_ANI_PLAYERBULLET_RIGHT;
-			}
-			else if (vx < 0 && vy == 0)
-			{
-				aniID = ID_ANI_PLAYERBULLET_LEFT;
-			}
-			else if (vy >= 0 && vx == 0)
-			{
-				aniID = ID_ANI_PLAYERBULLET_UP;
-			}
-			else if (vy < 0 && vx == 0)
-			{
-				aniID = ID_ANI_PLAYERBULLET_DOWN;
-			}
-			/*if (state == PLAYERBULLET_STATE_FINISH)
-			{
-				aniID = ID_ANI_PLAYERBULLET_FINISH;
-			}*/
-		}
-		Animations::GetInstance()->Get(aniID)->Render(x, y);
-		RenderBoundingBox();
+void OffBullet::render() {
+	int aniID = ID_ANI_OFFBULLET;
+	if (state == OFFBULLET_STATE_ACTIVE)
+	{
+		aniID = ID_ANI_OFFBULLET;
 	}
+	Animations::GetInstance()->Get(aniID)->Render(x, y);
+	RenderBoundingBox();
 }
 
-void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
+void OffBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 	SetState(this->state);
 	if (timetodestroy->IsTimeUp())
 	{
-		isdeleted=true;
+		isdeleted = true;
 		return;
 	}
 
@@ -48,38 +28,45 @@ void PlayerBullet::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 	CollisionProcess(dt, coObjects);
 }
 
-void PlayerBullet::OnNoCollision(DWORD dt) {
+void OffBullet::OnNoCollision(DWORD dt) {
 	x += vx * dt;
 	y += vy * dt;
 }
 
-void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
-	if (!e->objd->IsBlocking()) return;
+void OffBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
+	if (e->objd->objecttag == "Player")
+	{
+		this->Delete();
+	}
 	if (e->objd->objecttag == "Ground")
 	{
-		isdeleted = true;
-		return;
+		this->Delete();
 	}
 }
 
-void PlayerBullet::GetBoundingBox(float& left, float& top, float& right, float& bottom) {
-	left = x - PLAYERBULLET_BBOX_WIDTH / 2;
-	top = y + PLAYERBULLET_BBOX_HEIGHT / 2;
-	right = left + PLAYERBULLET_BBOX_WIDTH;
-	bottom = top - PLAYERBULLET_BBOX_HEIGHT;
+void OffBullet::GetBoundingBox(float& left, float& top, float& right, float& bottom) {
+	left = x - OFFBULLET_BBOX_WIDTH / 2;
+	top = y + OFFBULLET_BBOX_HEIGHT / 2;
+	right = left + OFFBULLET_BBOX_WIDTH;
+	bottom = top - OFFBULLET_BBOX_HEIGHT;
 }
 
-void PlayerBullet::SetState(int state) {
+void OffBullet::SetState(int state) {
 	Gameobject::SetState(state);
 	switch (state)
 	{
-	case PLAYERBULLET_STATE_ACTIVE:
+	case OFFBULLET_STATE_ACTIVE:
 		break;
 
 	}
 }
-
-void PlayerBullet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {
+void OffBullet::ShootService(float nx, float ny)
+{
+	this->nx = nx;
+	this->ny = ny;
+	((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
+}
+void OffBullet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {
 	vector<LPCOLLISIONEVENT>event;
 	LPCOLLISIONEVENT colX = NULL;
 	LPCOLLISIONEVENT colY = NULL;
@@ -163,3 +150,6 @@ void PlayerBullet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {
 		for (UINT i = 0; i < event.size(); i++) delete event[i];//xoa toan bo nhung event 
 	}
 }
+
+
+

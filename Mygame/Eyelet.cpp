@@ -11,6 +11,11 @@ void Eyelet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
 	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
 
+	if (health <= 0) 
+	{
+		SetState(EYELET_STATE_DIE);
+	}
+
 	if ((state == EYELET_STATE_DIE) && (GetTickCount64() - die_start > EYELET_DIE_TIMEOUT))
 	{
 		isdeleted = true;
@@ -91,6 +96,13 @@ void Eyelet::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		this->nx = -this->nx;
 		ax = -ax;
+	}
+
+	if (e->objd->objecttag == "PlayerBullet")
+	{
+		PlayerBullet* pBu = new PlayerBullet(0, 0);
+		TakeDamage(pBu->dame);
+		e->objd->Delete();
 	}
 }
 void Eyelet::OnNoCollision(DWORD dt)

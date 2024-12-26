@@ -43,7 +43,6 @@ public:
 	}
 	virtual void SetState(int state);
 	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
-	void TakeDamage(int dame);
 	void DropItem();
 };
 

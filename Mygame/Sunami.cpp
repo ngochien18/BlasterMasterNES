@@ -8,6 +8,11 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy = 0.1f*ny;
 	vx = 0.1f*nx;
 
+	if (health <= 0)
+	{
+		SetState(SUNAMI_STATE_DIE);
+	}
+
 	if ((state == SUNAMI_STATE_DIE) && (GetTickCount64() - die_start > SUNAMI_DIE_TIMEOUT))
 	{
 		isdeleted = true;
@@ -20,7 +25,7 @@ void Sunami::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (dynamic_cast<Sunami*>(e->objd)) return;
-	DebugOut(L"Collisioned\n");
+
 	if (e->nx != 0 && e->ny != 0)
 	{
 		if (lastcolY == 0)
@@ -38,7 +43,15 @@ void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 		lastXcol = this->x;
 		lastYcol = this->y;
 	}
+
+	if (e->objd->objecttag == "PlayerBullet")
+	{
+		PlayerBullet* pBu = new PlayerBullet(0, 0);
+		TakeDamage(pBu->dame);
+		e->objd->Delete();
+	}
 }
+
 void Sunami::OnNoCollision(DWORD dt)
 {
 	DebugOut(L"No collision\n");

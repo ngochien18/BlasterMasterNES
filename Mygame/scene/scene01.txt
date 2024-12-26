@@ -8,11 +8,13 @@ object\Bellbomber.txt
 object\SmallJason.txt
 object\Ground.txt
 object\Wall.txt
-object\Bullet.txt
+object\Offside.txt
 object\HealUp.txt
 object\HUD.txt
 object\Sophia.txt
-object\Bomb.txt
+object\Bullet\Bullet.txt
+object\Bullet\Bomb.txt
+object\Bullet\OffBullet.txt
 #
 [BACKGROUND]
 -2	1	1	2047	2047	30
@@ -36,6 +38,7 @@ object\Bomb.txt
 2	816	104	10
 2	880	104	10
 4	-600	150	10
+5	-580	140	10
 30	-600	90	50
 
 
