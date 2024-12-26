@@ -18,6 +18,7 @@ protected:
 	ULONGLONG die_start;
 	float range;
 	int health;
+	DWORD lastShoot;
 
 public:
 	Enermy(float x, float y) : Gameobject(x, y)
@@ -32,24 +33,8 @@ public:
 		trackingbox.b -= range;
 		return trackingbox;
 	}
-	float distancewithplayer()
-	{
-		Playerlevel* jason = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
-		float px, py;
-		jason->GetPosition(px, py);
-		float distance2 = (px - x) * (px - x) + (py - y) * (py - y);
-		float distance = sqrtf(distance2);
-		return distance;
-	}
-	float distancewithplayerx()
-	{
-		Playerlevel* player = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
-		float px, py;
-		player->GetPosition(px, py);
-		float distance = px-x;
-		//float distance = sqrtf(distance2);
-		return distance;
-	}
+	float distancewithplayer();
+	float distancewithplayerx();
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) = 0;
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) = 0;
 	virtual void render() = 0;
@@ -58,6 +43,9 @@ public:
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt) = 0;
 	virtual void OnCollisionWith(LPCOLLISIONEVENT e) = 0;
+	DWORD GetLastShoot() { return this->lastShoot; }
+	void SetLastShoot() { this->lastShoot = GetTickCount64(); }
+	void TakeDamage(int dame);
 	//virtual void DropItem();
 };
 

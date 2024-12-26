@@ -12,10 +12,11 @@ void Bomb::render() {
 
 void Bomb::Update(DWORD dt, vector<Gameobject*>* coObjects) {
 	SetState(this->state);
-	/*if (timetodestroy->IsTimeUp())
+	if (timetodestroy->IsTimeUp())
 	{
-		Destroy();
-	}*/
+		isdeleted=true;
+		return;
+	}
 
 	vy = ay * dt;
 	vx = ax * dt;

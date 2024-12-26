@@ -11,7 +11,7 @@
 #include"SmallJason.h"
 #include"PlayerBullet.h"
 #include"Bomb.h"
-
+#include"OffBullet.h"
 #define JASON_DASH_TIME 200
 #define JASON_LEVEL_SMALL 1
 #define JASON_LEVEL_BIG 2

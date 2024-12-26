@@ -26,7 +26,7 @@ public:
 
     PlayerBullet(float  x, float y) :Bullet(x, y)
     {
-        timetodestroy = new Timer(1000);
+        timetodestroy = new Timer(10000);
         objecttag = "PlayerBullet";
         dame = 50;
         vx = 0;
@@ -42,14 +42,9 @@ public:
     virtual void SetState(int state);
     void ShootService(float nx, float ny)
     {
-        Playerlevel* player = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
         this->nx = nx;
         this->ny = ny;
-        if (GetTickCount64() - player->GetLastShoot() >= 500) {
-
-            ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
-            player->SetLastShoot();
-        }
+        ((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->AddObject(this);
     }
 
 

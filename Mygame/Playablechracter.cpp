@@ -123,7 +123,7 @@ void Playablechracter::SetState(int state)
 void Playablechracter::SetLevel(int l)
 {
 }
-//4 - 600	140	10
+
 void Playablechracter::Shoot() {
 	PlayerBullet* pBullet = new PlayerBullet(x, y);
 	pBullet->ShootService(GunDirectionX, GunDirectionY);
@@ -177,7 +177,13 @@ void Playablechracter::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		Bomb* bomb = new Bomb(0, 0);
 		TakeDamage(bomb->dame);
-		//e->objd->Delete();
+		e->objd->Delete();
+	}
+	if (e->objd->objecttag == "OffBullet")
+	{
+		OffBullet* oBullet = new OffBullet(0, 0);
+		TakeDamage(oBullet->dame);
+		e->objd->Delete();
 	}
 }
 void Playablechracter::OnkeyUP(int keycode)
@@ -214,7 +220,11 @@ void Playablechracter::Keystate(BYTE* key)
 		}
 		else if (game->IsKeyDown(DIK_C))
 		{
-			Shoot();
+			if (GetTickCount64() - this->GetLastShoot() >= 500) {
+
+				Shoot();
+				this->SetLastShoot();
+			}
 		}
 		else
 		{

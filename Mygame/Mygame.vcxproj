@@ -142,9 +142,10 @@
     <ClCompile Include="Colision.cpp" />
     <ClCompile Include="Enermy.cpp" />
     <ClCompile Include="Eyelet.cpp" />
-    <ClCompile Include="Global.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="OffBullet.cpp" />
+    <ClCompile Include="Offside.cpp" />
     <ClCompile Include="Playablechracter.cpp" />
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Playerlevel.cpp" />
@@ -187,10 +188,11 @@
     <ClInclude Include="Enermy.h" />
     <ClInclude Include="Eyelet.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="KeyEventHandler.h" />
+    <ClInclude Include="OffBullet.h" />
+    <ClInclude Include="Offside.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Playerlevel.h" />
     <ClInclude Include="PlayScene.h" />
