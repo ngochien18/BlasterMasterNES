@@ -5,6 +5,7 @@
 #define BOMB_STATE_FINISH 3101
 
 #define ID_ANI_BOMB 31001
+#define ID_ANI_BOMB_FINISH 31002
 
 #define BOMB_BBOX_WIDTH 9
 #define BOMB_BBOX_HEIGHT 9
@@ -12,6 +13,7 @@
 class Bomb : public Bullet
 {
 public:
+    bool isFinish;
     virtual void render();
     virtual void OnNoCollision(DWORD dt);
     virtual void OnCollisionWith(LPCOLLISIONEVENT e);
@@ -30,6 +32,8 @@ public:
         maxVy = 0.1f;
         ax = 0;
         ay = -0.1f;
+        state = BOMB_STATE_ACTIVE;
+        isFinish = false;
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);

@@ -1,10 +1,14 @@
 #include "Bomb.h"
 
 void Bomb::render() {
-	int aniID = ID_ANI_BOMB;
+	int aniID = 0;
 	if (state == BOMB_STATE_ACTIVE)
 	{
 		aniID = ID_ANI_BOMB;
+	}
+	else if (state == BOMB_STATE_FINISH) 
+	{
+		aniID = ID_ANI_BOMB_FINISH;
 	}
 	Animations::GetInstance()->Get(aniID)->Render(x, y);
 	RenderBoundingBox();
@@ -40,7 +44,15 @@ void Bomb::OnCollisionWith(LPCOLLISIONEVENT e) {
 	}
 	if (e->objd->objecttag == "Ground")
 	{
-		this->Delete();
+		if (isFinish == true)
+		{
+			isdeleted = true;
+			return;
+		}
+		else
+		{
+			SetState(BOMB_STATE_FINISH);
+		}
 	}
 }
 
@@ -57,7 +69,9 @@ void Bomb::SetState(int state) {
 	{
 	case BOMB_STATE_ACTIVE:
 		break;
-
+	case BOMB_STATE_FINISH:
+		isFinish = true;
+		break;
 	}
 }
 

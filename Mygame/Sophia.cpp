@@ -17,14 +17,19 @@
 
 Sophia::Sophia(float x, float y) : Playerlevel(x, y)
 {
-	maxVx = 0.2f;
+	/*maxVx = 0;
 	maxVy = 0;
-	ax = 0.1f;
+	ax = 0;
 	ay = 0;
-	vx = 0.1f;
-	vy = 0;
+	vx = 0;
+	vy = 0;*/
 	state = SOPHIA_STATE_IDLE;
+	objecttag = "Player";
 
+	maxVx = 0.2f;
+	maxVy = 0.0f;
+	ax = 0.0f;
+	ay = 0.0f;
 	this->x = x;
 	this->y = y;
 
@@ -50,7 +55,9 @@ void Sophia::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	gun->Update(dt);
 
 	Gameobject::Update(dt, coObjects);
-	//CollisionProcess(dt, coObjects);
+	CollisionProcess(dt, coObjects);
+
+	DebugOut(L"vx: %f", vx);
 
 
 }
@@ -73,17 +80,19 @@ void Sophia::SetState(int state)
 	switch (state)
 	{
 	case SOPHIA_STATE_WALKING_RIGHT:
-		//vx = SOPHIA_WALKING_SPEED;
-		//nx = 1;
+		vx = SOPHIA_WALKING_SPEED;
+		ax = 0.05f;
+		maxVy = SOPHIA_WALKING_MAX_SPEED;
+		nx = 1;
+		ny = 0;
 		break;
 	case SOPHIA_STATE_WALKING_LEFT:
-		//vx = -SOPHIA_WALKING_SPEED;
-		//nx = -1;
 		break;
 	case SOPHIA_STATE_IDLE:
-		//vx = 0;
-		//ax = 0;
-		//maxVx = 0;
+		ax = 0.0f;
+		ay = 0.0f;
+		vx = 0;
+		vy = 0;
 		break;
 	case SOPHIA_STATE_DIE:
 		break;
@@ -92,8 +101,8 @@ void Sophia::SetState(int state)
 
 void Sophia::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x- SOPHIA_BIG_BBOX_WIDTH/2;
-	top = y+ SOPHIA_BIG_BBOX_WIDTH/2;
+	left = x - SOPHIA_BIG_BBOX_WIDTH/2;
+	top = y+ SOPHIA_BIG_BBOX_WIDTH/2-10;
 	right = left +SOPHIA_BIG_BBOX_WIDTH;
 	bottom = top - SOPHIA_BIG_BBOX_HEIGHT;
 
@@ -136,5 +145,100 @@ void Sophia::Keystate(BYTE* key)
 		{
 			SetState(SOPHIA_STATE_IDLE);
 		}
+	}
+}
+void Sophia::OnCollisionWith(LPCOLLISIONEVENT e)
+{
+	if (!e->objd->IsBlocking()) return;
+}
+void Sophia::OnNoCollision(DWORD dt)
+{
+	x += vx * dt;
+	y += vy * dt;
+
+}
+void Sophia::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
+{
+	vector<LPCOLLISIONEVENT>event;
+	LPCOLLISIONEVENT colX = NULL;
+	LPCOLLISIONEVENT colY = NULL;
+	event.clear();
+	if (IsCollidable())
+	{
+		Colision::GetInstance()->scan(this, dt, coObject, event);
+	}
+	if (event.size() == 0)
+	{
+		OnNoCollision(dt);
+	}
+	else
+	{
+		Colision::GetInstance()->filter(this, event, colX, colY, 1, 1, 1);
+		if (colX != NULL && colY != NULL)
+		{
+			if (colX < colY)
+			{
+				this->OnCollisionWith(colX);
+				LPCOLLISIONEVENT colY_other = NULL;
+				colX->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colX->objd));
+				Colision::GetInstance()->filter(this, event, colX, colY_other, 1, 0, 1);
+				if (colY_other != NULL)
+				{
+					OnCollisionWith(colY_other);
+				}
+				else
+				{
+					y += vy * dt;
+				}
+			}
+			else
+			{
+				this->OnCollisionWith(colY);
+				LPCOLLISIONEVENT colX_other = NULL;
+				colY->isdelete = true;
+				event.push_back(Colision::GetInstance()->SweptAABB(this, dt, colY->objd));
+				Colision::GetInstance()->filter(this, event, colX_other, colY, 1, 1, 0);
+				if (colX_other != NULL)
+				{
+					OnCollisionWith(colX_other);
+				}
+				else
+				{
+					x += vx * dt;
+				}
+			}
+		}
+		else
+		{
+			if (colX != NULL)//hoac colx hoac coly null
+			{
+				y += vy * dt;
+				this->OnCollisionWith(colX);
+			}
+			else {//x null
+				if (colY != NULL)
+				{
+					x += vx * dt;
+					this->OnCollisionWith(colY);
+				}
+				else // both colX & colY are NULL 
+				{
+					x += vx * dt;//nho them *dt de phu hop voi tinh frame a nhe
+					y += vy * dt;
+				}
+			}
+		}
+		for (UINT i = 0; i < event.size(); i++)//check col with all collsion that from non blocking object
+		{
+			LPCOLLISIONEVENT e = event[i];
+			if (e->isdelete) continue;
+			if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
+
+			OnCollisionWith(e);
+		}
+
+
+		for (UINT i = 0; i < event.size(); i++) delete event[i];//xoa toan bo nhung event 
 	}
 }

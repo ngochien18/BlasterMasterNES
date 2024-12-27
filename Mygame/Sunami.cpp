@@ -44,6 +44,7 @@ void Sunami::OnCollisionWith(LPCOLLISIONEVENT e)
 		lastYcol = this->y;
 	}
 
+
 	if (e->objd->objecttag == "PlayerBullet")
 	{
 		PlayerBullet* pBu = new PlayerBullet(0, 0);

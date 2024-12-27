@@ -85,7 +85,7 @@ void Eyelet::SetState(int state)
 
 void Eyelet::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->objd->IsBlocking()) return;
+	//if (!e->objd->IsBlocking()) return;
 	if (dynamic_cast<Eyelet*>(e->objd)) return;
 
 	if (e->objd->objecttag == "PlayerBullet")
@@ -97,8 +97,11 @@ void Eyelet::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void Eyelet::OnNoCollision(DWORD dt)
 {
-	x += vx;//100 - 50 * sin(x / 360 * 3.14);
-	y += 100 - 50 * sin(x / 360 * 3.14);
+	//x += -100 * sin(x / 360 * 3.14) - 100;
+	//x += vx;//100 - 50 * sin(x / 360 * 3.14);
+	//y += -100 * sin(x / 360 * 3.14)-100;
+	x+=vx;
+	y += vy;
 }
 
 void Eyelet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
@@ -133,7 +136,7 @@ void Eyelet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					y += vy;
+					y += vy * dt;
 				}
 			}
 			else
@@ -149,7 +152,7 @@ void Eyelet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 				}
 				else
 				{
-					x += vx;
+					x += vx * dt;
 				}
 			}
 		}
@@ -157,21 +160,32 @@ void Eyelet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)
 		{
 			if (colX != NULL)//hoac colx hoac coly null
 			{
-				y += vy;
+				y += vy * dt;
 				this->OnCollisionWith(colX);
 			}
 			else {//x null
 				if (colY != NULL)
 				{
-					x += vx;
+					x += vx * dt;
 					this->OnCollisionWith(colY);
 				}
 				else // both colX & colY are NULL 
 				{
-					x += vx;
-					y += vy;
+					x += vx * dt;//nho them *dt de phu hop voi tinh frame a nhe
+					y += vy * dt;
 				}
 			}
 		}
+		for (UINT i = 0; i < event.size(); i++)//check col with all collsion that from non blocking object
+		{
+			LPCOLLISIONEVENT e = event[i];
+			if (e->isdelete) continue;
+			if (e->objd->IsBlocking()) continue;  // blocking collisions were handled already, skip them
+
+			OnCollisionWith(e);
+		}
+
+
+		for (UINT i = 0; i < event.size(); i++) delete event[i];//xoa toan bo nhung event 
 	}
 }
