@@ -17,7 +17,7 @@ void SophiaGun::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void SophiaGun::render() {
 	int aniID = SOPHIA_ANI_GUN_0_RIGHT;
 
-	float transX = 8.0, transY = 8.0;
+	float transX = 10.0, transY = 8.0;
 
 	if (base->GetState() == SOPHIA_STATE_DIE) {
 		return;
@@ -26,7 +26,10 @@ void SophiaGun::render() {
 		if (nx > 0)
 			aniID = SOPHIA_ANI_GUN_0_RIGHT;
 		else
+		{
 			aniID = SOPHIA_ANI_GUN_0_LEFT;
+			transX = -10;
+		}
 	}
 
 

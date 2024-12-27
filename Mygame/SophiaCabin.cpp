@@ -34,7 +34,7 @@ void SophiaCabin::render() {
 		else
 			aniID = SOPHIA_ANI_CABIN_STANDING_LEFT;
 
-		transX = -4.0;
+		transX = 1.0;
 		transY = 8.0;
 	}
 
