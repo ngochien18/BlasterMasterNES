@@ -100,6 +100,10 @@ void Bellbomber::SetState(int state)
 		{
 			nx = 1;
 			vx = vx;
+			/*if (((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer()->Getx() - this->x > 0)
+			{
+				ax = 0.001f; nx = 1;
+			}*/
 		}
 		else if (distance < 0)
 		{

@@ -1,37 +1,32 @@
 #include "SophiaCabin.h"
 
-//sophiacabin::sophiacabin(sophia* sophia)
-//{
-//	this->parent = sophia;
-//
-//	/*canimationsets* animation_sets = canimationsets::getinstance();
-//	lpanimation_set ani_set = animation_sets->get(sophia_part_ani_sets_id);
-//	setanimationset(ani_set);*/
-//}
+SophiaCabin::SophiaCabin(Sophia* sophia)
+{
+	this->base = sophia;
+
+}
 
 SophiaCabin::~SophiaCabin() {}
 
 void SophiaCabin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	nx = parent->GetDirection();
+	SetState(this->state);
+	vy = ay * dt;
+	vx = ax * dt;
+
+	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
+	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
+
+	nx = base->GetDirection();
+	Gameobject::Update(dt, coObjects);
 }
 
 void SophiaCabin::render() {
 	int aniID = SOPHIA_ANI_CABIN_STANDING_RIGHT;
 	float transX = 0, transY = 0;
 
-	if (parent->GetState() == SOPHIA_STATE_HEAD_UP) {
-		if (nx > 0) {
-			aniID = SOPHIA_ANI_CABIN_HEAD_RIGHT;
-			transX = -8.0;
-		}
-
-		else {
-			aniID = SOPHIA_ANI_CABIN_HEAD_LEFT;
-			transX = 0.0;
-		}
-
-		transY = -14.0;
+	if (base->GetState() == SOPHIA_STATE_DIE) {
+		return;
 	}
 	else {
 		if (nx > 0)
@@ -40,19 +35,16 @@ void SophiaCabin::render() {
 			aniID = SOPHIA_ANI_CABIN_STANDING_LEFT;
 
 		transX = -4.0;
-		transY = -8.0;
+		transY = 8.0;
 	}
 
 
-	float partX, partY;
-	parent->GetPosition(partX, partY);
+	float CabinX, CabinY;
+	base->GetPosition(CabinX, CabinY);
 
-	partX += SOPHIA_BIG_BBOX_WIDTH / 2;
-	partY += SOPHIA_BIG_BBOX_HEIGHT / 2;
+	CabinX += SOPHIA_BIG_BBOX_WIDTH / 2;
+	CabinY -= SOPHIA_BIG_BBOX_HEIGHT / 2;
 
-	int alpha = 255;
-	//if (parent->GetIsUntouchable()) alpha = 128;
-
-	Animations::GetInstance()->Get(aniID)->Render(x, y);
+	Animations::GetInstance()->Get(aniID)->Render(CabinX + transX, CabinY + transY);
 }
 

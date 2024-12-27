@@ -6,12 +6,10 @@
 #define SOPHIA_ANI_CABIN_STANDING_RIGHT			24011
 #define SOPHIA_ANI_CABIN_WALKING_RIGHT			24012
 
-#define SOPHIA_PART_ANI_SETS_ID		1
-
 class SophiaCabin : public Playerlevel {
 protected:
 
-	Sophia* parent;
+	Sophia* base;
 
 public:
 	SophiaCabin(Sophia* sophia);

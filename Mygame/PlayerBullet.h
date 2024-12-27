@@ -17,6 +17,7 @@
 class PlayerBullet : public Bullet
 {
 public:
+    bool isFinish;
     virtual void render();
     virtual void OnNoCollision(DWORD dt);
     virtual void OnCollisionWith(LPCOLLISIONEVENT e);
@@ -36,6 +37,7 @@ public:
         ax = 0.1f;
         ay = 0.1f;
         state = PLAYERBULLET_STATE_ACTIVE;
+        isFinish = false;
     }
     virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
     virtual void Update(DWORD dt, vector<Gameobject*>* coObjects);

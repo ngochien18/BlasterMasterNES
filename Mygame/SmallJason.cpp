@@ -53,10 +53,10 @@ void SmallJason::SetState(int state)
 	{
 	case SMALLJASON_STATE_WALK_DOWN:
 		maxVy = SMALLJASON_WALKING_SPEED;
-		ay = SMALLJASON_ACCEL_WALK;
+		ay = -SMALLJASON_ACCEL_WALK;
 		ax = 0;
 		vx = 0;
-		ny = 1;
+		ny = -1;
 		nx = 0;
 		break;
 	case SMALLJASON_STATE_WALK_RIGHT:
@@ -114,7 +114,7 @@ void SmallJason::OnkeyDown(int keycode)
 }
 void SmallJason::Keystate(BYTE* key)
 {
-	LPGAME game = game->GetInstance();
+	/*LPGAME game = game->GetInstance();
 	if (game->IsKeyDown(DIK_DOWN))
 	{
 		SetState(SMALLJASON_STATE_WALK_DOWN);
@@ -130,5 +130,50 @@ void SmallJason::Keystate(BYTE* key)
 	else
 	{
 		SetState(SMALLJASON_STATE_IDLE);
+	}*/
+
+	LPGAME game = game->GetInstance();
+	if (state == SMALLJASON_STATE_DIE)
+	{
+		return;
+	}
+	else if (state == SMALLJASON_STATE_IDLE)
+	{
+		if (game->IsKeyDown(DIK_S))
+		{
+			SetState(SMALLJASON_STATE_WALK_DOWN);
+		}
+		else if (game->IsKeyDown(DIK_A))
+		{
+			SetState(SMALLJASON_STATE_WALK_LEFT);
+		}
+		else if (game->IsKeyDown(DIK_D))
+		{
+			SetState(SMALLJASON_STATE_WALK_RIGHT);
+		}
+		else
+		{
+			SetState(SMALLJASON_STATE_IDLE);
+		}
+	}
+	else if (state == SMALLJASON_STATE_WALK_LEFT
+		|| state == SMALLJASON_STATE_WALK_DOWN || state == SMALLJASON_STATE_WALK_RIGHT)
+	{
+		if (game->IsKeyDown(DIK_S))
+		{
+			SetState(SMALLJASON_STATE_WALK_DOWN);
+		}
+		else if (game->IsKeyDown(DIK_A))
+		{
+			SetState(SMALLJASON_STATE_WALK_LEFT);
+		}
+		else if (game->IsKeyDown(DIK_D))
+		{
+			SetState(SMALLJASON_STATE_WALK_RIGHT);
+		}
+		else
+		{
+			SetState(SMALLJASON_STATE_IDLE);
+		}
 	}
 }
