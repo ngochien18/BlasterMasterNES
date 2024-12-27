@@ -10,12 +10,12 @@ SophiaCabin::~SophiaCabin() {}
 
 void SophiaCabin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	SetState(this->state);
+	/*SetState(this->state);
 	vy = ay * dt;
 	vx = ax * dt;
 
 	if (abs(vx) > abs(maxVx)) vx = maxVx * nx;
-	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;
+	if (abs(vy) > abs(maxVy))	vy = maxVy * ny;*/
 
 	nx = base->GetDirection();
 	Gameobject::Update(dt, coObjects);

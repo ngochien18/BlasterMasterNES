@@ -3,7 +3,8 @@
 #include "Utils.h"
 #include "Playerlevel.h"
 
-#define SOPHIA_WALKING_SPEED					0.15f 
+#define SOPHIA_WALKING_SPEED					0.1f 
+#define SOPHIA_WALKING_MAX_SPEED				0.3f
 
 #define SOPHIA_STATE_IDLE						0
 #define SOPHIA_STATE_WALKING_RIGHT				100
@@ -62,7 +63,8 @@ public:
 	void Keystate(BYTE* key);
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; };
-	void OnNoCollision(DWORD dt) {};
-	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
+	void OnNoCollision(DWORD dt);
+	void OnCollisionWith(LPCOLLISIONEVENT e);
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject);
 
 };
