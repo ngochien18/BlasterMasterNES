@@ -13,7 +13,7 @@ void Eyelet::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (health <= 0) 
 	{
-		SetState(EYELET_STATE_DIE);
+		setstate(EYELET_STATE_DIE);
 	}
 
 	if ((state == EYELET_STATE_DIE) && (GetTickCount64() - die_start > EYELET_DIE_TIMEOUT))
@@ -87,16 +87,6 @@ void Eyelet::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->objd->IsBlocking()) return;
 	if (dynamic_cast<Eyelet*>(e->objd)) return;
-	if (e->ny != 0)
-	{
-		vy = 0;
-	}
-
-	else if (e->nx != 0)
-	{
-		this->nx = -this->nx;
-		ax = -ax;
-	}
 
 	if (e->objd->objecttag == "PlayerBullet")
 	{
@@ -107,8 +97,8 @@ void Eyelet::OnCollisionWith(LPCOLLISIONEVENT e)
 }
 void Eyelet::OnNoCollision(DWORD dt)
 {
-	x += vx;
-	y += vy;
+	x += vx;//100 - 50 * sin(x / 360 * 3.14);
+	y += 100 - 50 * sin(x / 360 * 3.14);
 }
 
 void Eyelet::CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject)

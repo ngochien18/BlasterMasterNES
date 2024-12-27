@@ -25,6 +25,10 @@ void PlayerBullet::render() {
 				aniID = ID_ANI_PLAYERBULLET_FINISH;
 			}*/
 		}
+		else if (state == PLAYERBULLET_STATE_FINISH)
+			{
+				aniID = ID_ANI_PLAYERBULLET_FINISH;
+			}
 		Animations::GetInstance()->Get(aniID)->Render(x, y);
 		RenderBoundingBox();
 	}
@@ -57,8 +61,15 @@ void PlayerBullet::OnCollisionWith(LPCOLLISIONEVENT e) {
 	if (!e->objd->IsBlocking()) return;
 	if (e->objd->objecttag == "Ground")
 	{
-		isdeleted = true;
-		return;
+		if (isFinish == true)
+		{
+			isdeleted = true;
+			return;
+		}
+		else
+		{
+			SetState(PLAYERBULLET_STATE_FINISH);
+		}
 	}
 }
 
@@ -75,7 +86,9 @@ void PlayerBullet::SetState(int state) {
 	{
 	case PLAYERBULLET_STATE_ACTIVE:
 		break;
-
+	case PLAYERBULLET_STATE_FINISH:
+		isFinish = true;
+		break;
 	}
 }
 

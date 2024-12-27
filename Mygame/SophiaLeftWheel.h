@@ -8,7 +8,7 @@
 class SophiaLeftWheel : public Playerlevel {
 protected:
 
-	Sophia* parent;
+	Sophia* base;
 
 public:
 	SophiaLeftWheel(Sophia* sophia);

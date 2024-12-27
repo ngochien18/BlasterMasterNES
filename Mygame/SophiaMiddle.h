@@ -8,7 +8,7 @@
 class SophiaMiddle : public Playerlevel {
 protected:
 
-	Sophia* parent;
+	Sophia* base;
 
 public:
 	SophiaMiddle(Sophia* sophia);

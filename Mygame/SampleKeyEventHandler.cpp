@@ -6,6 +6,7 @@
 #include "Playablechracter.h"
 #include "PlayScene.h"
 #include "SmallJason.h"
+#include "Sophia.h"
 void SampleKeyEventHandler::OnKeyDown(int KeyCode)
 {
 	Playerlevel* jason = (Playerlevel*)((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->GetPlayer();
@@ -25,6 +26,10 @@ void SampleKeyEventHandler::KeyState(BYTE* state)
 	if (game->IsKeyDown(DIK_1))
 	{
 		((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new SmallJason(x, y));
+	}
+	else if (game->IsKeyDown(DIK_2))
+	{
+		((LPPLAYSCENE)Game::GetInstance()->GetCurrentScene())->Setplayerstate(new Sophia(x, y));
 	}
 	else {
 		jason->Keystate(state);

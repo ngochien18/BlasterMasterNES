@@ -4,20 +4,11 @@
 #include "Playerlevel.h"
 
 #define SOPHIA_WALKING_SPEED					0.15f 
-//0.1f
-#define SOPHIA_JUMP_SPEED_Y						0.5f
-#define SOPHIA_JUMP_DEFLECT_SPEED				0.2f
-#define SOPHIA_GRAVITY							0.002f
-#define SOPHIA_DIE_DEFLECT_SPEED				0.5f
 
 #define SOPHIA_STATE_IDLE						0
 #define SOPHIA_STATE_WALKING_RIGHT				100
 #define SOPHIA_STATE_WALKING_LEFT				200					
-#define SOPHIA_STATE_JUMP						300
 #define SOPHIA_STATE_DIE						400
-#define SOPHIA_STATE_HEAD_UP					500
-#define SOPHIA_STATE_FIRE						600
-#define SOPHIA_STATE_FIRE_UP					700
 
 #define SOPHIA_ANI_BIG_IDLE_RIGHT				24000
 #define SOPHIA_ANI_BIG_IDLE_LEFT				24001
@@ -37,18 +28,12 @@
 #define SOPHIA_ANI_DIE							69
 
 #define	SOPHIA_LEVEL_JASON					1
-#define	SOPHIA_LEVEL_SOPHIA				2
+#define	SOPHIA_LEVEL_SOPHIA					2
 
 #define SOPHIA_BIG_BBOX_WIDTH				28
 #define SOPHIA_BIG_BBOX_HEIGHT				14
 
-#define SOPHIA_SMALL_BBOX_WIDTH				13
-#define SOPHIA_SMALL_BBOX_HEIGHT			15
-
 #define SOPHIA_UNTOUCHABLE_TIME				1000
-
-#define FALLING_VELOCITY_UPPER_LIMITATION	0.02f
-
 
 class SophiaMiddle;
 class SophiaRightWheel;
@@ -67,29 +52,17 @@ class Sophia : public Playerlevel
 	SophiaGun* gun;
 
 public:
-	Sophia(float x, float y) : Playerlevel(x, y)
-	{
-		maxVx = 0.0f;
-		maxVy = 0.0f;
-		ax = 0.0f;
-		ay = 0.0f;
-		state = SOPHIA_STATE_IDLE;
-		untouchable = 0;
-		untouchable_start = -1;
-
-		this->x = x;
-		this->y = y;
-
-		/*middle = new SophiaMiddle(this);
-		rightWheel = new SophiaRightWheel(this);
-		leftWheel = new SophiaLeftWheel(this);
-		cabin = new SophiaCabin(this);
-		gun = new SophiaGun(this);*/
-	}
-
+	Sophia(float x, float y);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects = NULL);
 	virtual void render();
 	void SetState(int state);
+	void OnkeyUP(int keycode) {};
+	void OnkeyDown(int keycode) {};
+	void Keystate(BYTE* key);
+	virtual int IsCollidable() { return 1; };
+	virtual int IsBlocking() { return 0; };
+	void OnNoCollision(DWORD dt) {};
+	virtual void CollisionProcess(DWORD dt, vector<LPGAMEOBJECT>* coObject) {};
 
 };

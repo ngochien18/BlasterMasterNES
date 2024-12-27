@@ -1,7 +1,7 @@
 #pragma once
 #include "Enermy.h"
 #include "OffBullet.h"
-#define OFFSIDE_DIE_TIMEOUT 500
+#define OFFSIDE_DIE_TIMEOUT 2000
 #define OFFSIDE_BBOX_WIDTH 18
 #define OFFSIDE_BBOX_HEIGHT 20
 #define OFFSIDE_BBOX_HEIGHT_DIE 7
@@ -40,7 +40,7 @@ public:
 		ny = 0;
 		maxVx = 0;
 		maxVy = 0;
-		health = 200;
+		health = 100;
 		GunDirectionX = 1;
 	}
 	virtual void SetState(int state);

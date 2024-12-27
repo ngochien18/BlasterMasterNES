@@ -15,7 +15,7 @@ void Offside::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	distance = this->distancewithplayerx();
 	if (health <= 0)
 	{
-		SetState(OFFSIDE_STATE_DIE);
+		setstate(OFFSIDE_STATE_DIE);
 	}
 
 	if ((state == OFFSIDE_STATE_DIE) && (GetTickCount64() - die_start > OFFSIDE_DIE_TIMEOUT))
@@ -103,7 +103,7 @@ void Offside::SetState(int state)
 	{
 	case OFFSIDE_STATE_DIE:
 		die_start = GetTickCount64();
-		y += (OFFSIDE_BBOX_HEIGHT - OFFSIDE_BBOX_HEIGHT_DIE) / 2;
+		//y += (OFFSIDE_BBOX_HEIGHT - OFFSIDE_BBOX_HEIGHT_DIE) / 2;
 		vx = 0;
 		vy = 0;
 		ay = 0;

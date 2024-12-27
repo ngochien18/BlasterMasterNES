@@ -1,19 +1,17 @@
 #include "SophiaLeftWheel.h"
 
-//SophiaLeftWheel::SophiaLeftWheel(Sophia* sophia)
-//{
-//	this->parent = sophia;
-//
-//	/*CAnimationSets* animation_sets = CAnimationSets::GetInstance();
-//	LPANIMATION_SET ani_set = animation_sets->Get(SOPHIA_PART_ANI_SETS_ID);
-//	SetAnimationSet(ani_set);*/
-//}
+SophiaLeftWheel::SophiaLeftWheel(Sophia* sophia)
+{
+	this->base = sophia;
+
+}
 
 SophiaLeftWheel::~SophiaLeftWheel() {}
 
 void SophiaLeftWheel::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	nx = parent->GetDirection();
+	nx = base->GetDirection();
+	Gameobject::Update(dt, coObjects);
 }
 
 void SophiaLeftWheel::render() {
@@ -21,31 +19,21 @@ void SophiaLeftWheel::render() {
 
 	float transX = -7.0, transY = 0;
 
-	if (parent->GetState() == SOPHIA_STATE_IDLE) {
+	if (base->GetState() == SOPHIA_STATE_IDLE) {
 		aniID = SOPHIA_ANI_STANDING;
 	}
-	else if (parent->GetState() == SOPHIA_STATE_WALKING_RIGHT) {
+	else if (base->GetState() == SOPHIA_STATE_WALKING_RIGHT) {
 		aniID = SOPHIA_ANI_RIGHT_WALK;
 	}
-	else if (parent->GetState() == SOPHIA_STATE_WALKING_LEFT) {
+	else if (base->GetState() == SOPHIA_STATE_WALKING_LEFT) {
 		aniID = SOPHIA_ANI_LEFT_WALK;
 	}
-	else if (parent->GetState() == SOPHIA_STATE_HEAD_UP) {
-		aniID = SOPHIA_ANI_STANDING;
-		transX = -5.0;
-	}
 
+	float WheelX, WheelY;
+	base->GetPosition(WheelX, WheelY);
 
-	float partX, partY;
-	parent->GetPosition(partX, partY);
+	WheelX += SOPHIA_BIG_BBOX_WIDTH / 2;
+	WheelY -= SOPHIA_BIG_BBOX_HEIGHT / 2;
 
-	partX += SOPHIA_BIG_BBOX_WIDTH / 2;
-	partY += SOPHIA_BIG_BBOX_HEIGHT / 2;
-
-	int alpha = 255;
-	/*if (parent->GetIsUntouchable()) alpha = 128;
-
-	this->animation_set->at(ani)->Render(partX + transX, partY, alpha);*/
-
-	Animations::GetInstance()->Get(aniID)->Render(x, y);
+	Animations::GetInstance()->Get(aniID)->Render(WheelX + transX, WheelY + transY);
 }

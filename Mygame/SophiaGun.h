@@ -13,7 +13,7 @@
 class SophiaGun : public Playerlevel {
 protected:
 
-	Sophia* parent;
+	Sophia* base;
 
 public:
 	SophiaGun(Sophia* sophia);
