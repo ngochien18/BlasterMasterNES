@@ -87,6 +87,11 @@ void Sophia::SetState(int state)
 		ny = 0;
 		break;
 	case SOPHIA_STATE_WALKING_LEFT:
+		vx = -SOPHIA_WALKING_SPEED;
+		ax = 0.05f;
+		maxVy = -SOPHIA_WALKING_MAX_SPEED;
+		nx = -1;
+		ny = 0;
 		break;
 	case SOPHIA_STATE_IDLE:
 		ax = 0.0f;
